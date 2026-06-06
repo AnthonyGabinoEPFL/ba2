@@ -1,0 +1,199 @@
+\section{Formes bilinéaires}
+
+\subsection{Formes bilinéaires : Définition et propriétés de base}
+
+\newdef{Soit $V$ un $\K$-espace vectoriel, une \emph{forme bilinéaire} est une application 
+	\[
+	\begin{array}{cccc}
+			f: & V \times V & \to & \K\\
+				&  (u,v) & \mapsto & \langle u,v \rangle 
+	\end{array}
+	\]
+tel que, pour tout $u,v,w \in W$ et $\alpha \in \K$,
+\[
+\langle u, v + w \rangle = \langle u, v \rangle + \langle u, w \rangle \et \langle u + v, w \rangle = \langle u, w \rangle + \langle v, w \rangle
+\]
+et
+\[
+\langle u, \alpha v \rangle = \alpha \langle u,v \rangle \et \langle \alpha u, v \rangle = \alpha \langle u,v \rangle
+\]
+}{}
+
+\newthm{Soit $\langle \cdot, \cdot \rangle : V \times V \to \K$ une forme bilinéaire et $B = \{b_1, \ldots b_n\} $ une base de $V$, alors la matrice associée dans la base $B$ est donnée par,
+\[
+\left(A_B^{\langle,\rangle} \right)_{ij}= \langle b_i, b_j \rangle
+\]
+}{}
+
+\prf{Soit $u,v \in V$ tel que $u = \sum_{i=1}^n u_i b_i$ et $v = \sum_{j=1}^n v_j b_j$ alors
+	\[
+	\langle u,v \rangle = \left\langle \sum_{i=1}^n u_i b_i, \sum_{j=1}^n v_j b_j \right \rangle = \sum_{i=1}^n \sum_{j=1}^n u_i v_i \langle b_i, b_j \rangle
+	\]
+	ainsi si on pose la matrice $A_B^{\langle,\rangle} \in M_n(\K)$ ayant comme composante $\langle b_i, b_j \rangle$, on a
+	\[
+	\langle u,x \rangle = [u]_B^\top A_B^{\langle,\rangle} [v]_B
+	\]
+}
+
+\newdef{Soit $\langle \cdot, \cdot \rangle : V \times V \to \K$ une forme bilinéaire, alors on dit que $\langle \cdot, \cdot \rangle$ est \emph{non-dégénéré à gauche} si,
+	\[
+	\exists v \in V, \forall w \in V, \quad \langle v,w \rangle = 0 \implies v = 0
+	\]
+}{}
+
+\newlem{Soit $\langle \cdot, \cdot \rangle : V \times V \to \K$ une forme bilinéaire et $B = \{b_1, \ldots, b_n\}$ une base de $V$, alors
+	\[
+	f \text{ non dégénéré à gauche} \iff \mathrm{rg} A_B^{\langle, \rangle}= n \iff f \text{ non dégénéré à droite}
+	\]
+}{}
+
+\prf{Supposons que $\mathrm{rg} A_B < n$ alors, il existe $x \in \K^n$ non nul tel que
+	\[
+	x^\top A_B = 0
+	\]
+	Ainsi on posant $u = \sum_{i=1}^n x_i b_i$ alors,
+	\[
+	\forall v \in V, \quad \langle u,v \rangle = [u]_B^\top A_B [v]_B = 0
+	\]
+	ce qui contredit le fait que $f$ soit non-dégénéré à gauche, il en va de même pour la dégénérescence à droite. Réciproquement, si $f$ est non-dégénérée à gauche, alors $x^\top A_B \neq 0$ pour tout $x \in \K^n$ non nul. Ceci implique les les lignes de $A_B$ sont linéairement indépendante. Alors $\mathrm{rg}A_b = n$. 
+}
+
+\newthm{Soit $\langle \cdot, \cdot \rangle : V \times V \to \K$ une forme bilinéaire, $B = \{b_1, \ldots, b_n\}$ et $B' = \{ b_1', \ldots, b_n'2 \}$ deux bases de $V$ et $A_B$ la matrice associé dans la base $B$ alors,
+	\[
+	A_{B'} = P_{B'B}^\top A_B P_{B'B}
+	\]
+}{Changement de base}
+
+\prf{A l'aide de la matrice de changement de base $P_{B'B}$ on sait que
+	\[
+	[x]_{B} = P_{B'B} [x]_{B'}
+	\]
+	donc,
+	\[
+	\langle u,v \rangle = [u]_{B}^\top A_{B} [v]_{B} = \left( P_{B'B} [u]_{B'}\right)^\top A_B P_{B'B} [v]_{B'} = [v]_{B'}^\top \underbrace{P_{B'B}^\top A_B P_{B'B}}_{A_B'} [v]_{B'}
+	\]
+}
+
+\subsection{Orthogonalité}
+
+\newdef{Deux éléments $u,v \in V$ sont \emph{orthogonaux} si et seulement si $\langle u,v \rangle = 0$ et l'on écrit $u \perp v$.
+}{}
+
+\newprop{Soit $E \subset V$, alors $E^\perp = \{v \in V ~|~ \forall \in E, ~ \langle v, e \rangle = 0 \}$ est un sous-espace vectoriel de $V$.
+}{}
+
+\prf{Si on considère l'application,
+\[
+\begin{array}{cccc}
+	\varphi : & V &\to &E^* \\
+			& v & \mapsto & e \mapsto \langle v, e \rangle 
+\end{array}
+\] 
+alors $V^\perp = \ker \varphi$ est un sous-espace vectoriel puisque c'est le noyau d'un endomorphisme.
+}
+
+\newdef{Soit $B = \{b_1, \ldots, b_n \}$ une base de $V$, on dit que $B$ est \emph{orthogonal} si,
+\[
+\forall i,j \in \entiers, \quad \langle b_i,  b_j \rangle \neq 0
+\]
+}{}
+
+\newthm{Soit $V$ un espace vectoriel de dimension fini sur une corps $\K$ de caractéristique $\mathrm{car} \K \neq 2$ muni d'une forme bilinéaire symétrique. Alors $V$ possède une base orthogonale.
+}{Base orthogonale}
+
+\prf{Soit $B = \{b_1, \ldots, b_n \}$ une base quelconque de $V$, on remarque que $V$ possède une base orthogonale si et seulement s'il existe une matrice diagonale $D$ telle que $A_B \simeq D$. En effet, si $V$ possède une base $B'$ orthogonale de $V$, alors $A_{B'}$ est diagonale et donc par le théorème (\ref{Changement de base}),
+	\[
+	A_{B'} = P_{B'B}^\top A_B P_{B'B}
+	\]
+	donc $A_B \simeq A_{B'}$. Réciproquement si $A_B \simeq D$ alors il existe $P \in \mathrm{GL}_n(\K)$ telle que,
+		\[
+		P^\top A_B P = D
+		\]
+	Et donc la base $B' = \{w_1, \ldots, w_n\}$ donnée par les colones de $P$ (en tant que coordonnées dans la base $B$) est une base orthogonale. \\\\
+	Ainsi si on considère la matrice associé à la forme bilinéaire dans la base $B$ on a,
+	\[
+	(A_B)_{ij} = \langle b_i, b_j \rangle
+	\]
+	Par procédé récursif, après la $(i-1)$-ème itération on a une matrice de la forme,
+	\[
+	\begin{pmatrix}
+		c_1 &   	 &   		&   &   &   \\
+		    & \ddots &   		&   &   &   \\
+		    &        & c_{i-1}  &   &   &   \\
+		    &        &    		&a_{ii} & \ldots & a_{in} \\
+		    &	     &			& \vdots&		&  \vdots \\
+		    &		&			& a_{ni} & \ldots & a_{nn}
+	\end{pmatrix}
+	\]
+	Donc pour la $i-ème$ itération on procède comme suit
+	\begin{itemize}
+		
+		\item Soit $k$ l'indice minimal tel que $k \geqslant i$ et $a_{kk} \neq 0$. Alors on échange la $i$-ème colonne avec la $k$-ème colonne puis la $i$-ème ligne et la $k$-ème ligne. Ainsi désormais le nouveau coefficient $a_{ii}'= a_{kk}$ est non-nul puisque $a_{kk} \neq 0$. 
+		\item Si l'indice $k$ de l'étape précédente n'existe pas, alors on considère un indice $j$ tel que $b_{ij} \neq 0$. On ajours alors la $j$-ème colonne sur la $i$-ème colonne puis la $j$-ème ligne sur la $i$-ème ligne. Ainsi $a_{ii}' = 2 b_{ij} \neq 0$ (ce qui est vrai puisque on avait supposé car $\K \neq 2$.)
+		\item Si, à son tour, un tel indice $j$ n'existe pas, alors on peut procéder à l'itération $i+1$.
+		\item Si $a_{ii} \neq 0$, alors pour tout $j \in \llbracket i+1, n \rrbracket$ on additionne $-a_{ij}/a_{ii}$ fois la $i$-ème colonne sur la $j$-ème colonne puis on additionne $-a_{ij}/a_{ii}$ fois la $i$-ème ligne sur la $j$-ème ligne. Ce qui permet d'annuler tout les coefficients à droite et sous le coefficient $a_{ii}$. On peut alors poursuivre à l'étape $i + 1$.
+	\end{itemize}
+	On obtient alors une suite de matrice $P_k$ correspondant aux transformations successives de la matrice, ainsi en posant 
+	\[
+	P = P_1 \cdot P_2 \cdot \ldots \cdots P_n
+	\] 
+	on obtient bien que,
+	\[
+	P^\top A_B P = D
+	\]
+	Ce qui conclut la preuve du théorème.
+}
+
+\subsection{Théorème de Sylvester}
+On a vu qu'une matrice symétrique $A \in M_n(\K)$ étant congruente à une matrice diagonale,
+\[
+P^\top A P = \begin{pmatrix}
+	c_1 &   & \\
+	    & \ddots & \\
+	    &   &  c_n 
+\end{pmatrix}
+\]
+En particulier si on se place dans $\R$ alors 
+quitte à interchanger les colonnes de $P$ (ce qui ne change pas le fait que $A$ soit congruente à une matrice diagonale), on peut supposer sans perte de généralité que les $c_i$ sont ordonnées. Ainsi en divisant la $i$-ème colonne et la $i$-ème ligne par $|c_i|$ si $c_i \neq 0$ alors on obtient que pour toute matrice symétrique $A$ il existe une matrice inversible $P$ telle que
+\[
+P^\top A P = 
+\begin{pmatrix}
+	1 &   &   &   &   &   &   &   &   \\
+	& \ddots &   &   &   &   &   &   &   \\
+	&   & 1 &   &   &   &   &   &   \\
+	&   &   & 0 &   &   &   &   &   \\
+	&   &   &   & \ddots &   &   &   &   \\
+	&   &   &   &   & 0 &   &   &   \\
+	&   &   &   &   &   & -1 &   &   \\
+	&   &   &   &   &   &   & \ddots &   \\
+	&   &   &   &   &   &   &   & -1
+\end{pmatrix}
+\]
+
+\newthm{Soit $V$ un espace vectoriel sur $\R$ de dimension finie muni d'une forme bilinéaire symétrique. Il existe un nombre entier $r \geqslant 0$ tel que, pour chaque base $B = \{v_1, \ldots, v_n\}$ de $V$, exactement $r$ indices $i$ satisfont $\langle v_i, v_i \rangle = 0$. 
+}{Théorème de Sylvester}
+
+\prf{Soit $B = \{b_1, \dots, b_n \}, B' = \{b_1', \ldots, b_n'\}$ des bases orthogonales de $V$ ordonnées telles que
+	\[
+	\forall i \in \llbracket1, r \rrbracket, \quad \langle b_i, b_i \rangle >  0 \et \forall i \in \llbracket r +1, n \rrbracket, \quad \langle b_i, b_i \rangle \leqslant 0
+	\]
+	et
+	\[
+	\forall i \in \llbracket1, r' \rrbracket, \quad \langle b_i', b_i' \rangle >  0 \et \forall i \in \llbracket r'+1, n \rrbracket, \quad \langle b_i', b_i' \rangle \leqslant 0
+	\]
+	Supposons que $b_1, \ldots b_r, b_{r'+1}', \ldots b_n'$ sont linéairement dépendant, alors il existe $\alpha_1, \ldots, \alpha_r, \beta_{r'+1}, \ldots, \beta_n \in \R$ non tous égaux à zéro tel que,
+	\[
+	\alpha_1 b_1 + \ldots + \alpha_r b_r = \beta_{r'+1} b_{r'+1}' + \ldots + \beta_n b_n'
+	\]
+	Alors,
+	\[
+	\langle \alpha_1 b_1 + \ldots + \alpha_r b_r, \alpha_1 b_1 + \ldots + \alpha_r b_r \rangle = \sum_{ij = 1}^r \alpha_i \alpha_j \langle b_i, b_j \rangle = \sum_{i=1}^r \alpha_i^2 \langle b_i, b_i \rangle > 0
+	\]
+	cependant,
+	\[
+	\langle \beta_{r'+1} b_{r'+1}' + \ldots + \beta_n b_n', \beta_{r'+1} b_{r'+1}' + \ldots + \beta_n b_n' \rangle = \sum_{i = r'+1}^n \beta_i^2 \langle b_i', b_i' \rangle \leqslant 0
+	\]
+	ainsi par contradiction on conclut que $b_1, \ldots b_r, b_{r'+1}', \ldots b_n'$ est linéairement indépendant, ce qui implique que $r + n - r' \leqslant n$ et donc $r \leqslant r'$. Mais par symétrie de l'argument, on peut conclure que $r = r'$.
+}
+	
+

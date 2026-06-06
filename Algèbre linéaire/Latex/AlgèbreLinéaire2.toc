@@ -1,0 +1,51 @@
+\babel@toc {french}{}\relax 
+\contentsline {section}{\numberline {1}Polynômes}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Notions fondamentales}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Interpolation}{4}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Division avec reste}{6}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Divisibilité et racines}{6}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Le plus grand diviseur commun}{7}{subsection.1.5}%
+\contentsline {subsection}{\numberline {1.6}Algorithme d'Euclide}{9}{subsection.1.6}%
+\contentsline {subsection}{\numberline {1.7}Factorisation irréductible}{9}{subsection.1.7}%
+\contentsline {section}{\numberline {2}Valeurs propre}{11}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Valeurs propres et vecteurs propres}{11}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Polynôme caractéristique}{13}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Théorème de Cayley-Hamilton}{14}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Formes bilinéaires}{15}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Formes bilinéaires : Définition et propriétés de base}{15}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Orthogonalité}{16}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Théorème de Sylvester}{18}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Produit scalaire et hermitien}{19}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Méthode des moindres carrées}{21}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Forme hermitienne}{22}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Produit hermitien}{24}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Théorème spectral et la décomposition en valeurs singulières}{25}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Théorème spectrale}{25}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Forme quadratique et matrice symétrique réelles}{27}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Décomposition en valeurs singulières}{30}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Encore des systèmes d'équations linéaires}{32}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Le meilleur sous-espace approximatif}{33}{subsection.5.5}%
+\contentsline {subsubsection}{\numberline {5.5.1}Rang $k$ approximation}{34}{subsubsection.5.5.1}%
+\contentsline {section}{\numberline {6}Système différentiels linéaires}{36}{section.6}%
+\contentsline {section}{\numberline {7}La forme normale de Jordan}{38}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Déterminer la forme normale de Jordan}{39}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Décomposition selon le polynôme caractéristique}{40}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Endomorphismes nilpotents}{42}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Résolution de système différentielle}{44}{subsection.7.4}%
+\contentsline {section}{\numberline {8}Formule Normale de Frobenius}{45}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Déterminer la forme normale de Frobenius}{45}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Utilisation de la forme normale de Frobenius}{46}{subsection.8.2}%
+\contentsline {section}{\numberline {9}Exercices étoiles}{48}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Semaine 1}{48}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Semaine 2}{49}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Semaine 3}{50}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Semaine 4}{51}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.5}Semaine 5}{53}{subsection.9.5}%
+\contentsline {subsection}{\numberline {9.6}Semaine 6}{54}{subsection.9.6}%
+\contentsline {subsection}{\numberline {9.7}Semaine 7}{55}{subsection.9.7}%
+\contentsline {subsection}{\numberline {9.8}Semaine 8}{56}{subsection.9.8}%
+\contentsline {subsection}{\numberline {9.9}Semaine 9}{57}{subsection.9.9}%
+\contentsline {subsection}{\numberline {9.10}Semaine 10}{58}{subsection.9.10}%
+\contentsline {subsection}{\numberline {9.11}Semaine 11}{60}{subsection.9.11}%
+\contentsline {subsection}{\numberline {9.12}Semaine 12}{61}{subsection.9.12}%
+\contentsline {subsection}{\numberline {9.13}Semaine 13}{62}{subsection.9.13}%

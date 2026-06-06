@@ -1,0 +1,263 @@
+\section{Dérivabilité}
+\subsection{Dérivées partielles, dérivées directionnelles, différentielle}
+\newdef{Soient $E$ un ouvert non-vide, $f : E \to \R$ et $\bm v \in \rn$. On dit que $f$ est \emph{dérivable} en $\bm x_0$ dans la direction $\bm v$ si $\lim_{t \to 0} \frac{f(\bm x_0 + t \bm v) - f(\bm x_0)}{t}$ existe et est finie, si c'est le cas on note
+	\[
+	D_{\bm v} f(\bm x_0) = \lim_{t \to 0} \frac{f(\bm x_0 + t \bm v) - f(\bm x_0)}{t}
+	\]
+Si $\norme{\bm v} = 1$, on appelle $D_{\bm v} f (\bm x_0)$ la \emph{dérivée directionnelle}. En particulier, on peut choisir $\bm v = \bm e_i$. On parle alors de \emph{dérivée partielle} que l'on note,
+\[
+\frac{\partial f}{\partial x_i}(\bm x_0) = D_{\bm e_i} f(\bm x_0)
+\]
+}{}
+
+\newrem{Autrement dit, pour $\bm x = (x_1, \ldots, x_n) \in E$, on a
+	\[
+	\frac{\partial f}{\partial x_i}(\bm x) = \lim_{t \to 0} \frac{ f(x_1, \ldots, x_i + t, \ldots, x_n) - f(x_1, \ldots, x_i, \ldots, x_n)}{t}
+	\]
+	ce qui revient à calculer la dérivée de la fonction $x_i \mapsto f(\cdot, x_i, \cdot)$ pensée comme une fonction uniquement de la variable $x_i$, en traitant les autres variables $x_1, \ldots, x_{i-1}, x_{i+1}, \ldots, x_n$ comme des paramètres. Pour cela, on peut donc utiliser les règles de dérivation des fonctions d'une seule variable réelle.
+}{}
+
+\newdef{Soit $f : E \to \R$ et $\bm x_0 \in \overset{\circ}{E}$. Si toutes les dérivées partielles de $f$ existent en $\bm x_0$, on appelle \emph{matrice jacobienne} $D f(\bm x_0) \in \R^{1 \times n}$ le vecteur ligne,
+	\[
+	D f(\bm x_0) = \begin{bmatrix}
+		\frac{\partial f }{\partial x_1} (\bm x_0), \ldots, \frac{\partial f}{\partial x_n}(\bm x_0) 
+	\end{bmatrix}
+	\] 
+	et le \emph{vecteur gradient}, noté $\bm \nabla f(\bm x_0) \in \R^{n \times 1}$,
+	\[
+	\bm \nabla f(\bm x_0) = D f(\bm x_0)^\top = \begin{bmatrix}
+		\frac{\partial f}{\partial x_1} (\bm x_0) \\ \vdots \\ \frac{\partial f}{\partial x_n} (\bm x_0)
+	\end{bmatrix}
+	\]
+}{}
+
+\exemples{Soit $f : \R^2 \to \R$ donnée par,
+\[
+f(x,y) = \left\{ \begin{array}{cc}
+						\frac{xy}{x^2 + y^4} & (x,y) \neq (0,0) \\
+						0 & (x,y) = (0,0)
+				\end{array} \right.
+\]
+On remarque que toute les dérivées directionnelles existent mais que $f$ n'est pas continues en $(0,0)$. Donc la dérivabilité de $f$ en $\bm x_0$ n'induit pas nécessairement la continuité en celui-ci.
+}
+
+\newdef{Soient $f : E \to \R$ et $\bm x_0 \in \overset{\circ} E$. On dit que $f$ est \emph{différentiable} en $\bm x_0$, s'il existe une application linéaire $ L : \rn \to \R$ telle que,
+	\[
+	\forall \bm x \in E, \quad f(\bm x) = f(\bm x_0) + L(\bm x - \bm x_0) + o(\norme{\bm x - \bm x_0})
+	\]
+}{fonction différentiable}
+
+\newlem{Soit $f : E \to \R$ différentiable en $\bm x_0 \in \overset{\circ}{E}$ de différentiel $L$. Alors 
+	\[
+	\forall \bm v \in \rn, \quad L(\bm v) = \langle \bm \nabla f(\bm x_0), \bm v \rangle
+	\]
+}{}
+
+\prf{Soit $f : E \to \R$ différentiable en $\bm x_0 \in \overset{\circ}{E}$ de différentiel $L$. Par définition de la différentiabilité en $\bm x_0$, on a
+	\[
+	f(\bm x_0 + t \bm e_i) = f(\bm x_0) + t L(\bm e_i) + o(t)
+	\]
+	ainsi on obtient,
+	\[
+	\frac{\partial f}{\partial x_i} (\bm x_0) = \lim_{t \to 0} \frac{f(\bm x_0 + t \bm e_i) - f(\bm x_0)}{t} = L(\bm e_i)
+	\]
+	ce qui permet de conclure,
+	\[
+	\forall \bm v \in \rn, \quad L(\bm v) = \sumn v_i L(\bm e_i) = \sumn \frac{\partial f}{\partial x_i}(\bm x_0) v_i = \langle \bm \nabla f(\bm x_0), \bm v \rangle
+	\]
+}
+
+\newthm{Soit $f : E \to \R$ différentiable en $\bm x_0 \in \overset{\circ}{E}$,
+\[
+	\forall \bm v \in \rn, \quad D_{\bm v} f(\bm x_0) = \bm \nabla f(\bm x_0)^\top \bm v = D f(\bm x_0) \bm v
+\]
+}{}
+
+\prf{Soit $f : E \to \R$ différentiable en $\bm x_0 \in \overset{\circ}{E}$, 
+	\[
+	D_{\bm v} f(\bm x_0) = \lim_{t \to 0} \frac{f(\bm x_0 + t \bm v) - f(\bm x_0)}{t} = L(\bm v) = \bm \nabla f(\bm x_0)^\top \bm v = D f(\bm x_0) \bm v 
+	\]
+}
+
+\newrem{On voit alors que si $f : E \to \R$ est différentiable en $\bm x_0 \in \overset{\circ}{E}$ alors on a,
+	\[
+	\forall \bm x \in E, \quad f(\bm x) = f(\bm x_0) + D f(\bm x_0) (\bm x - \bm x_0) + o(\norme{\bm x - \bm x_0})
+	\]
+}{}
+
+\newthm{Soit $f : E \to  \rn$ différentiable en $\bm x_0 \in \overset{\circ}{E}$. Alors $f$ est continue en $\bm x_0$, autrement dit
+	\[
+	f \text{ diffentrentiable en } \bm x_0 \implies f \text{ continue } \bm x_0
+	\]
+}{}
+
+\prf{Par hypothèse de différentiabilité en $ \bm x_0$,
+	\[
+	\lim_{\bm x \to \bm x_0} f(\bm x) = f(\bm x_0) + \underbrace{\lim_{\bm x \to \bm x_0} L(\bm x - \bm x_0)}_{=0} + \underbrace{\lim_{\bm x \to \bm x_0} o(\norme{\bm x - \bm x_0})}_{=0} = f(\bm x_0)
+	\]
+	ce qui montre bien que $f$ est continue en $\bm x_0$.
+}
+
+\newthm{Soit $f : E \to \R$ et $\bm x_0 \in \overset{\circ}{E}$. S'il existe $\delta > 0$ tel que $B(\bm x_0, \delta) \subset E$ et les dérivées partielles $\frac{\partial f}{\partial x_i} (\bm x)$ existent pour tout $\bm x \in B(\bm x_0, \delta)$ et sont continues en $\bm x_0$, alors $f$ est différentiable en $\bm x_0$.
+}{}
+
+\prf{On utilise la norme euclidienne et, pour alléger les notations, on renomme $\bm x_0 = \bm a = (a_1, \ldots, a_n)$. Pour $\bm x \in B(\bm x_0, \delta )$ donné, on introduit la notation $\bm x^k = (\bm x_1, \ldots, x_k, a_{k+1}, \ldots, a_n)$ de sorte que $\bm x^n = \bm x$ et $\bm x^0 = \bm a$. Ainsi par somme télescopique, on peut écrire 
+	\[
+	f(\bm x) - f(\bm a) = \sumn f(\bm x^i) - f(\bm x^{i-1})
+	\]
+
+
+Par le théorème des accroissement finis sur $\R$, on que pour tout $i \in \entiers$, il existe $\theta_i \in ]0,1[$ tel que,
+\[
+f(\bm x^i) - f(\bm x^{i-1}) = \frac{\partial f}{\partial x_i} (\bm x^{i-1} + \theta_i (\bm x^i - \bm x^{i-1})) (x_k - a_k)
+\]
+De plus par continuité de $\frac{\partial f}{\partial x_i}$ en $\bm a$, on a
+\[
+\forall \varepsilon > 0, \exists \tilde \delta \in \left]0, \frac{\delta}{2} \right],~\forall \bm y \in E, \quad \norme{\bm y -\bm x_0} \leqslant 2 \tilde \delta \implies \left| \frac{\partial f}{\partial x_i} (\bm y) - \frac{\partial f}{\partial x_i} (\bm a) \right| \leqslant \varepsilon
+\]
+ainsi pour $\bm y(\bm x) =  \bm x^{i-1} + \theta_i (\bm x^i - \bm x^{i-1})$ on a
+\[
+\norme{\bm y(\bm x) - \bm a} = \norme{(1 - \theta_i)(\bm x^{i-1} - \bm a) + \theta_i(\bm x^i- \bm a)} \leqslant \norme{\bm x^{i-1} -  \bm a} + \norme{\bm x^i - \bm a} \leqslant 2 \norme{\bm x - \bm a}
+\]
+ainsi,
+\[
+g_i(\bm x) := \frac{\partial f}{\partial x_i} (\bm x^{i-1} + \theta_i (\bm x^i - \bm x^{i-1})) - \frac{\partial f}{\partial x_i} (\bm a) \underset{\bm x \to \bm a}{\longrightarrow} 0
+\]
+Et donc,
+\[
+f(\bm x) - f(\bm a) = \sumn f(\bm x^k) - f(\bm x^{i-1}) = \sumn \left( \frac{\partial f}{\partial x_i} (\bm a) (\bm x_k - a_k) + g_k(\bm x)(\bm x_k - a_k) \right) = Df(\bm a) \cdot (\bm x - \bm a) + g(\bm x)
+\]
+avec $g(\bm x) = \sumn g_i(\bm x)(x_k - a_k)$. De plus 
+\[
+\lim_{\bm x \to \bm a} \frac{|g(\bm x)|}{\norme{\bm x - \bm a}} \leqslant \lim_{\bm x \to \bm a} \sqrt{\sumn g_i(\bm x^2)} = 0
+\]
+Ainsi on a bien $g(\bm x) = o(\norme{\bm x- \bm a})$.
+}
+
+\subsubsection{Espace $C^1$}
+\newdef{Soit $E \subset \rn$ un ouvert non-vide. On dit que $f : E \to \R$ est continûment différentiable sur $E$ si toutes les dérivées partielles $\frac{\partial f}{\partial x_i}$ existent et sont continues en tout point $\bm x \in E$. Dans ce cas on note $f \in C^1(E)$. De même si $\bm f : E \to \rmm$ est de classe $C^1(E)$, si chaque composante de $\bm f$ satisfait $f_k \in C^1(E)$.
+}{}
+
+\newrem{On vérifie facilement que $C^1(E)$ est un espace vectoriel réel. En effet, pour tout $f,g \in C^1(E)$ et toutes constantes $\lambda, \mu \in \R$ on a
+	\[
+	\lambda f + \mu g \in C^1(E).
+	\]
+On vérifie aussi facilement les règles de dérivations suivantes : Soit $E \subset \rn$ ouvert, $f,g \in C^1(E)$ et des constantes $\lambda, \mu \in \R$. Alors
+\begin{itemize}
+	\item $\lambda f + \mu g \in C^1(E), \quad D(\lambda f + \mu g)(\bm x) = \lambda D f(\bm x) + \mu D g(\bm x)$
+	\item $f\cdot g \in C^1(E), \quad D(f\cdot g)(\bm x) = Df(\bm x) g(\bm x) + f(\bm x) Dg(\bm x)$
+\end{itemize}
+}
+\subsection{Dérivation de fonctions composées}
+
+\newthm{Soit $\bm f : E \subset \rn \to \rmm$, $\bm g : F \subset \rmm \to \R^p$ avec $E$ et $F$ des ouverts non-vides. Si $\mathrm{Im} f \subset F$, on peut définir la fonction composée,
+	\[
+	\bm \varphi = \bm g \circ \bm f : E \to \R^p, \quad \forall \bm x \in E, ~\bm \varphi (\bm x) = \bm g(\bm f (\bm x))
+	\]
+	Si $\bm f$ est différentiable en $\bm x_0 \in E$ et $\bm g $ est différentiable en $\bm y_0 = \bm f(\bm x_0)$, alors $\bm \varphi$ est différentiable en $\bm x_0$ et,
+	\[
+	D \bm \varphi (\bm x_0) = D \bm g (\bm f(\bm x_0)) \cdot D\bm f(\bm x_0)
+	\] 
+	De plus si $\bm f \in C^1(E)$ et $\bm g \in C^1(F)$ alors $\bm \varphi \in C^1(E)$.
+}{Dérivation d'une composition}
+
+\prf{Par hypothèse de différentiabilité, on sait que
+\[
+\bm f (\bm x) = \bm f(\bm x_0) + Df (\bm x_0) \cdot (\bm x - \bm x_0) + \bm R_{\bm f} (\bm x)
+\]
+\[
+\bm g(\bm x) = \bm g(\bm x_0) + Dg (\bm x_0) \cdot (\bm x - \bm x_0) + \bm R_{\bm g} (\bm x)
+\]
+Ainsi par composition de fonction,
+\begin{align*}
+	\bm \varphi(\bm x) = \bm g ( \bm f(\bm x))  &= \bm g(\bm f(\bm x) + \overbrace{D \bm f(\bm x_0) \cdot (\bm x -  \bm x_0) + \bm R_{\bm f} (\bm x)}^{\bm h(\bm x)})  \\
+												&= \bm g(\bm y_0) + D \bm g(\bm y_0) \cdot \bm h(\bm x) + o(\norme{\bm h(\bm x))}) \\
+												&= \bm g(\bm y_0) + D \bm g(\bm y_0) \cdot D \bm f(\bm x_0) \cdot (\bm x - \bm x_0) + \underbrace{D \bm g (\bm y_0) \bm R_{\bm f}(\bm x) + o(\norme{\bm h(\bm x)})}_{\bm R(\bm x)}
+\end{align*}
+il nous reste donc juste à montrer  que $\bm R(\bm x) = o(\norme{\bm x - \bm x_0})$. Premièrement, on a
+\[
+\lim_{\bm x \to \bm x_0} \frac{\norme{D \bm g(\bm y_0) \cdot \bm R_{\bm f}(\bm x)}}{\norme{\bm x - \bm x_0}} \leqslant \norme{D \bm g (\bm y_0)} \lim_{\bm x \to \bm x_0} \frac{\norme{\bm R_{\bm f}(\bm x)}}{\norme{\bm x - \bm x_0}} = 0
+\]
+et deuxièmement 
+\[
+\lim_{\bm x \to \bm x_0} \frac{ o(\norme{\bm h(\bm x)})}{\norme{\bm x- \bm x_0}}\leqslant \lim_{\bm  x \to \bm x_0} \left( \norme{D \bm f(\bm x_0)} + \lim_{\bm x \to \bm x_0} \frac{\bm R_{\bm f}(\bm x)}{\norme{\bm x- \bm x_0}} \right) \cdot \lim_{\bm x \to \bm x_0} \frac{\bm R_g(\bm f(\bm x))}{\norme{\bm x- \bm x_0}} = 0
+\]
+et donc, 
+\[
+\bm \varphi (\bm x) = \bm \varphi(\bm x) + D \bm g(\bm f(\bm x_0)) \cdot D \bm f(\bm x_0) \cdot (\bm x- \bm x_0) + \bm R_{\bm \varphi}(\bm x)
+\]
+On conclut donc que $\bm \varphi$ est différentiable en $\bm x_0$ et par unicité de la différentielle,
+\[
+D \bm \varphi( \bm x_0) = D \bm g(\bm f(\bm x_0)) \cdot D \bm f(\bm x_0)
+\]
+Si maintenant $\bm f \in C^1(E)$ et $\bm g \in C^1(F)$, alors chaquue composante des matrices $D \bm f(\bm x)$ et $D \bm g (\bm y)$ est une fonction continue de $\bm x$ (resp. $\bm y$) et donc $D \bm \varphi(\bm x) = D \bm g (\bm f (\bm x)) \cdot D \bm f (\bm x)$ est continue en $\bm x$ pour tout $\bm x \in E$. Donc $\varphi \in c^1(E)$.
+}
+
+
+\subsection{Théorème des accroissements finis}
+
+\newdef{Soit $\bm x, \bm y \in \rn$, on note $[\bm x, \bm y]$ le segment d'origine $\bm x$ et d'extréminité $\bm y$ définie par,
+	\[
+	[\bm x, \bm y] = \{ \bm z \in  \rn ~|~ \bm z = \bm x + t(\bm y - \bm x), ~ t \in [0,1]\}
+	\]
+}{}
+
+\newthm{Soit $E \subset \rn$ un ouvert non-vide et $f : E \to \R$ une fonction différentiable sur $E$. Si $\bm x, \bm y \in E$ distincts sont tels que $[\bm x, \bm y] \subset E$, alors il existe $\bm z \in ]\bm x, \bm y[$, tel que
+	\[
+	f(\bm y) - f(\bm x) = Df(\bm z) (\bm y - \bm x)
+	\]
+}{Théorème des accroissements finis}
+
+\prf{On pose $g(t) = f(\bm x + t(\bm y - \bm y))$ avec $t \in [0,1]$. Alors $g$ est continue sur $[0,1]$ et dérivable sur $]0,1[$ par composition de fonctions dérivables. Par la règle de dérivation d'une composition,
+	\[
+	g'(t) = D f(\bm x + t(\bm y - \bm x)) \cdot (\bm y-\bm x)
+	\]
+	Par le théorème des accroissements finis pour des fonctions d'une seule variable, il existe $\theta \in ]0,1[$ tel que $g(1) - g(0) = g'(\theta)$ ce qui équivaut à
+	\[
+	f(y) - f(\bm y) = Df(\bm x + \theta(y - x)) (\bm y - \bm x) = D f(\bm z) (\bm y - \bm x)
+	\]
+	où $\bm z = \bm x + \theta (\bm y - \bm x) \in ]\bm x, \bm y[$.
+}
+
+\newcor{Si on pose désormais que $f \in C^1(E)$ alors on peut écrire,
+\[
+g(1) - g(0) = \int_0^1 g'(t) ~\mathrm dt
+\]
+On en déduit donc que
+\[
+f(\bm y) - f(\bm x) = \int_0^1 Df(\bm x + t(\bm y - \bm x)) (\bm y - \bm x) ~\mathrm dt
+\]
+}
+
+\newrem{Le théorème des accroissement finis est généralement faux si on considère une fonction $\bm f : E \to \rmm$ car si on applique le théorème des accroissement finis à chaque composantes, on trouve
+	\[
+	\forall i \in \llbracket 1, m \rrbracket, \exists \bm z_i \in ]\bm x, \bm y[, \quad f_i(\bm y) - f_i(\bm x) = Df_i (\bm z_i) (\bm y- \bm x)
+	\]
+	Toutefois, on n'a aucune garantie que les $\bm z_i$ coïncident. Cependant si $\bm f \in C^1(E)$, on a toujours,
+	\[
+	\bm f(\bm y) - \bm f(\bm x) = \int_0^1 D \bm f(\bm x + t(\bm y -\bm x)) (\bm y - \bm x) ~\mathrm dt
+	\]
+	Ici l'intégrale d'une fonction continue $[0,1] \to \rmm$ est comprise comme le vecteur dans $\rmm$ obtenu en prenant l'intégrale de chaque composante.
+}
+
+\newprop{Soit $\bm f : E \to \rmm$ est différentiable sur $E$ ouvert non-vide et $\bm x, \bm y \in E$ distincts tels que $[\bm x, \bm y] \subset E$. S'il existe $M > 0$ tel que $\norme{D \bm f(\bm z)} \leqslant M, ~\forall \bm z \in ]\bm x, \bm y[$, alors
+	\[
+	\norme{\bm f(\bm y) - \bm f(\bm x)} \leqslant M \norme{\bm y - \bm x}
+	\]
+}{}
+
+\prf{Le résultat est évident si $\bm f(\bm y) - \bm f(\bm x) = \bm 0$. Supposons donc $\bm f(\bm y) - \bm f(\bm x) \neq \bm 0$. On considère la fonction $f_{\bm w} : E \to \R$ définie par,
+	\[
+	f_{\bm w}(\bm u) = w \cdot \bm f(\bm u)
+	\]
+	pour $\bm  u \in E$. Par le théorème des accroissement finis (\ref{Théorème des accroissemnts finis}) on sait qu'il existe $\bm z \in ]\bm x, \bm y[$ tel que
+	\[
+	\bm w(\bm f(\bm y) - \bm f(\bm x)) = \bm w D \bm f(\bm z)(\bm y - \bm x)
+	\]
+	On choisit en particulier $\bm w = (\bm f(\bm y) - \bm f(\bm x))^\top$, ce qui donne,
+	\begin{align*}
+	(\bm f(\bm y) - \bm f(\bm x))^\top \cdot (\bm f(\bm y) - \bm f(\bm x)) &= \norme{\bm f(\bm y) - \bm f(\bm x)}^2 = \bm w D \bm f (\bm z) (\bm y - \bm x) \leqslant \norme{\bm w} \norme{D \bm f(\bm z) (\bm y - \bm x)} \\
+	&\leqslant \norme{\bm w} \norme{\bm D \bm f(\bm z)} \norme{\bm y - \bm x} \leqslant \norme{\bm f(\bm y) - \bm f(\bm x)} M \norme{\bm y - \bm x}
+	\end{align*}
+	et donc $\norme{\bm f(\bm y) - \bm f(\bm x)} \leqslant M \norme{\bm x- \bm y}$.
+}

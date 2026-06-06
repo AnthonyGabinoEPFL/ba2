@@ -1,0 +1,308 @@
+\documentclass[10pt]{article}
+
+%====================================
+%				package
+%====================================
+
+%gestion du français et des accents
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+
+%symbole mathématique
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+\usepackage{bm}
+\usepackage{amscd} 
+\usepackage{tabularx}
+\usepackage{stmaryrd}
+\usepackage{cleveref}
+\usepackage{mathdots}
+
+
+
+
+
+%mise en page
+\usepackage[margin=1in]{geometry}
+\usepackage{lmodern}
+%\usepackage{mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{soul}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+
+
+%===============================
+% initialisation des théorèmes
+%===============================
+\newtheoremstyle{break} % Nom du style
+{\topsep}   % Espace avant
+{\topsep}   % Espace après
+{\itshape}  % Style du texte
+{}          % Indentation
+{\bfseries} % Style du titre
+{.}         % Ponctuation après le titre
+{\newline}  % Saut de ligne après le titre
+{}          % Format du titre
+
+\newtheoremstyle{noit} % Nom du style
+{\topsep}   % Espace avant
+{\topsep}   % Espace après
+{}  % Style du texte
+{}          % Indentation
+{\bfseries} % Style du titre
+{.}         % Ponctuation après le titre
+{\newline}  % Saut de ligne après le titre
+{}          % Format du titre
+
+
+
+
+\theoremstyle{break}
+\newtheorem{theorem}{Théorème}[section]
+\newtheorem{definition}{Définition}[section]
+\newtheorem{lemma}{Lemme}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corrolary}{Corollaire}[section]
+\newtheorem{exo}{Exercice}
+
+\theoremstyle{noit}
+\newtheorem{remark}{Remarque}[section]
+\newtheorem{exemple}{Exemple}[section]
+
+\renewenvironment{proof}
+{\noindent\underline{\textsc{Démonstration} :}\newline}
+{\qed}
+
+\numberwithin{equation}{section}
+%==================================
+% Configuration des environnements
+%==================================
+
+\definecolor{thmcolor}{RGB}{50,50,50}
+\definecolor{defcolor}{RGB}{10,10,10}
+
+
+\newtcolorbox{thmbox}{colframe=thmcolor, colback=thmcolor!25, coltitle=thmcolor, boxrule=0.8pt, arc=5pt}
+\newtcolorbox{defbox}{colframe=defcolor, boxrule=0.8pt, arc=5pt}
+%configuration de l'environnement "théorème"
+\newcommand{\newthm}[2]{
+	\begin{thmbox}
+		\begin{theorem}[#2]
+			#1
+			\label{#2}
+		\end{theorem}
+	\end{thmbox}
+	\vspace{0.2cm}
+}
+
+%configuration de l'environnement "définition"
+\newcommand{\newdef}[2]{
+	\begin{defbox}
+		\begin{definition}
+			#1
+			\label{#2}
+		\end{definition}
+	\end{defbox}
+	\vspace{0.2cm}
+}
+
+%configuration de l'environnement "proposition"
+\newcommand{\newprop}[2]{
+	\begin{proposition}
+		#1
+		\label{#2}
+	\end{proposition}
+	\vspace{0.2cm}
+}
+
+%configuration de l'environnement "lemme"
+\newcommand{\newlem}[2]{
+	\begin{lemma}
+		#1
+		\label{#2}
+	\end{lemma}
+	\vspace{0.2cm}
+}
+
+%configuration de l'environnement "corrolaire"
+\newcommand{\newcor}[1]{
+	\begin{corrolary}
+		#1
+	\end{corrolary}
+	\vspace{0.2cm}
+}
+
+%configuration de l'environnement "preuve"
+\newcommand{\prf}[1]{
+	\begin{proof}
+		#1
+	\end{proof}
+	\vspace{0.2cm}
+}
+
+%configuration de l'environnemenet "exemple"
+\newcommand{\exemples}[1]{
+	\begin{exemple}
+		#1
+	\end{exemple}
+	\vspace{0.2cm}
+}
+
+\newcommand{\newrem}[1]{
+	\begin{remark}
+		#1
+	\end{remark}
+	\vspace{0.2cm}
+}
+
+\newcommand{\newexo}[2]{
+	\begin{thmbox}
+	\begin{exo}
+		#1
+	\end{exo}
+	\end{thmbox}
+	\prf{#2}
+	\newpage
+}
+
+%===========================
+%	   mise en page
+%===========================
+
+%en-tête
+\pagestyle{fancy}    % Utiliser un style d'en-têtes personnalisés
+\fancyhf{}           % Réinitialise les en-têtes et pieds de page
+\fancyhead[L]{Anthony Gabino}  % Nom de l'auteur à gauche
+\fancyhead[R]{\nouppercase{\leftmark}}  % Titre du sous-chapitre à droite
+\fancyfoot[C]{\thepage}  % Numéro de page centré en bas
+\setcounter{tocdepth}{2}
+
+
+%configuration des boxs
+\setlength{\fboxrule}{0.4mm}
+\setlength{\fboxsep}{3mm}
+
+%configuration de l'indentation
+\setlength{\parindent}{0pt}
+
+%configuration des listes
+\setlist[itemize]{label=$\circ$}
+
+%configuration des sections et sous-sections
+\titleformat{\subsection}[block]   % format "block"
+{\centering\large\bfseries}      % centrage + taille + gras
+{\thesubsection}                 % numéro de la sous-section
+{1em}                            % espace entre numéro et texte
+{}  
+
+\titleformat{\section}    % section = "Chapitre"
+[block]                 % format en bloc
+{\centering\large}      % style : centré, grand (pas en gras)
+{\MakeUppercase{Chapitre \thesection}} % numéro en majuscules
+{0pt}                   % pas d’espace entre numéro et texte
+{\vspace{1ex}\\\bfseries\huge}  % saut de ligne + texte en énorme
+
+\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{10ex} 
+
+%======================
+%Raccourcis
+%======================
+
+\newcommand{\N}{\mathbb N}
+
+\newcommand{\entiers}{\llbracket 1,n \rrbracket}
+
+\newcommand{\et}{\quad \text{et} \quad }
+
+\newcommand{\K}{\mathbb K}
+
+\newcommand{\R}{\mathbb R}
+
+\newcommand{\C}{\mathbb C}
+
+\newcommand{\norme}[1]{\left \| #1  \right\| }
+
+\newcommand{\Span}{\mathrm{span}}
+
+
+
+\begin{document}
+	%page de titre 
+	\begin{titlepage}	
+		\thispagestyle{empty}
+		\vspace*{-2.5cm}
+		\mdseries{
+			
+			\begin{center}
+				\includegraphics[width=0.35\textwidth]{"images/logo-epfl.png"}
+				
+				{\Large
+					\textsc{École Polytechnique Fédérale de Lausanne }}\\
+				\rule{11cm}{1pt}
+				
+				
+				\vspace*{7cm} 
+				
+				{\fontsize{47}{47} \selectfont
+					Algèbre linéaire II}\\
+				\vspace*{0.5cm}
+				{MATH-115(a)}
+				
+				
+				\vspace*{1.5truecm} 
+				
+				{\small
+					Note de  
+				}
+				
+				{\large
+					\vspace*{0.3cm}
+					Anthony Gabino
+				}
+			\end{center}
+			
+			\vspace*{2cm}
+			
+			\begin{tabular}{@{}ll}
+				\small
+				Professeur :\\[0.5cm]
+				\normalsize
+				\quad Eisenbrand Frierich & \hspace{3.1cm}%..............................\\[0.1cm]
+			\end{tabular}
+			
+			\vspace*{1.0truecm}
+			
+			\begin{center}
+				\rule{3cm}{1pt}
+				\vspace*{0.5cm}
+				
+				\small
+				Dernière mise à jour \today\\
+				Bachelor Mathématique\\
+				Lausanne
+			\end{center} 
+			
+			\clearpage
+		}
+	\end{titlepage}
+	
+	\tableofcontents
+	
+	\include{"Chapitres/chapitre1.tex"}
+	\include{"Chapitres/chapitre2.tex"}
+	\include{"Chapitres/chapitre3.tex"}
+	\include{"Chapitres/chapitre4.tex"}
+	\include{"Chapitres/chapitre5.tex"}
+	\include{"Chapitres/chapitre6.tex"}
+	\include{"Chapitres/chapitre7.tex"}
+	\include{"Chapitres/chapitre8.tex"}
+	\include{"Chapitres/exos.tex"}
+	
+	
+\end{document}

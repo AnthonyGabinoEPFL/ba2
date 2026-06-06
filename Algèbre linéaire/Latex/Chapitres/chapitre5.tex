@@ -1,0 +1,514 @@
+\section{Théorème spectral et la décomposition en valeurs singulières}
+
+\subsection{Théorème spectrale}
+\newlem{Soit $A \in \C^{n \times n}$ une matrice hermitienne, alors toutes les valeurs propres de $A$ sont réelles.
+}{}
+
+\prf{Soit $\lambda \in \C$ une valeur propre de $A$ associé à un vecteur propre $v \in \C^n$ non nul, quitte à le normaliser, on peut supposer sans perte de généralité que $v$ est unitaire, ainsi
+	\[
+	\lambda = \lambda \cdot 1 = \lambda v^* v = v^* (\lambda v) = v^* A v = (Av)^* v =  (\lambda v)^* v= \overline \lambda v^* v = \overline \lambda
+	\]
+on est conclut que $\lambda$ est réelle.
+}
+
+\newprop{Soit $A \in \C^{n \times n}$ une matrice hermitienne, alors $A$ possède au moins une valeur propre et par conséquent elles sont toutes réelles.
+}{}
+
+\prf{On sait que $\lambda \in \C$ est une valeur propre de $A$ si et seulement $\lambda$ est racine de,
+\[
+\chi_A(x) = \det(A-xI_n) \in \C[X]
+\]
+mais par le théorème fondamentale de l'algèbre $\chi_A$ possède une racine $\lambda \in \C$.
+}
+
+\newlem{Soit $A \in \C^{n \times n}$ une matrice hermitienne, $\lambda_1, \lambda_2 \in \R$ deux valeurs propres distinctes et $u, v \neq 0$ des vecteurs propres associées à $\lambda_1, \lambda_2$ respectivement, alors
+	\[
+	u^* v = 0
+	\]
+}{}
+
+\prf{On a
+	\[
+	\lambda_1 u^* v = (\lambda u)^* v = (Au)^* v= u^* A^* v = u^* A v = \lambda_2 u^* v
+	\]
+	mais comme $\lambda_1$ et $\lambda_2$ sont distincts on en déduit nécessairement que $u^* v = 0$.
+}
+
+\newthm{Soit $A \in \K^{n\times n}$ une matrice symétrique (hermitienne) est diagonalisable avec une matrice orthogonale (unitaire) $P \in \K^{n \times n}$ telle que
+	\[
+	P^* A P = \begin{pmatrix}
+		\lambda_1 & & \\
+		&  \ddots & \\
+		&  & \lambda_n
+	\end{pmatrix}
+	\]
+	où $\lambda_1, \ldots, \lambda_n \in \R$ sont les valeurs propres de $A$.
+}{Théorème spectrale}
+
+\prf{On considère le cas où $A \in \R^{n \times n}$, ainsi soit $\lambda_1 \in \R$ une valeur propre de $A$ et $v \neq 0$ un vecteur propre unitaire associé à $\lambda_1$. Avec Gram-schmidt (\ref{Procédé de Gram-Schmidt}), on peut trouver une base $\{v , u_2, \ldots , u_n \}$ qui est orthonormale pour le produit scalaire ordinaire. Soit $U \in \R^{n \times (n-1)}$ la matrice dont les colonnes sont $u_2, \ldots, u_n$. On considère alors la matrice, 
+\[
+S = U^\top A U \in \R^{n-1 \times n-1}
+\]
+on remarque facilement $S$ est symétrique puisque $A$ l'est. Ainsi par induction, cette matrice est diagonalisable avec une matrice orthogonale $K \in \R^{n-1 \times n-1}$, alors
+\[
+K^\top S K = K^\top U^\top A U K = \begin{pmatrix}
+	\lambda_2 & & \\
+	&  \ddots & \\
+	&  & \lambda_n
+\end{pmatrix}
+\] 
+On pose donc la matrice $P = (v, UK) \in \R^{n \times n}$, alors $P$ est orthogonale et on a bien,
+\[
+P^\top A P = \begin{pmatrix}
+	\lambda_1 & & \\
+	&  \ddots & \\
+	&  & \lambda_n
+\end{pmatrix}
+\]
+Le cas où $A \in \C^{n \times n}$ est similaire.
+}
+
+\newcor{Le théorème spectrale nous assure la diagonalisation d'une matrice symétrique (hermitienne), ainsi pour trouver la matrice $P$ telle que,
+	\[
+	P^* A P = \begin{pmatrix}
+		\lambda_1 & & \\
+		&  \ddots & \\
+		&  & \lambda_n
+	\end{pmatrix}
+	\]
+	Il suffit de 
+	\begin{enumerate}
+		\item Trouver les racines $\lambda_1, \ldots, \lambda_r \in \R$ du polynôme caractéristique
+				\[
+				\chi_A(x) = \det(A - x I_n)
+				\]
+		\item On trouve	pour tout $j$ une base de,
+		\[
+		E_{\lambda_j} = \ker(A - \lambda_j I_n)
+		\]
+		On utilise Gram-Schimdt pour trouver une base $B_{\lambda_j}$ orthonormale de $E_{\lambda_j}$.
+		\item Et donc comme $A$ est diagonalisable, alors les sous-espaces caractéristiques sont en somme directe et donc
+		\[
+		B = \bigcup_{j = 1}^r B_{\lambda_j}
+		\]
+		forme de une base orthonormale de $V$. On pose donc
+		\[
+		P = (B_{\lambda_1} | \ldots | B_{\lambda_r})
+		\]
+	\end{enumerate}
+}{}
+
+\exemples{Soit $V$ un espace vectoriel de dimension $3$ et $A \in \R^{n \times n}$ une matrice symétrique réelle dans une base orthonormale $B = \{v_1, v_2, v_3\}$ telle que
+	\[
+	A_B = \begin{pmatrix} 3 & -2 & 4 \\ -2 &  6 & 3 \\ 4 &  2 & 3 \end{pmatrix}
+	\]
+	On calcule alors sont polynôme caractéristique, on trouve
+	\[
+	\chi_A(x) = -(x - 7)^2(x+2)
+	\]
+	On calcul alors on base des sous-espaces propres respectifs, puis en utilisant Gram-Schmidt pour orthogonaliser la base : 
+	\[
+	B_7 = \left\{ \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} , \begin{pmatrix} -1/4 \\ 1 \\ 1/4 \end{pmatrix} \right\} \et B_{-2} = \left\{ \begin{pmatrix}
+		-1 \\ -1/2 \\ 1
+	\end{pmatrix}\right\}
+	\]
+	En normalisant on trouve finalement que
+	\[
+	P = \begin{pmatrix} \frac{\sqrt 2}{2} & - \frac{\sqrt 2}{2} & - \frac{2}{3} \\
+						0 & \frac{ 2 \sqrt 2}{3} & - \frac{1}{3} \\
+						\frac{\sqrt 2}{2} & \frac{\sqrt 2}{6} & \frac{2}{3} \end{pmatrix}
+	\]
+	et $\{ \frac{2}{3} v_1 + \frac{\sqrt 2}{2} v_3, - \frac{\sqrt 2}{2} v_1 + \frac{2}{\sqrt 2}{3} v_2 + \frac{\sqrt 2}{6} v_3, -\frac{2}{3} v_1 - \frac{1}{3} v_2 + \frac{2}{3} v_3\}$ est une base orthonormale de $V$ composée de vecteurs propres.
+}
+
+\subsection{Forme quadratique et matrice symétrique réelles}
+
+\newdef{Une \emph{forme quadratique} est une est fonction de la forme,
+	\[
+	\begin{array}{cccc}
+		f : & \R^n & \to & \R \\
+			& x & \mapsto & x^\top A x
+	\end{array}
+	\]
+	où $A \in \R^{n \times n}$. Quitte à remplacer $A$ par $\frac{1}{2} (A + A^\top)$ on peut supposer sans perte de généralité que $A$ est symétrique.
+}{}
+
+On souhaite résoudre le problème,
+\[
+\max_{x \in S^{n-1}} x^\top A x
+\]
+étant donnée une matrice symétrique réelle et, où $S^{n-1} = \{ x \in \R^n ~|~ \norme{x} = 1\}$ est la sphère unité. Mais puisque $f : x \mapsto x^\top A x$ est une fonction continue sur le compact $S^{n-1}$, alors $f$ admet un maximum sur $S^{n-1}$.
+
+\newthm{Soit $A \in \R^{n \times n}$ une matrice symétrique réelle et $f(x) = x^\top A x$ la forme quadratique correspondante à $A$. Dans ce cas
+	\[
+	\max_{x \in S^{n-1}} f(x) = \lambda_1 \et \min_{x \in S^{n-1}} f(x) = \lambda_n
+	\]
+	dont les solutions optimales sont respectivement $S^{n-1} \cap E_{\lambda_1}$ et $S\cap E_{\lambda_n}$.
+}{}
+
+\prf{Par le théorème spectrale, on sait que $A$ est diagonalisable donc admet des valeurs propres $\lambda_1 \geqslant \lambda_2 \geqslant \ldots \geqslant \lambda_n$ et une matrice orthogonale $P \in \R^{n \times n}$ telle que,
+	\[
+	P^\top A P = \begin{pmatrix}
+		\lambda_1 & & \\
+		&  \ddots & \\
+		&  & \lambda_n
+	\end{pmatrix}
+	\]
+	dont les colonnes $p_1, \ldots, p_n$ forme un base orthonormale, ainsi pour $x \in \R^n$ on a
+	\[
+	\norme{x}^2 = x^\top x = \left\langle \sum_{i=1}^n \alpha_i p_i, \sum_{j=1}^n \alpha_j p_i \right\rangle = \sum_{i=1}^n \alpha_i^2 = \norme{[x]_B}^2
+	\]
+	donc $x \in S^{n-1} \iff [x]_B \in S^{n-1}$. De plus,
+	\[
+	x^\top A x = \left(\sum_{i=1}^n \alpha_i p_i \right)^\top\cdot A \cdot \left(\sum_{j=1}^n \alpha_j p_j \right) =  \left(\sum_{i=1}^n \alpha_i p_i \right)^\top \cdot \left(\sum_{j=1}^n \alpha_j  \lambda_j  p_j \right) = \sum_{i=1}^n \lambda_i \alpha_i^2
+	\]
+	Ainsi pour $x \in S^{n-1}$ on a,
+	\[
+	\lambda_n = \lambda_n \sum_{i=1}^n \alpha_i^2 \leqslant \sum_{i=1}^n \lambda_i \alpha_i^2 \leqslant \lambda_1 \sum_{i=1}^n \alpha_i^2 = \lambda_1
+	\]
+	Ainsi $\lambda_n$ et $\lambda_1$ sont respectivement un minorant et majorant. Or pour $x \in S^{n-1} \cap E_{\lambda_1}$ on a
+	\[
+	x^\top A x = x^\top \lambda_1 x = \lambda_1
+	\]
+	il en va de même pour $\lambda_n$ ainsi on a bien,
+	\[
+	\max_{x \in S^{n-1}} f(x) = \lambda_1 \et \min_{x \in S^{n-1}} f(x) = \lambda_n
+	\]
+	dont les solutions optimales sont $S^{n-1}\cap E_{\lambda_1}$ et $S^{n-1} \cap E_{\lambda_n}$.
+}
+
+\newdef{Soit $A \in \R^{n \times n}$ symétrique est dite 
+	\begin{enumerate}
+		\item \emph{définie positive} si,
+		\[
+		\forall  x \in \R^n \backslash\{0\}, \quad x^\top A x > 0
+		\]
+		\item \emph{définie négative} si,
+		\[
+		\forall x \in \R^n \backslash \{0\}, \quad x^\top A x < 0
+		\]
+	\end{enumerate}
+	De plus on dira respectivement que $A$ est \emph{semi définie positive} ou \emph{semi définie négative} si les inégalités ne sont pas strictes. Également, la forme quadratique associé $x \mapsto x^\top Ax$ est dite définie positive si et seulement si $A$ est définie positive. Il en va de même pour les autres définitions.
+}{}
+
+\newthm{Soit $A \in \R^{n \times n}$ une matrice symétrique, alors 
+	\begin{enumerate}
+		\item $A$ est définie positive si et seulement si toutes les valeurs propres de $A$ sont strictement positives.
+		\item $A$ est définie négatives si et seulement si toutes les valeurs propres de $A$ sont strictement négatives.
+		\item $A$ est semi définie négative si et seulement si toutes les valeurs propres de $A$ sont positives ou nulles.
+		\item $A$ est semi définie négative si et seulement si toutes les valeurs propres de $A$ sont négatives ou nulles.
+		\end{enumerate}
+}{Caractérisation par les valeurs propres}
+
+\prf{On démontre que le premier cas, mais les autres sont analogue. Supposons $A$ définie positive ainsi pour tout $i \in \entiers$,
+	\[
+	u_i^\top A u_i > 0 \implies \lambda_i > 0
+	\]
+	Ainsi toutes les valeurs propres sont bien strictement positives. Réciproquement on a
+	\[
+	\forall x \in \R^{n} \backslash \{0\}, \quad x^\top A x = \sum_{i=1}^n \alpha_i^2 \lambda_i > 0
+	\]
+	donc $A$ est bien définie positive.
+}
+\newdef{Soit $A \in \R^{n \times n}$ une matrice symétrique, le \emph{$k$-mineur principale} de la matrice $A$ est le déterminant la matrice $A_k \in \R^{k \times n}$ qui est construite en choisissant les $k$ première lignes et colonnes de $A$. 
+	
+De plus un \emph{$k$-mineur symétrique} de $A$ est le déterminant de la matrice $B_k \in \R^{k \times k}$ tel que $b_{ij} = a_{l_i, l_j}$ où $\{l_1, \ldots, l_k\} \subset \entiers$ et $l_1 < \ldots < l_k$.
+}{}
+
+\newthm{Soit $A \in \R^{n \times n}$ une matrice symétrique est,
+	\begin{enumerate}
+		\item \emph{définie positive} si et seulement tous ses mineurs principaux sont strictement positifs
+		\item \emph{semi définie négative} si et seulement si tous ses mineurs symétrique sont positifs ou nulle.
+	\end{enumerate}
+}{Caractérisation par les déterminants des mineurs}
+
+\prf{Dans l'ordre on a,
+	\begin{enumerate}
+		\item Soit $A \in \R^{n \times n}$ une matrice symétrique définie positive. Ainsi soit $k \in \entiers$, ainsi soit $y \in \R^k \backslash \{0\}$ et ajoutons $n-k$ zéros à $y$ pour obtenir un vecteur $x \in \R^n$. Ainsi
+		\[
+		x^\top A x = y^\top A_k y > 0
+		\]
+		Donc $A_k$ est définie positive puisque $A$ l'est, ainsi par le théorème (\ref{Caractérisation par les valeurs propres}) toutes ses valeurs propres sont positives et donc $\det A_k > 0$.
+		
+		 Réciproquement, par récurrence le cas $n = 1$ est trivial. Ainsi pour $n \geqslant 2$ et par l'hypothèse de récurrence les matrices $A_k$ associé au $k$-mineur principaux pour $k \in \llbracket 1, n-1 \rrbracket$ sont définie positives. Supposons que $A$ n'est pas définie positive comme $\det A = \det A_n > 0$ alors $A$ possède au moins deux valeurs propres strictement négatives $\mu, \lambda \in \R$, et deux vecteurs propres $u,v \in \R^n$ orthonormales correspondants. Leurs dernières composantes de $u$ et $v$ sont non nulle puisque $A_{n-1}$ est définie positive, en effet si on suppose que $u$ est de la forme $u = (u_1, \ldots, u_{n-1}, 0)^\top$, alors
+		 \[
+		 A u = \mu u \implies A_{n-1} (u_1, \ldots, u_{n-1})^\top = \mu (u_1, \ldots, u_{n-1})^\top
+		 \] 
+		 Donc $A_{n-1}$ admet une valeurs propres strictement négative négative, ce qui contredit le fait que $A_{n-1}$ est définie positive. Il en va de même pour $v$. Alors il existe $\beta \neq 0$ tel que la dernière composante de $u + \beta v$ est nulle, ainsi
+		 \[
+		 (u + \beta v)^\top A (u + \beta v) = \mu + \beta^2 \lambda < 0
+		 \]
+		 ce qui est une contradiction au fait que $A_{n-1}$ est définie positive.
+	\end{enumerate}
+}
+
+\newthm{Soit $A \in \R^{n \times n}$ une matrice symétrique avec les valeurs propres $\lambda_1 \geqslant \ldots \geqslant \lambda_n$. Si $U \subset \R^n$ dénote un sous espace-vectoriel de $\R^n$ alors,
+	\[
+	\lambda_k = \max_{\dim U = k} ~\min_{x \in U\cap S^{n-1}} x^\top A x
+	\]
+	ou
+	\[
+	\lambda_k = \min_{\dim U = n-k + 1} ~\max_{x \in U \cap S^{n-1}} x^\top A x
+	\]
+}{Théorème Min-Max}
+	
+
+\prf{On fixe $k \in \entiers$ et prenons $U \subset \R^n$ arbitraire de dimension $k$. Par un argument dimensionnel, on voit que
+	\[
+	U \cap \Span \{u_k, \ldots, u_n\} \neq \{ 0\}
+	\]
+	où $\{u_1, \ldots, u_n\}$ est une base orthonormale de vecteurs propres de $A$ ordonnés selon les valeurs propres. Ainsi il existe $0 \neq x = \sum_{i=k}^n \alpha_i u_i \in U$, quitte à le normaliser, on peut sans perte de généralité que $\norme x = 1$. Ainsi on obtient
+	\[
+	x^\top A x = \sum_{i=k}^n \alpha_i^2 \lambda_i \leqslant \lambda_k
+	\]
+	on a bien $\min_{x \in U \cap S^{n-1}} x^\top A y \leqslant \lambda_k$.
+	
+	Prenons maintenant le cas particulier
+	\[
+	U = \Span \{u_1, \ldots, u_k\}
+	\]
+	Par le théorème on sait que
+	\[
+	\min_{x \in U \cap S^{n-1}} x^\top A x = \lambda_k
+	\]
+	Donc on conclut bien que
+	\[
+	\lambda_k = \max_{\dim U = k} ~\min_{x \in U\cap S^{n-1}} x^\top A x
+	\]
+}
+
+\subsection{Décomposition en valeurs singulières}
+
+\newthm{Une matrice $A \in \C^{m \times n}$ peut être décomposée comme
+	\[
+	A = P \cdot D \cdot Q
+	\]
+	où $P \in \C^{m \times m}$ et $Q \in \C^{n \times n}$ sont unitaire, et $D \in \R_+^{m \times n}$ est une matrice diagonale. Si $A$ est réelle cela implique que $P$ et $Q$ sont réelles.
+}{Décomposition en valeurs singulières}
+
+\prf{On considère la matrice hermitienne $A^* A \in \C^{n \times n}$ qui est semi-définie positive. Car pour tout $x \in \C^{n}$,
+	\[
+	x^* A^* A x = (Ax)^* Ax = \norme{Ax}^2 \geqslant 0
+	\]
+	Ainsi soit $\sigma_1^2 \geqslant \sigma_2^2 \geqslant \ldots \geqslant \sigma_n^2 \geqslant 0$ les valeurs propres de $A^*A$. Soient $\{u_1, \ldots, u_n\}$ une base orthonormale de $\C^n$ composée de vecteurs propres de $A^*A$, alors les lignes de $Q$ sont $u_1^*, \ldots, u_n^*$. Ainsi par construction $Q$ est unitaire.
+	
+	Soit $r \in \N$ le nombre tel que $\sigma_i > 0$ est strictement positif,
+	\[
+	r = | \{i \in \entiers, ~\sigma_i > \}|
+	\]
+	On définit par les vecteurs
+	\[
+	\forall \in \llbracket 1, r \rrbracket, \quad v_i = \frac{ Au_i}{\sigma_i}
+	\]
+	Notons que les $v_i$ sont déjà orthonormées, en effet
+	\[
+	\norme{v_i}^2 = \frac{u_i^* A^*}{\sigma_i}\frac{ Au_i}{\sigma_i} = \frac{\sigma_i^2 u_i^* u_i}{\sigma_i^2} = u_i^* u_i = 1
+	\]
+	Et pour $i \neq j$,
+	\[
+	v_i^* v_j = u_i^* u_j = 0
+	\]
+	Avec le procédè de Gram-Schmidt, on complète les $v_i$ tels que $\{v_1, \ldots, v_m\}$ est une base orthonormale de $\C^m$. Donc les colonnes de $P$ sont les $v_1, \ldots, v_m$ dans cet ordre et donc par construction, $P$ est unitaire. 
+	
+	La matrice $D \in \C^{m \times n}$ est la matrice diagonale dont les $r$ première composantes sur la diagonale sont $\sigma_1, \ldots, \sigma_r$ dans cet ordre. Avec ces matrice $P,D$ et $Q$ on a
+	\[
+	A = P \cdot D \cdot Q
+	\]
+	ou de manière équivalente
+	\[
+	P^* \cdot A \cdot Q^*
+	\]
+	En effet, par construction
+	\[
+	(P^* \cdot A \cdot Q^*)_{ij} = v_i^* A \cdot u_j
+	\]
+	et c'est égale à zéro si $j > r$, parce que dans ce cas $Au_j = 0$ dès que $u_j^* A^* A u_j = 0$. Si $i > r$, par construction $v_i$ est orthogonale à $Au_j/\sigma_j$ et donc c'est égale à zéro. Et si $i \leqslant i,j \leqslant r$, alors
+	\[
+	u_i^* A^* A u_j/\sigma_i = u_i^* u_j \sigma_j^2/\sigma_i = \left\{ \begin{array}{cl} \sigma_i & \text{st } i = j \\ 0 &  \text{autrement} \end{array} \right.
+	\]
+}
+
+\newdef{Les $\sigma_1, \ldots, \sigma_r$ du théorème (\ref{Décomposition en valeurs singulières}) sont les \emph{valeurs singulières} de $A$, et 
+	\[
+	A = P \cdot D \cdot Q
+	\]
+	est appelé une \emph{décomposition en valeurs singulières}.
+}{}
+
+
+\newdef{La pseudo inverse d'une matrice diagonale $D \in \R^{m \times n}$ de la forme
+	\[
+	D = \mathrm{diag}_{m \times n}(\sigma_1, \ldots , \sigma_r, 0 , \ldots, 0)
+	\]
+	est 
+	\[
+	D^+ = \mathrm{diag}_{n \times m} (\sigma_1^{-1}, \ldots, \sigma_r^{-1}, 0, \ldots, 0)
+	\]
+	Ainsi la \emph{pseudo inverse} d'une matrice $A \in \C^{m \times n}$ avec une décomposition $A = P\cdot D \cdot Q$ est,
+	\[
+	A^+ = Q^* D^+ P^*  
+	\]
+}{Matrice pseudo inverse}
+
+\newlem{Soit $A \in \C^{m \times n}$, alors il existe une unique matrice $X \in \C^{n \times n}$ telle que les quatre conditions de \emph{Penrose} sont satisfaites :
+	\begin{enumerate}
+		\item $A X A = A$
+		\item $(AX)^* = AX$
+		\item $XAX$ = $X$
+		\item $(XA)^* = XA$
+	\end{enumerate}
+}{Conditions de Penrose}
+
+\prf{Soit $X, Y \in \C^{n \times m}$ deux matrices satisfaisant les conditions de Penrose, alors
+\begin{align*}
+	X &= XAX \\ &= XAYAX \\ &= XAYAYAYAX \\ &= (XA)^* (YA)^* Y (AY)^* (AX)^* \\ &= A^* X^* A^* Y^* Y Y^* A^* X^* A^* \\ &= (AXA)^* Y^* Y Y^* (AXA)^* \\ &= A^* Y^* Y Y^* A^* \\ &= (YA)^*Y(AY)^* \\ &= YAYAY \\ &= YAY \\ &= Y 
+	\end{align*}
+}
+\newthm{La pseudo inverse d'une matrice $A \in \C^{m \times n}$ est unique.}{}
+
+\prf{Soit $A = PDQ$ une décomposition en valeurs singulières et $A^+ = Q^* D^+ P^*$. Alors
+	\[
+	A A^+ A = PDQ \cdot Q^* D^+ P^* \cdot PDQ = P D D^+ D Q = PDQ = A
+	\]Il est facile de voir que $A^+$ respecte les quatre conditions de Penrose (\ref{Conditions de Penrose}), et donc $A^+$ est unique.
+}
+
+
+\subsection{Encore des systèmes d'équations linéaires}
+On considère de nouveau un système
+\begin{equation} \label{eq2}
+	Ax = b
+\end{equation}
+où $A \in \C^{m \times n}$ et $b \in \C^m$.
+
+\newdef{On appelle \emph{solution minimal} de (\ref{eq2}) est la solution du problème des moindres carrées
+	\[
+	\min_{x \in \C^n} \norme{Ax -b}_2
+	\]
+	correspondant avec norme $\norme x$ minimale.
+}{}
+
+\newthm{La solution minimal de (\ref{eq1}) est 
+	\[
+	x = A^+ b,
+	\]
+	où $A^+$ est la pseudo inverse de $A$.
+}{}
+
+\prf{Soit $B \in \C^{n \times n}$ unitaire on remarque que pour tout $x \in \C^n$
+	\[
+	\norme x^2 = x^* x = x^* B^* B x = \norme{Bx}^2
+	\]
+ainsi les matrices unitaire préserve la norme. Ainsi pour $x \in \C^n$,
+\[
+\norme{Ax -b} = \norme{PDQ x -b} = \norme{DQx - P^*b} 
+\]
+on pose $y = Qx$ mais comme $Q$ est unitaire alors $\norme y = \norme x$. Dès lors on peut facilement vérifier que $y$ est solution minimal de $Dy = P^*b \iff Q^*y$ est solution minimal de $Ax = b$. Or les solutions optimales de $Dy = P^*b$ sont les $y \in \C^n$ tel que $y_i = (P^*b_i)/\sigma_i$ pour $1 \leqslant i \leqslant r$ et $y_{r+1}, \ldots y_n$ sont libres alors la solution où $y_{r+1} = \ldots y_n = 0$ est celle de norme minimale. Et elle est donné par
+\[
+y = D^+ P^* b
+\]
+On peut donc conclure que
+\[
+x = Q^*y = Q^* D^+ P^* b = A^+b
+\]
+}
+
+\subsection{Le meilleur sous-espace approximatif}	
+Soient $a_1, \ldots, a_m \in \R^n$ des vecteurs et $1 \leqslant k \leqslant n$, on souhaite trouver un sous-espace $H \subset \R^n$ de dimension $k$ tel que 
+\[
+\sum_{i=1}^m d(a_i, H)^2
+\]
+soit minimale.
+
+Supposons que $H = \Span\{u_1, \ldots, u_k\}$ où $u_1, \ldots, u_k$ sont orthonormales, alors
+\[
+d(a_i,H)^2 = \norme{a_i - \pi(a_i)}^2 \implies d(a_i, H)^2 =  \norme{a_i}^2 -\norme{\pi(a_i)}^2
+\]
+donc minimiser $\sum_{i=1}^n d(a_i, H)^2$ revient à maximiser 
+\[
+\sum_{i=1}^m \norme{\pi(a_i)}^2 = \sum_{i=1}^m \sum_{j=1}^k \langle a_i, u_j \rangle^2 = \sum_{j=1}^k \norme{Au_j}^2 = \sum_{j=1}^k u_j^\top A^\top A u_j
+\]
+où $A^\top = (a_1, \ldots, a_n)$.
+
+\newthm{Soient $a_1, \ldots, a_m \in \R^n$ et $A^\top (a_1, \ldots, a_m) \in \R^{m \times n}$ et $U = (u_1, \ldots, u_n) \in \R^{n \times n}$ une base orthonormale de vecteur propres de $A^\top A$ associés aux valeurs propres $\lambda_1, \ldots, \lambda_n$. Alors $H = \Span \{u_1, \ldots, u_n\}$ est une solution optimale de 
+	\[
+	\min_{\dim H = k} \sum_{i=1}^m d(a_i, H)^2
+	\]
+	et $u_1, \ldots, u_k$ est une solution optimale de 
+	\[
+	\max_{u_1, \ldots u_k \in S^{n-1}} \sum_{j=1}^k u_j^\top A^\top A u_j
+	\]
+}{Sous-espace approximatif}
+
+\prf{On procède par récurrence sur $k$. Pour $k = 1$, le problème revient à maximiser une forme quadratique sur $S^{n-1}$, ce qu'on connait déjà.
+	
+Pour le cas $k > 1$, on pose $W = \Span \{w_1, \ldots, w_k\} \neq \Span \{u_1, \ldots, u_k\}$ où les $w_i$ forment une base orthonormale. Sans perte de généralité on peut supposer que $w_k \perp u_1, \ldots u_{k-1}$. Par récurrence on sait que
+\[
+\sum_{j=1}^{k-1} w_j^\top A^\top A w_j \leqslant \sum_{j=1}^{k-1} u_j^\top A^\top A u_j
+\]
+Or on observe que pour tout $x \in S^{n-1}, ~x \perp \Span\{u_1,	\ldots u_{k-1}\}$
+\[
+x^\top A^\top A x = \sum_{i=k}^n \lambda_i \alpha_i^2  \leqslant \lambda_k \sum_{i=k}^n \alpha_i^2 = \lambda_k
+\]
+alors
+\[
+\max_{x \in S^{n-1}, x \perp \Span\{u_1, \ldots u_{k-1}\}} x^\top A^\top A x
+\]
+est atteint en $u_k$. Alors
+\[
+w_k^\top A^\top A w_k \leqslant u_k^\top A^\top A u_k
+\]
+et 
+\[
+\sum_{j=1}^k w_j^\top A^\top A w_j \leqslant \sum_{j=1}^k u_j^\top A^\top A u_j
+\]
+}
+
+\subsubsection{Rang $k$ approximation}
+Pour une matrice $A \in \R^{m \times n}$ et $k \in \N$, on résoudre
+\begin{equation} \label{k approximation}
+\min_{\substack{B \in \R^{m \times n} \\ \mathrm{rg} B \leqslant k}} \norme{A - B}_F
+\end{equation}
+où $\norme{\cdot}_F$ est la norme de Frobenius définit par
+\[
+\norme{A}_F = \sqrt{\sum_{ij} \alpha_{ij}^2}
+\]
+
+\newdef{Soit $A \in \R^{m \times n}$, on considère sa décomposition en valeurs singulière $A = P \mathrm{diag}(\sigma_1, \ldots, \sigma_r, 0 , \ldots, 0) Q$, alors la matrice $A_k$ de $A$ pour $k \in \N$ est
+	\[
+	A_k = P \mathrm{diag}(\sigma_1, \ldots, \sigma_k, 0 ,\ldots ,0) Q
+	\]
+On observe alors que $\mathrm{rg} A_k \leqslant k$.
+}{}
+
+\newthm{$A_k$ est une solution optimale de (\ref{k approximation})
+}{}
+
+\prf{Soit $\tilde H \unlhd \R^n$ le sous-espace engendré par les lignes de $C$ de dimension $\dim \tilde H \leqslant k$, alors
+	\[
+	\norme{A - C}_F^2= \sum_{i=1}^m \norme{a_i - c_i}^2 \geqslant \sum_{i=1}^m d(a_i, \tilde H)^2
+	\]
+	or d'après le théorème (\ref{Sous-espace approximatif}) $H = \Span\{u_1, \ldots , u_k\}$ minimise le problème et donc
+	\[
+	\norme{A - C}_F^2 = \sum_{i=1}^m d(a_i, \tilde H)^2 \geqslant \sum_{i=1}^m d(a_i, H)^2 = \sum_{i=1}^m \norme{a_i - \hat a_i}^2 = \norme{A - A_k}_F^2 
+	\]
+}
+
+\newlem{Soit $U \mathrm{diag}(\lambda_1, \ldots, \lambda_n) U^\top$ une factorisation de $A^\top A$ selon le théorème spectral où $\lambda_1 \leqslant \ldots \leqslant \lambda_n$. Les lignes de $A_k$ sont les projections des lignes $A$ sur $H = \Span\{u_1, \ldots, u_k\}$.
+}{}
+
+\prf{Soit $a_i^\top \in \R^n$ une ligne de $A$, alors sa projection sur $H$ est
+	\[
+	\pi(a_i) = \sum_{j=1}^k  a_i^\top u_j u_j
+	\]
+	que l'on peut écrire son forme de ligne
+	\[
+	\sum_{j=1}^k a_i^\top (u_j u_j^\top)
+	\]
+	Ainsi on a bien
+	\[
+	\sum_{j=1}^k A u_j u_j^\top = \sum_{j=1}^k \sigma_i v_i u_i^\top = P \mathrm{diag}(\sigma_1, \ldots, \sigma_k, 0 , \ldots, 0) Q = A_k
+	\]
+	
+}
+
+

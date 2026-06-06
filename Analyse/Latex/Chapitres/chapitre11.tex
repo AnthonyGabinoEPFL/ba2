@@ -1,0 +1,662 @@
+\section{Preuve à connaitre}
+\newprf{Soit $f, g : [a,b[ \to \R$ deux fonctions intégrables sur tout sous-intervalle $J \subset [a,b[$ et supposons qu'il existe $c \in [a,b[$ tel que,
+	\[
+	\forall x \in c, b[, \quad 0 \leqslant f(x) \leqslant g(x) 
+	\]
+	Si $\int_a^b g(x) ~\mathrm dx$ existe, alors $\int_a^b f(x) ~\mathrm dx$ existe aussi. Inversement, si $\int_a^b f(x) ~\mathrm dx$ diverge, alors $\int_a^b g(x) ~\mathrm dx$ diverge aussi.
+}{Critère de comparaison}
+
+\prf{Si $\int_a^b g(x) ~\mathrm dx$ existe alors $\int_c^b g(x) ~\mathrm dx$ existe aussi. De plus, pour tout $t \in [c, b[$,
+	\[
+	F(t) = \int_c^t f(x) ~\mathrm dx \int_c^t g(x) ~\mathrm dx \leqslant \int_c^b g(x) ~\mathrm dx < + \infty
+	\]
+	Puisque $F$ est croissant et bornée supérieurement sur $[c,b[$, on a que $\lim_{t \to b^-} F(t)$ existe. Ainsi $\int_c^b f(x) ~\mathrm dx$ converge et 
+	\[
+	\int_a^b f(x) ~\mathrm dx = \lim_{t \to b^-} \int_a^t f(x) ~\mathrm dx = \int_a^c f(x) ~\mathrm dx + \lim_{t \to b^-} \int c^t f(x) ~\mathrm dx 
+	\]
+	existe aussi. La seconde affirmation est la contraposée de la première.
+}
+
+\newprf{Soit $V$ un espace vectoriel réel et $\langle \cdot, \cdot \rangle : V \times V \to \R$ un produit scalaire. Alors
+	\[
+	\forall x,y \in V, \quad |\langle x,y \rangle| \leqslant \langle x,x \rangle^\frac{1}{2}  \langle y,y \rangle^\frac{1}{2}
+	\]
+}{Inégalité de Cauchy-Schwarz}
+
+\prf{Pour tout $\alpha \in \R$ et pour tout $x, y \in V$,
+	\[
+	0 \leqslant \langle \alpha x + y, \alpha x + y \rangle = \alpha^2 \langle x,x \rangle 2 \alpha \langle x,y \rangle + \langle y,y \rangle = p(\alpha)
+	\]
+	où $p(\alpha)$ est un polynôme de degré $2$ en $\alpha$. Par positivité de $\langle \cdot, \cdot \rangle$, le discriminant est nécessairement négatif ou nul ainsi,
+	\[
+	\langle x,y \rangle ^2 - \langle x,x \rangle \langle y,y \rangle \leqslant 0
+	\]
+	d'où la thèse.
+}
+
+\newprf{Soit $(\bm x^k) \subset \rn$ une suite \emph{bornée}. Alors il existe une sous-suite $(\bm x^{k_i}) \subset (\bm x^k)$ qui est convergente}{Bolzano-Weierstrass}
+
+\prf{Puisque ${\bm x^k}$ est bornée, en particulier $(x_1^k)$ l'est aussi. Donc on peut extraire une sous-suite $(x_1^{k_j})$ qui converge vers $x_1 \in \R$. Désormais, comme la suite $(x_2^{k_j})$ est bornée, on peut extraire une sous-suite $(x_2^{k_{j_l}})$ qui converge vers $x_2 \in \R$. Ainsi,
+	\[
+	x_1^{k_{j_l}} \underset{l \to \infty}{\longrightarrow} x_1 \et x_2^{k_{j_l}} \underset{l \to \infty}{\longrightarrow} x_2
+	\]
+	
+	En itérant ce processus $n$ fois, on peut extraire une sous-suite de $(\bm x^k)$ donc chaque composante converge vers $(x_1, x_2, \ldots, x_n)$.
+}
+
+\newprf{Un ensemble $E \subset \rn$ non vide est fermé si et seulement si toute suite convergente $(\bm x^k) \subset E$ convergente, converge vers un élément de $E$.}{Caractérisation d'un ensemble fermé}
+
+\prf{Soit $E$ fermé et $(\bm x^k) \subset E$ une suite convergente vers $\bm x \in \rn$. Alors $\bm x$ adhère $E$ et, puisque $E$ est fermé, $\bm x \in E$. Réciproquement, supposons que $E$ ne soit pas fermé, par passage au complémentaire $E^c$ n'est pas ouvert et donc il existe $\bm{\tilde x} \in E^c$ tel que $\forall \delta > 0, \quad B(\bm{\tilde x}, \delta) \not \subset E$. En posant $\delta = \frac{1}{k}$ pour tout $k \in \N^*$, on obtient alors une suite $(\bm x^k) \subset E$ convergente vers $\bm{\tilde x} \not \in E$.
+}
+
+\newprf{Soit $\bm f : E \subset \rn \to \rmm$ continue en $\bm x_0 \in E$ et $\bm g : A \to \rn$ continue en $\bm y_0$ et telle que $\bm x_0 = \bm g(\bm y_0)$. Alors $\bm h = \bm f \circ \bm g$ est continue en $\bm y_0$.
+}{Compositions de fonctions continues}
+
+\prf{Pour toute suite $\bm \{\bm y^k\} \subset A$ telle que $\lim_{k \to \infty} \bm y^k = \bm y_0$, on a par continuité de $\bm g$ que $\lim_{k \to \infty} \bm g(\bm y^k) = \bm g(\bm y_0) = \bm x_0$ et par la continuité de $\bm f$ en $\bm x_0$, $\lim_{k \to \infty} \bm f(\bm g(\bm y^k)) = \bm f(\bm x_0)$. Donc $ \lim_{k \to \infty} \bm h(\bm y^k) = \bm h(\bm y_0)$, ce qui montre la continuité de $\bm h$ en $\bm x_0$.
+}
+
+\newprf{Soit $E$ un compact non vide et  $f : E \to \R$	 une fonction continue. Alors
+	\begin{itemize}
+		\item $f$ est bornée
+		
+		\item $f$ atteint ses bornes, c'est-à-dire,
+		\[
+		\exists \bm x_m, \bm x_M \in E, \quad f(\bm x_M) = \sup_{\bm x \in E} f(\bm x) \et f(\bm x_m) = \inf_{\bm x \in E} f(\bm x)
+		\]
+	\end{itemize}
+}{}
+
+\prf{Dans l'ordre on a,
+	\begin{itemize}
+		\item Supposons $f$ non bornée,
+		\[
+		\forall k > 0, \exists \bm  x^k \in E, \quad |f(\bm x^k)| \geqslant k
+		\]
+		mais par compacité de $E$ il existe une sous-suite $(\bm x^{k_i})$ qui converge vers $\bm x \in E$ et donc par continuité de $f$,
+		\[
+		\lim_{i \to \infty} f(\bm x^{k_i}) = f(\bm x)
+		\]
+		ce qui contredit le fait que $f$ est supposée non bornée car $\forall i \in \N, \quad f(\bm x^{k_i}) \geqslant k_i > i$.
+		
+		\item Si on note,
+		\[
+		m = \inf_{\bm x \in E} f(\bm x) \et M = \sup_{\bm x \in E} f(\bm x)
+		\]
+		par caractérisation des extremums on sait qu'il existe deux suites $(\bm a^k), (\bm b^k) \subset E$ telles que,
+		\[
+		\lim_{k \to \infty} f(\bm  a^k) = m \et \lim_{k \to \infty}  f(\bm b^k) = M
+		\]
+		De plus comme $E$ est compact, on peut extraire des sous-suites $(\bm a^{k_i})$ et $(\bm b^{k_i})$ qui converge respectivement vers $\bm x_m$ et $\bm x_M$ qui appartiennent à E. Ainsi par continuité de $f$,
+		\[
+		m = \lim_{k \to \infty} f(\bm a^k) = \lim_{i \to \infty} f(\bm a^{k_i}) = f(\bm x_m)
+		\]
+		et 
+		\[
+		M = \lim_{k \to \infty} f(\bm b^k) = \lim_{i \to \infty} f(\bm b^{k_i}) = f(\bm x_M)
+		\]		
+	\end{itemize}
+}
+
+\newprf{Soit $f : E \to \R$ différentiable en $\bm x_0 \in \mathring{E}$ de différentiel $L$. Alors toutes les dérivées partielles existent en $\bm x_0$ et,
+	\[
+	\forall \bm v \in \rn, \quad L(\bm v) = \langle \nabla f(\bm x_0), \bm v \rangle
+	\]
+De plus $f$ est continue en $\bm x_0$
+}{}
+
+\prf{Soit $f : E \to \R$ différentiable en $\bm x_0 \in \mathring{E}$ de différentiel $L$. Par définition de la différentiabilité en $\bm x_0$, on a
+	\[
+	f(\bm x_0 + t \bm e_i) = f(\bm x_0) + t L(\bm e_i) + o(t)
+	\]
+	ainsi on obtient,
+	\[
+	\frac{\partial f}{\partial x_i} (\bm x_0) = \lim_{t \to 0} \frac{f(\bm x_0 + t \bm e_i) - f(\bm x_0)}{t} = L(\bm e_i)
+	\]
+	ce qui permet de conclure,
+	\[
+	\forall \bm v \in \rn, \quad L(\bm v) = \sumn v_i L(\bm e_i) = \sumn \frac{\partial f}{\partial x_i}(\bm x_0) v_i = \langle \nabla f(\bm x_0), \bm v \rangle
+	\]
+	De plus par hypothèse de différentiabilité en $ \bm x_0$,
+	\[
+	\lim_{\bm x \to \bm x_0} f(\bm x) = f(\bm x_0) + \underbrace{\lim_{\bm x \to \bm x_0} L(\bm x - \bm x_0)}_{=0} + \underbrace{\lim_{\bm x \to \bm x_0} o(\norme{\bm x - \bm x_0})}_{=0} = f(\bm x_0)
+	\]
+	ce qui montre bien que $f$ est continue en $\bm x_0$.
+}
+
+\newprf{Soit $f : E \to \R$ et $\bm x_0 \in \overset{\circ}{E}$. S'il existe $\delta > 0$ tel que $B(\bm x_0, \delta) \subset E$ et les dérivées partielles $\frac{\partial f}{\partial x_i} (\bm x)$ existent pour tout $\bm x \in B(\bm x_0, \delta)$ et sont continues en $\bm x_0$, alors $f$ est différentiable en $\bm x_0$.
+}{}
+
+\prf{On utilise la norme euclidienne et, pour alléger les notations, on renomme $\bm x_0 = \bm a = (a_1, \ldots, a_n)$. Pour $\bm x \in B(\bm x_0, \delta )$ donné, on introduit la notation $\bm x^k = (\bm x_1, \ldots, x_k, a_{k+1}, \ldots, a_n)$ de sorte que $\bm x^n = \bm x$ et $\bm x^0 = \bm a$. Ainsi par somme télescopique, on peut écrire 
+	\[
+	f(\bm x) - f(\bm a) = \sumn f(\bm x^i) - f(\bm x^{i-1})
+	\]
+	
+	
+	Par le théorème des accroissement finis sur $\R$, on que pour tout $i \in \entiers$, il existe $\theta_i \in ]0,1[$ tel que,
+	\[
+	f(\bm x^i) - f(\bm x^{i-1}) = \frac{\partial f}{\partial x_i} (\bm x^{i-1} + \theta_i (\bm x^i - \bm x^{i-1})) (x_k - a_k)
+	\]
+	De plus par continuité de $\frac{\partial f}{\partial x_i}$ en $\bm a$, on a
+	\[
+	\forall \varepsilon > 0, \exists \tilde \delta \in \left]0, \frac{\delta}{2} \right],~\forall \bm y \in E, \quad \norme{\bm y -\bm x_0} \leqslant 2 \tilde \delta \implies \left| \frac{\partial f}{\partial x_i} (\bm y) - \frac{\partial f}{\partial x_i} (\bm a) \right| \leqslant \varepsilon
+	\]
+	ainsi pour $\bm y(\bm x) =  \bm x^{i-1} + \theta_i (\bm x^i - \bm x^{i-1})$ on a
+	\[
+	\norme{\bm y(\bm x) - \bm a} = \norme{(1 - \theta_i)(\bm x^{i-1} - \bm a) + \theta_i(\bm x^i- \bm a)} \leqslant \norme{\bm x^{i-1} -  \bm a} + \norme{\bm x^i - \bm a} \leqslant 2 \norme{\bm x - \bm a}
+	\]
+	ainsi,
+	\[
+	g_i(\bm x) := \frac{\partial f}{\partial x_i} (\bm x^{i-1} + \theta_i (\bm x^i - \bm x^{i-1})) - \frac{\partial f}{\partial x_i} (\bm a) \underset{\bm x \to \bm a}{\longrightarrow} 0
+	\]
+	Et donc,
+	\[
+	f(\bm x) - f(\bm a) = \sumn f(\bm x^k) - f(\bm x^{i-1}) = \sumn \left( \frac{\partial f}{\partial x_i} (\bm a) (\bm x_k - a_k) + g_k(\bm x)(\bm x_k - a_k) \right) = Df(\bm a) \cdot (\bm x - \bm a) + g(\bm x)
+	\]
+	avec $g(\bm x) = \sumn g_i(\bm x)(x_k - a_k)$. De plus 
+	\[
+	\lim_{\bm x \to \bm a} \frac{|g(\bm x)|}{\norme{\bm x - \bm a}} \leqslant \lim_{\bm x \to \bm a} \sqrt{\sumn g_i(\bm x^2)} = 0
+	\]
+	Ainsi on a bien $g(\bm x) = o(\norme{\bm x- \bm a})$.
+}
+
+
+\newprf{Soit $E \subset \rn$ un ouvert non-vide et $f : E \to \R$ une fonction différentiable sur $E$. Si $\bm x, \bm y \in E$ distincts sont tels que $[\bm x, \bm y] \subset E$, alors il existe $\bm z \in ]\bm x, \bm y[$, tel que
+	\[
+	f(\bm y) - f(\bm x) = Df(\bm z) (\bm y - \bm x)
+	\]
+}{Théorème des accroissements finis}
+
+\prf{On pose $g(t) = f(\bm x + t(\bm y - \bm y))$ avec $t \in [0,1]$. Alors $g$ est continue sur $[0,1]$ et dérivable sur $]0,1[$ par composition de fonctions dérivables. Par la règle de dérivation d'une composition,
+	\[
+	g'(t) = D f(\bm x + t(\bm y - \bm x)) \cdot (\bm y-\bm x)
+	\]
+	Par le théorème des accroissements finis pour des fonctions d'une seule variable, il existe $\theta \in ]0,1[$ tel que $g(1) - g(0) = g'(\theta)$ ce qui équivaut à
+	\[
+	f(\bm y) - f(\bm x) = Df(\bm x + \theta(y - x)) (\bm y - \bm x) = D f(\bm z) (\bm y - \bm x)
+	\]
+	où $\bm z = \bm x + \theta (\bm y - \bm x) \in ]\bm x, \bm y[$.
+}
+
+\newprf{Soit $f : E \to \R$ telle que $\frac{\partial f}{\partial x_i}, \frac{\partial f}{\partial x_j}, \frac{\partial^2 f}{\partial x_i \partial x_j}, \frac{\partial^2 f}{\partial x_j \partial x_i}$ existent dans $E$ et $\frac{\partial^2 f}{\partial x_i \partial x_j}, \frac{\partial^2 f}{\partial x_j \partial x_i}$ sont continues en $\bm x \in E$, alors
+	\[
+	\frac{\partial^2 f}{\partial x_i \partial x_j}(\bm x) = \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm x)
+	\]
+}{Théorème de Schwarz}
+
+\prf{On considère la quantité,
+	\[
+	\Delta(s,t) = f(\bm x + s \bm e_i + t \bm e_j) - f(\bm x + \bm e_i) - f(\bm x + t \bm e_j) + f(\bm x)
+	\]
+	et les deux fonctions auxiliaires,
+	\[
+	g(\xi) = f(\bm x + \xi \bm e_i + t \bm e_j) - f(\bm x + \xi \bm e_i) \et h(\xi) = f(\bm x + s \bm e_i + \xi \bm e_j) - f(\bm x + \xi \bm e_j)
+	\]
+	La fonction $g$ est dérivable sur $]0,s[$ et donc par le théorème des accroissement finis, il existe $\tilde s \in ]0,s[$ tel que
+	\[
+	g(s) - g(0) = g'(\tilde s) s = \left( \frac{\partial f}{\partial x_i}(\bm x + \tilde s \bm e_i + t \bm e_j) - \frac{\partial f}{\partial x_i}(\bm x + \tilde s \bm e_i) \right) s.
+	\]
+	Si on pose
+	\[
+	\varphi(\eta) = \frac{\partial f}{\partial x_i}(\bm x + \tilde s \bm e_i + \eta \bm e_j)
+	\]
+	la fonction $\varphi$ est dérivable sur $]0,t[$ donc il existe $\tilde t \in ]0,t[$ tel que
+	\[
+	\varphi(t) - \varphi(0) = \varphi'(\tilde t)t = \frac{\partial^2 f}{\partial x_j \partial x_i} (\bm x + \tilde s \bm e_i + \tilde t \bm e_j) t
+	\]
+	On a finalement,
+	\[
+	\Delta(s,t) = g(s) - g(0) = g'(\tilde s) s = \left( \varphi(t) - \varphi(0)\right) s = \varphi(\tilde t) st = \frac{\partial^2 f}{\partial x_j \partial x_i} (\bm x + \tilde s \bm e_i + \tilde t \bm e_j) st
+	\]
+	De manière analogue avec la fonction $h$ on trouve
+	\[
+	\Delta(s,t) = \frac{\partial^2 f}{\partial x_i \partial x_j} (\bm x + \hat s \bm e_i + \hat t \bm e_j) st
+	\]
+	et donc 
+	\[
+	\Delta(s,t) = \frac{\partial^2 f}{\partial x_i \partial x_j} (\bm x + \hat s \bm e_i + \hat t \bm e_j) st = \varphi(\tilde t) st = \frac{\partial^2 f}{\partial x_j \partial x_i} (\bm x + \tilde s \bm e_i + \tilde t \bm e_j) st
+	\]
+	Si on prend $s = t \to 0^+$, on obtient $\hat s, \tilde s \to 0^+$ et $\hat t, \tilde t \to 0^+$. Et donc par continuité des dérivées partielles secondes en $\bm x$, on a
+	\[
+	\lim_{s \to 0^+} \frac{1}{s^2} \Delta(s,s) = \frac{\partial^2 f}{\partial x_i \partial x_j}(\bm x) = \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm x)
+	\]
+}	
+
+\newprf{Soit $f : [a,b] \times E \to \R$ une fonction continue, alors la fonction
+	\[
+	g(\bm x) = \int_a^b f(t, \bm x) ~\mathrm dt
+	\]
+	est continue sur $E$.
+}{}
+
+\prf{Soient $\bm x_0 \in E$ et $\varepsilon >0$. D'après le théorème de Cantor-Heine généralisé appliqué au sous-ensemble $K = I \times {x_0}$, il existe $\delta > 0$ tel que
+	\[
+	\forall t_0  \in I, \quad \forall (t, \bm x) \in I \times E, \quad |t-t_0| + \norme{\bm x - \bm x_0} \leqslant \delta \implies |f(t_0, \bm x_0) - f(t, \bm x)| \leqslant \varepsilon
+	\]
+	En particulier pour $t = t_0$, on a
+	\[
+	\forall (t, \bm x) \in I \times E, \quad \norme{\bm x - \bm x_0} \leqslant \delta \implies |f(t, \bm x ) - f(t_0, \bm x_0) | \leqslant \varepsilon
+	\]
+	Pour tout $\bm x \in E$, la fonction $t \mapsto f(t, \bm x)$ est continue sur l'intervalle fermé $I$, donc l'intégrale $g(\bm x) = \int_i f(t, \bm x) ~\mathrm dt$ existe. De plus pour tout $\bm x \in \overline B(\bm x_0, \delta) \cap E$, 
+	\[
+	|g(\bm x) - g(\bm x_0)| = \left| \int_a^b f(t, \bm x) - f(t_0, \bm x_0) ~\mathrm dt \right| \leqslant \int_a^b |f(t, \bm x) - f(t_0, \bm x_0)| ~\mathrm dt \leqslant \varepsilon (b-a)
+	\]
+	ce qui prouve a continuité de $g$ en $x_0 \in E$. Puisque $x_0$ est arbitraire, $g$ est continue sur $E$.
+}
+
+\newprf{Soit $f : [a,b] \times E \to \R$ une fonction continue telle que
+	\[
+	\frac{\partial f}{\partial x_i} : [a,b] \times E \to \R
+	\]
+	existe et est continue. Ainsi $\frac{\partial g}{\partial x_i} : E \to \R$ existe et est continue sur $E$. De plus
+	\[
+	\frac{\partial g}{\partial x_i} (\bm x) = \int_a^b \frac{\partial f}{\partial x_i} (t, \bm x) ~\mathrm dt
+	\]
+	en continue sur $E$.
+}{}
+
+\prf{Soit $\bm x \in E$, comme $E$ est ouvert, il existe $\delta > 0$ tel que $\overline B(\bm x, \delta) \subset E$. On considère donc la restriction de $\frac{\partial f}{\partial x_i}$ sur le compact $I \times \overline B(\bm x, \delta)$, ainsi $\frac{\partial f}{\partial x_i}$ est uniformément continue. Donc
+	\[
+	\forall \varepsilon >0, \exists \gamma > 0, \forall t \in I, \forall \bm x, \bm y \in \overline B(\bm x_0, \gamma), \quad \norme{\bm x- \bm y} < \gamma \implies \left|\frac{\partial f}{\partial x_i}(t, \bm x) - \frac{\partial f}{\partial x_i}(t, \bm y) \right| < \varepsilon
+	\]
+	Donc pour tout $s \in \R$ tel que $|s| < \gamma$,
+	\begin{align*}
+		\left| \frac{ g(\bm x_0 + s \bm e_i) - g(\bm x_0)}{s} - \int_I \frac{\partial f}{\partial x_i} (t, \bm x_0) ~\mathrm dt \right| &= \left| \int_I \left(\frac{ f(t, \bm x_0 + s \bm e_i) - f(t, \bm x_0)}{s} - \frac{\partial f}{\partial x_i} (t, \bm x_0) \right) ~\mathrm dt \right|  \\&= \left| \int_I \left( \frac{\partial f}{\partial x_i} f(t, \bm x_0 + \hat s \bm e_i) - \frac{\partial f}{\partial x_i}(t, \bm x_0) \right) ~\mathrm dt \right| \\
+		&\leqslant \int_I \left| \frac{\partial f}{\partial x_i} f(t, \bm x_0 + \hat s \bm e_i) - \frac{\partial f}{\partial x_i}(t, \bm x_0) \right| ~\mathrm dt \leqslant \varepsilon I
+	\end{align*}
+	Ainsi $\frac{\partial g}{\partial x_i}(\bm x_0)$ existe bien et est continue.
+}
+
+\newprf{Soient $E \subset \rn$ un ensemble non-vide et $f \in C^1([a,b[ \times E)$ et les intégrales $\int_a^b f(t, \bm x) ~\mathrm dt$,
+	\[
+	\int_a^b \frac{\partial f}{\partial x_i} (t, \bm x) ~\mathrm dt
+	\]
+	convergent uniformément alors la fonction $g(\bm x) = \int_a^b f(t, \bm x)~\mathrm dt$ est de classe $C^1$ et 
+	\[
+	\frac{\partial g}{\partial x_i} (\bm x) = \int_a^b \frac{\partial f}{\partial x_i} (t, \bm x) ~\mathrm dt
+	\]
+}{}
+
+\prf{...}
+
+\newprf{Soit $\bm f : E \to F$ un difféomorphisme locale en $\bm x_0 \in E$. Alors $\det D\bm f(\bm x_0) \neq 0$.
+}{}
+
+\prf{Puisque $\bm f : E \to F$ est un difféomorphisme locale en $\bm x_0$, il existe un ouvert $U \subset E$ contenant $\bm x_0$ et un ouvert $V \subset F$ contenant $\bm f(\bm x_0) = \bm y_0$ tels que $\bm f : U \to V$ est bijective et la fonction $\bm g : V \to U$ est de classe $C^1$. Puisque $\bm f$ et $\bm g$ sont différentiable respectivement en $\bm x_0$ et $\bm y_0$ alors
+	\[
+	D \bm f(\bm x_0) D \bm g(\bm y_0) = D \bm g(\bm y_0) D \bm f(\bm x_0) = \mathrm I_n
+	\]
+	ce qui implique que $D \bm f(\bm x_0)$ est inversible et donc $\det D \bm f(\bm x_0) \neq 0$.
+}
+
+\newprf{Soit $f : E \to F$ une fonction continue de classe $C^1$ et $\bm x_0 \in E$. Si $\det D \bm f (\bm x_0) \neq 0$, alors $\bm f$ est un difféomorphisme locale en $\bm x_0$. De plus $D \bm g(\bm f(\bm x)) = D \bm f(\bm x)^{-1}$ pour tout $\bm x \in U$.
+}{Théorème d'inversion locale}
+
+\prf{La preuve se décompose en trois étapes : 
+	\begin{enumerate}
+		\item On montre qu'il existe $r, \tilde r > 0$ tel que $\forall \bm y \in B(\bm y_0, \tilde r)$ l'équation $\bm f(\bm x) = \bm y$ pour $\bm x \in B(\bm x_0,r)$ possède une unique solution en utilisant le théorème du point fixe de Banach (\ref{Théorème du point fixe de Banach})
+		
+		\item On pose donc $V = B(\bm y_0, \tilde r)$ et $U = B(\bm x_0, r) \cap \bm f^{-1}(V)$, on montre $\bm f : U \to V$ est une bijection et la fonction inverse $\bm g : V \to U$ est continue.
+		
+		\item On montre finalement $\bm g: V \to U$ est de classe $C^1$ et $\forall \bm x \in U, \quad D \bm g(\bm f(\bm x)) = D \bm f(\bm x)^{-1}$.
+	\end{enumerate}
+	\textit{Première étape} : Si on considère l'application,
+	\[
+	\begin{array}{cccc}
+		\varphi : & E & \to &F \\
+		& \bm x & \mapsto & \mathrm I_n - D\bm f(\bm x_0)^{-1} D\bm f(\bm x)
+	\end{array}
+	\]
+	on remarque alors que $\phi$ est continue et s'annule en $\bm x_0$. Ainsi il existe $r > 0$ tel que,
+	\[
+	\forall \bm x \in \overline B(\bm x_0, r), ~\forall i,j \in \entiers, \quad \left|(\mathrm I_n - D \bm f(\bm x_0)^{-1} D \bm f(\bm x))_{ij} \right| \leqslant \frac{1}{2n}
+	\]
+	et de plus donc par continuité de l'application $\bm x \mapsto \det D \bm f(\bm x)$, on en déduit que pour tout $\bm x \in \overline B(\bm x_0, r), ~\det D \bm f(\bm x) \neq 0$. De plus on remarque que l'équation $\bm f(\bm x) = \bm y$ est équivalente à $\bm x = \varphi (x)$ où $\bm \varphi (\bm x) = \bm x - D \bm f(\bm x_0)^{-1} (\bm f(\bm x) - \bm y)$. En particulier $\bm \phi \in C^1$. Alors $\bm f(\bm x) = \bm y$ possède une solution dans $\overline B(\bm x_0, r)$ si et seulement si $\bm \phi$ possède un point fixe dans $\overline B(\bm x_0, r)$. Mais pour $\bm x\in \overline B(\bm x_0, r)$, 
+	\[
+	D \bm \phi = \mathrm I_n - D \bm f(\bm x_0)^{-1} D \bm f(\bm x)
+	\]
+	et donc $\left| \frac{\partial \bm \phi_i}{\partial x_j}(\bm x) \right| \leqslant \frac{1}{2n}$. Ainsi on en déduit que,
+	\[
+	\forall \bm x \in \overline B(\bm x_0, r), \quad \|| D \bm \phi(\bm x) \|| \leqslant \norme{D \bm \phi(\bm x)}_F = \left( \sum_{i,j = 1}^n \left|\frac{\partial \bm \phi_i}{\partial x_j}(\bm x)\right|^2\right)^{\frac{1}{2}} \leqslant \frac{1}{2}
+	\]
+	Par le théorème des accroissement finis version intégrales \ref{Théorème des accroissements finis} et les lemmes (\ref{Norme spectrale}-\ref{Norme intégrale}) on a pour $\bm x_1, \bm x_2 \in \overline B(\bm x_0, r)$,
+	
+	\begin{align*}
+		\norme{\bm \phi(\bm x_2) - \bm \phi(\bm x_1)} &= \| \int_0^1 D \bm \phi (\bm x_1 + t(\bm x_2 - \bm x_1)) (\bm x_2 - \bm x_1) ~\mathrm dt \\
+		&\leqslant \int_0^1 \norme{D \bm \phi(\bm x_1 + t(\bm x_2 - \bm x_1)) (\bm x_2 - \bm x_1)} ~\mathrm dt \\
+		& \leqslant \int_0^1 \|| D \bm \phi(\bm x_1 + t(\bm x_2 - \bm x_1)) \|| \norme{\bm x_2 - \bm x_1} ~\mathrm dt \leqslant \frac{1}{2} \norme{\bm x_2 - \bm x_1}
+	\end{align*}
+	Ainsi $\bm \phi$ est contractante sur $\overline B(\bm x_0, r)$ pour tout $\bm x \in \rn$. De plus, pour tout $\bm x \in \overline B(\bm x_0,r)$ et $\bm y \in B(\bm y_0, \tilde r)$, avec $\tilde r = \frac{r}{2 \|| D \bm f(\bm x_0)^{-1}\||}$, on a
+	\begin{align*}
+		\norme{\bm \phi(\bm x) - \bm  x_0}   &\leqslant \norme{\bm \phi(\bm x) - \bm \phi(\bm x_0)} + \norme{\bm \phi (\bm x_0) - \bm x_0} \\
+		&\leqslant \frac{1}{2} \norme{\bm x -\bm x_0} + \norme{D \bm f(\bm x_0)^{-1} (\bm y_0 - \bm y)} \leqslant \frac{r}{2} + \|| D \bm f(\bm x_0)^{-1} \||  \norme{\bm y_0 - \bm y} < r		
+	\end{align*}
+	Donc si on prend $\bm y \in B(\bm y_0, \tilde r)$, on a $\bm \phi (\overline B(\bm x_0, r)) \subset B(\bm x_0, r)$. Par conséquent, $\bm \phi : \overline B(\bm x_0, r) \to \overline B(\bm x_0, r)$ possède un unique point fixe $\bm x \in \overline B(\bm x_0, r)$. Mais comme $\bm \phi (\overline B(\bm x_0, r)) \subset B(\bm x_0, r)$, ce point fixe est dans la boule ouverte $B(\bm x_0, r)$. On a donc montré que $\forall \bm y \in B(\bm y_0, \tilde r)$, il existe un unique $\bm x \in B(\bm x_0, r)$ tel que $\bm x = \bm \phi(\bm x)$, c'est-à-dire $\bm f(\bm x) = \bm y$. \\ \\
+	\textit{Deuxième étape} : Soit $V = B(\bm y_0, \tilde r)$ et $U = B(\bm x_0, r) \cap \bm f^{-1} (V)$. On remarque que $\bm f^{-1} (V)$ est ouvert car la pré-image d'un ouvert par une fonction continue est ouvert, donc $U$ ouvert. On sait que, d'après la première étape que $\bm f: U \to V$ est une bijection, on peut donc définir la fonction inverse $\bm g : V \to U$. Soit $\varepsilon > 0$ et $\delta = \frac{\varepsilon}{2 \|| D \bm f(\bm x_0)^{-1} \||}$. Ainsi pour tout $\bm y_1, \bm y_2 \in V$ tels que $\norme{\bm y_1 - \bm y_2} \leqslant \delta$ et en notant $\bm x_1 = \bm g(\bm y_1)$ et $\bm x_2 = \bm g(\bm y_2)$, on a
+	\begin{align*}
+		\norme{\bm x_1 - \bm x_2} &= \norme{\bm \phi_{\bm y_1}(\bm x_1) - \bm \phi_{\bm y_2} (\bm x_2)} \\
+		& \leqslant \norme{\bm \phi_{\bm y_1} (\bm x_1) - \bm \phi_{\bm y_1} (\bm x_2)} + \norme{\bm \phi_{\bm y_1} (\bm x_2) - \phi_{\bm y_2} (\bm x_2)} \\
+		&\leqslant \frac{1}{2} \norme{\bm x_1 - \bm x_2} + \norme{D \bm f(\bm x_0)^{-1}(\bm y_1 - \bm y_2)}
+	\end{align*}
+	et donc,
+	\[
+	\norme{\bm x_1 - \bm x_2} = \norme{\bm g (\bm y_1) - \bm g(\bm y_2)} \leqslant 2 \|| D \bm f(\bm x_0)^{-1} \|| \norme{\bm y_1 - \bm y_2} \leqslant \varepsilon
+	\]
+	ce qui montre que $\bm g : V \to U$ est de Lipschitz, ce qui implique la continuité.
+	\\\\
+	\textit{Troisième étape} : Il reste à démontrer que $\bm g : V \to U$ est de classe $C^1$ et $D \bm g(\bm y) = D \bm f(\bm x)^{-1}$. Par le choix de $r$, $D \bm f(\bm x)$ est inversible pour tout $\bm x \in B(\bm x_0, r)$. Soit maintenant $\bm y_1 \in V$ et $\bm x = \bm g(\bm y_1)$. Puisque $\bm f$ est de classe $C^1$, on a
+	\[
+	\bm f(\bm x_1) - \bm f(\bm x) = D \bm f(\bm x) (\bm x_1 - \bm x) + \bm R_{\bm f}(\bm x_1)
+	\]
+	où $\bm R_{\bm f} (\bm x_1) = o(\norme{\bm x_1 - \bm x})$. Ceci implique
+	\[
+	\bm x_1 - \bm x = \bm g(\bm y_1) - \bm g(\bm y) = D\bm f(\bm x)^{-1}(\bm y_1 - \bm y) - \underbrace{D \bm f(\bm x)^{-1} \bm R_{\bm f}(\bm x_1)}_{\bm R_{\bm g}(\bm y_1)}
+	\]
+	Il nous reste à montrer que $\bm R_{\bm g}(\bm y_1) = o(\norme{\bm y_1 - \bm y})$,
+	\[
+	\lim_{\bm y_1 \to \bm y} \frac{\norme{\bm R_{\bm g}(\bm y_1)}}{\bm y_1 - \bm y} \leqslant \lim_{\bm y_1 \to \bm y} \|| D \bm f(\bm x)^{-1} \|| \frac{\norme{\bm R_{\bm f}(\bm x_1)}}{\norme{\bm y_1 - \bm y}} = \|| D \bm f(\bm x)^{-1} \|| \lim_{\bm y_1 \to \bm y} \frac{\norme{\bm R_{\bm f}(\bm x_1)}}{\norme{\bm x_1 - \bm x}} \frac{\norme{\bm x_1 - \bm x}}{\norme{\bm y_1 - \bm y}}
+	\]
+	Mais on a vu, lors de la seconde étape que,
+	\[
+	\norme{\bm x_1 - \bm x} \leqslant 2 \|| D \bm f(\bm x_0)^{-1} \|| \norme{\bm y_1 - \bm y}
+	\]
+	et donc,
+	\[
+	\lim_{\bm y_1 \to \bm y} \frac{\bm R_{\bm g}(\bm y_1)}{\norme{\bm y_1 - \bm y}} \leqslant 2 \|| D \bm f(\bm x)^{-1} \|| \|| D \bm f(\bm x_0)^{-1} \||  \lim_{\bm x_1 \to \bm x} \frac{\bm R_{\bm f}(\bm x_1)}{\norme{\bm x_1 - \bm x}} = 0
+	\]
+	On conclut que $\bm g : V \to U$ est différentiable en tout $\bm y \in V$ et $D \bm g(\bm y) = D \bm f(\bm x)^{-1}$, avec $\bm x = \bm g(\bm y)$. Enfin puisque $D \bm f(\bm x)$ en continue en tout $\bm x \in B(\bm x_0, r), ~ D \bm f(\bm x)^{-1}$ est continue pour vu que $\det D \bm f(\bm x) \neq 0$, ce qui est vrai dans $B(\bm x_0, r)$. Ceci montre que $\bm g$ est de classe $C^1$.
+}
+
+\newprf{Soit $E \subset \R^{n+1}$ un ouvert non vide, $f : \rn \to \R$ une fonction de classe $C^1$, $\Sigma = \{(\bm x, y) \in E ~|~ f(\bm x, y) = 0\}$ et $\bm z_0 = (\bm x_0, y_0) \in \Sigma$ tel que $\frac{\partial f}{\partial y}(\bm x_0, y_0) \neq 0$. Alors il existe un ouvert $U = B(\bm x_0, \delta) \subset \rn$ de $\bm x_0$, un ouvert $V \subset E$ contenant $\bm z_0$ et une unique application $\phi : U \to \R$ de classe $C^1$ telle que : 
+	\begin{enumerate}
+		\item $y_0 = \phi(\bm x_0)$
+		\item $\forall \bm x \in U, \quad (\bm x, \phi(\bm x)) \et f(\bm x, \phi(\bm x)) = 0$
+		\item $G(\phi) = \Sigma \cap V$
+	\end{enumerate}
+	De plus, on a pour tout $\bm x \in U, \quad \frac{\partial f}{\partial y} (\bm x, \phi(\bm x)) \neq 0$ et,
+	\[
+	\frac{\partial \phi}{\partial x_i} (\bm x) = - \frac{\frac{\partial f}{\partial x_i} (\bm x, \phi(\bm x))}{\frac{\partial f}{\partial y}(\bm x, \phi(\bm x))}
+	\]
+	et si $f \in C^k$ alors $\phi \in C^k$.
+}{Théorème des fonctions implicites}
+
+
+\prf{Sans perte de généralité, supposons que $\frac{\partial f}{\partial y} (\bm x_0, y_0) > 0$. Puisque $\frac{\partial f}{\partial y}$ est continue sur $E$, il existe donc $\delta_1, \delta_2 > 0$ tels que, pour tout $(\bm x, y) \in B(\bm x_0, \delta_1) \times [y_0 - \delta_2, y_0 + \delta_2]$, on a
+	\[
+	\frac{\partial f}{\partial y} (\bm x, y) > 0
+	\]
+	Ainsi pour tout $\bm x \in B(\bm x_0, \delta_1)$, la fonction $y \mapsto g_{\bm x}(y) = f(\bm x, y)$ est strictement croissante dans l'intervalle $[y_0 - \delta_2, y_0 + \delta_2]$. En particulier,
+	\[
+	g_{\bm x_0} (y_0 - \delta_2)< g_{\bm x_0}(y_0) = 0 < g_{\bm x_0}(y_0 + \delta_2)m
+	\]
+	Mais puisque $f$ est continue, il existe $0 < \delta < \delta_1$ tel que,
+	\[
+	\forall \bm x \in U := B(\bm x_0, \delta), \quad g_{\bm x} (y - \delta_2) =  f(\bm x, y_0 - \delta_2) < 0 \et g_{\bm x}(y + \delta 2) = f(\bm x, y_0 + \delta_2) > 0
+	\]
+	Ainsi pour $\bm x \in U$, $g_{\bm x} (y)$ est continue est strictement croissante sur l'intervalle $[y_0 - \delta_2, y_0 + \delta_2]$, et donc il existe un unique $y = \phi(x) \in ]y_0 - \delta_2, y_0 + \delta_2[$ tel que $g_{\bm x}(y) = f(\bm x, y) = 0$. Cette procédure permet de définir de façon unique une fonction $\phi : U \to \R$ telle que,
+	\[
+	\phi(\bm x_0) = y_0 \et f(\bm x, \phi(\bm x)) = 0
+	\]
+	De plus si on note $V = B(\bm x_0, \delta) \times ]y_0 - \delta_2, y_0 + \delta_2[$, on a $G(\phi) = \Sigma \cap V$.\\\\
+	\textit{Continuité de $\phi$ : } Soit $\bm{\overline x} \in U$ et $\overline y = \phi(\bm{\overline x})$. Pour tout $\varepsilon \in ]0, \delta_2 - |\overline y - y_0|]$, on considère
+	\[
+	W_\varepsilon = B(\bm x_0, \delta_1) \times [\overline y - \varepsilon, \overline y + \varepsilon]
+	\]
+	Ainsi par construction $W_\varepsilon \subset W$, donc $\frac{\partial f}{\partial y} > 0$ sur $W_\varepsilon$. De la même manière que auparavant, mais sur $W_\varepsilon$ au lieu de $W$, il existe $\delta_\varepsilon >0$ et une fonction $\overline \phi : B(\bm{\overline x}, \delta_\varepsilon) \cap U : \to \R$ tels que 
+	\[
+	\overline y = \overline \phi(\bm{\overline x}) \et f(\bm x, \overline \phi(\bm x)) = 0
+	\]
+	Mais par unicité de la fonction implicite sur $W$ et le choix de $W_\varepsilon$, on a $\overline \phi(\bm x) = \phi(\bm x) \in [\overline y, \varepsilon, \overline y + \varepsilon]$ pour tout $\bm x \in B(\bm{\overline x}, \delta_\varepsilon)\cap U$. On a donc montré que pour tout $\varepsilon > 0$ il existe $\delta_\varepsilon > 0$ tel que,
+	\[
+	\forall \bm x \in B(\bm{\overline x} \cap U, \delta_\varepsilon), \quad |\phi(\bm x) - \phi(\bm{\overline x})| \leqslant \varepsilon 
+	\]
+	ce qui montre la continuité de $\phi$ est $\bm{\overline x}$ et donc par arbitrarité de $\bm{\overline x}$ on conclut que $\phi$ est continue sur $U$. \\\\
+	\textit{Continuité de $\frac{\partial \phi}{\partial x_i}$ : } Soient $\bm x_1 \neq \bm x_2$ dans $U$, $y_1 = \phi(\bm x_1)$ et	$y_2 = \phi(\bm x_2)$. Puisque $f \in C^1$, on a 
+	\[
+	0 = f(\bm x_2, y_1,) - f(\bm x_1, y_1) = \nabla f(\bm \xi, \eta) \cdot (\bm x_2 - \bm x_1, y_2 - y_1)
+	\]
+	Si l'on note $\nabla_{\bm x} f$ les $n$ première composantes on a,
+	\[
+	\nabla_{\bm x} f(\bm \xi, \eta) \cdot (\bm x_2 - \bm x_1) + \frac{\partial f}{\partial y} (\bm \xi, \eta)(y_2 - y_1) = 0
+	\]
+	Alors,
+	\[
+	\frac{\phi(\bm x_2) - \phi(\bm x_1)}{\norme{\bm x_2 - \bm x_1}} = - \frac{\nabla_{\bm x} f(\bm \xi, \eta)}{\frac{\partial f}{\partial y} (\bm \xi, \eta)} \cdot \frac{\bm x_2 - \bm x_1}{\norme{\bm x_2 - \bm x_1}}
+	\]
+	puisque $\frac{\partial f}{\partial y} > 0$ car $(\bm \xi, \eta) \in V \subset W$. On obtient donc par passage à la limite,
+	\[
+	\phi(\bm x_2) = \phi(\bm x_1) - \frac{\nabla_{\bm x} f(\bm x_1, y_1)}{\frac{\partial f}{\partial y}(\bm x_1, y_1)} \cdot (\bm x_2 - \bm x_1) + o(\norme{\bm x_2 - \bm x_1})
+	\]
+	donc $\phi$ est différentiable et par unicité de la différentielle,
+	\[
+	\forall i \in \entiers, \quad \frac{\partial \phi}{\partial x_i}(\bm x) = -\frac{\frac{\partial f}{\partial x_i} f(\bm x_1, y_1)}{\frac{\partial f}{\partial y}(\bm x_1, y_1)} 
+	\]
+	De plus les dérivées partielles de $\phi$ sont continues car celles de $f$ le sont. La démonstration que $\phi \in C^k$ se fait par récurrence sur $k \geqslant 1$.
+}
+
+\newprf{Soit $E \subset \rn$ un ouvert non vide, $f : E \to \R$ de classe $C^2$ sur $E$ et $\bm x_0 \in E$ un point stationnaire de $f$. Si $H_f(\bm x_0)$ est définit positive (resp. définit négative) alors $f$ admet un minimum (resp. maximum) local strict en $\bm x_0$.
+}{Condition suffisante pour extrema locaux}
+
+\prf{Puisque $f$ est de classe $C^2$ alors on peut écrire un développement limité d'ordre $2$ de $f$ au point $\bm x_0$,
+	\[
+	\forall \bm x \in E, \quad f(\bm x) = f(\bm x_0) + \nabla f(\bm x_0) \cdot (\bm x - \bm x_0) + \frac{1}{2} Q_{H_f}(\bm x - \bm x_0) + R_f(\bm x)
+	\]
+	Comme $R_f(\bm x) = o(\norme{\bm x - \bm x_0}^2)$ alors il existe $\delta > 0$ tel que pour tout $\bm x \in B(\bm x_0, \delta)\backslash \{\bm x_0\}$, on a $\bm x \in E$ et $|R_f(\bm x)| \leqslant \frac{c}{4} \norme{\bm x - \bm x_0}^2$. Mais comme $\bm x_0$ est un point stationnaire, alors $\nabla f (\bm x_0) = 0$ et puisque $H_f(\bm x_0)$ est définie positive alors $\forall \bm x \in \rn, \quad Q_{H_F}(\bm x) \geqslant c \norme{\bm x}^2$, ainsi
+	\[
+	\forall \bm x \in B(\bm x_0, \delta) \backslash \{ \bm x_0\}, \quad f(\bm x) = f(\bm x_0) + \frac{1}{2} Q_{H_f}(\bm x - \bm x_0) + R_f(\bm x) \geqslant f(\bm x_0) + \frac{c}{4} \norme{\bm x - \bm x_0}^2 > f(\bm x_0)
+	\]
+	ce qui montre que $\bm x_0$ est bien un minimum locale strict.
+}
+
+\newprf{Soit $E \subset \rn$ un ouvert non-vide, $f,g : E \to \R$ deux fonctions de classe $C^1$. Soit $\bm z_0$ un point d'extremum local lié de $f$ sur $\Sigma_g$. Si $\nabla g(\bm z_0) \neq 0$, alors il existe $\lambda \in \R$ tel que,
+	\[
+	\nabla f (\bm z_0) = \lambda \nabla g(\bm z_0)
+	\]
+}{Condition nécessaire d'optimalité}
+
+\prf{Puisque $\nabla g(\bm z_0) \neq 0$ alors il existe au moins un composante non-nulle, soit $\frac{\partial g}{\partial x_j}(\bm z_0) \neq 0$. Pour se fixer les idées, supposons que $j = n$. Notons alors $y = z_n$ et $\bm x = (z_1, \ldots, z_{n-1}) \in \R^{n-1}$, de sorte que tout point $\bm z \in E$ puisse s'écrire comme $(\bm x, y)$. En particulier $\bm z_0 = (\bm x_0, y_0)$.
+	
+	Par le théorème des fonctions implicites, il existe $\delta > 0$ et une unique fonction $\phi : B(\bm x_0, \delta) \subset \R^{n-1} \to \R$ telle que $\phi(\bm x_0) = y_0, ~(\bm x, \phi(\bm x)) \in E \et g(\bm x, \phi(\bm x)) = 0$ sur $B(\bm x_0, \delta)$, et le graphe de $\phi$ coïncident avec $\Sigma_g$ dans un voisinage de $\bm z_0$. Ainsi la fonction $\tilde f(\bm x) = f(\bm x, \phi(\bm x)$ admet un maximum locale libre en $\bm x_0$ et $\nabla \tilde f(\bm x_0) = 0$. Donc
+	\[
+	\forall i \in \llbracket 1, n-1 \rrbracket, \quad 0 = \frac{\partial f}{\partial x_i}(\bm x_0) = \frac{\partial f}{\partial x_i}(\bm x, \phi(\bm x)) +  \frac{\partial f}{\partial y} (\bm x_0, \phi(\bm x_0)) \frac{\partial \phi}{\partial x_i} (\bm x_0)
+	\]
+	D'autre part,
+	\[
+	\frac{\partial \phi}{\partial x_i} = (\bm x_0) = - \frac{\frac{\partial g}{\partial x_i}(\bm z_0)}{\frac{\partial g}{\partial y}(\bm z_0)}
+	\]
+	Par conséquent, on a
+	\[
+	\forall i \in \llbracket 1, n-1 \rrbracket, \quad \frac{\partial f}{\partial x_i} (\bm z_0) - \frac{\partial f}{\partial y} (\bm z_0) \frac{\frac{\partial g}{\partial x_i}(\bm z_0)}{\frac{\partial g}{\partial y}(\bm z_0)} = 0
+	\]
+	Si on pose $\lambda = \frac{\frac{\partial f}{\partial y} (\bm z_0)}{\frac{\partial g}{\partial y} (\bm z_0)}$, alors
+	\[
+	\forall i \in \llbracket 1, n-1 \rrbracket, \quad \frac{\partial f}{\partial x_i}(\bm z_0) =  \lambda \frac{\partial g}{\partial x_i}(\bm z_0)
+	\]
+	et, par définition $\frac{\partial f}{\partial y}(\bm z_0) = \lambda \frac{\partial g}{\partial y} (\bm z_0)$. On a donc bien
+	\[
+	\nabla f(\bm z_0) = \lambda \nabla g (\bm z_0)
+	\]
+}
+
+\newprf{Soit $P$ une partition d'un pavé $R \subset \rn$. Alors
+	\[
+	\mathrm{Vol}(R) = \sum_{Q \in P} \mathrm{Vol}(Q)
+	\]
+}{}
+
+\prf{Supposons d'abord que $P$ est tensorielle,
+	\[
+	P = (t_1^0, \ldots , t_1^{N_1}) \otimes \ldots \otimes (t_n^0, \ldots, t_n^{N_n})
+	\]
+	Alors
+	\begin{align*}
+		\sum_{Q \in P} \mathrm{Vol}(R) &= \sum_{\alpha_1 = 0}^{N_1 - 1} \dots \sum_{\alpha_n = 0}^{N_n -1} (t_1^{1 +\alpha_1} - t_1^{\alpha_1}) \cdot \ldots \cdot (t_n^{1 +\alpha_n} - t_n^{\alpha_n}) \\
+		&= \sum_{\alpha_1 = 0}^{N_1-1} (t_1^{1 +\alpha_1} - t_1^{\alpha_1}) \cdot \ldots \cdot \sum_{\alpha_n = 0}^{N_n -1} (t_n^{1 +\alpha_n} - t_n^{\alpha_n}) \\
+		&= (t_1^{N_1} - t_1^0) \cdot \ldots \cdot (t_n^{N_n} - t_n^0) = \mathrm{Vol}(R)
+	\end{align*}
+	Passons au cas général, on sait que $P$ admet un raffinement tensorielle $P'$. On a donc par ce qui précède 
+	\begin{align*}
+		\mathrm{Vol}(R) &= \sum_{Q' \in P'} \mathrm{Vol}(Q') \\
+		&= \sum_{Q \in P} \left( \sum_{Q' \in P', ~ Q' \subset Q} \mathrm{Vol}(Q') \right) \\
+		&= \sum_{Q \in P} \mathrm{Vol}(Q)
+	\end{align*}
+}
+\newprf{Soit $P'$ un raffinement de $P$ alors
+	\[
+	\underline S(f, P) \leqslant \underline S(f, P') \leqslant \overline S(f, P') \leqslant \overline S(f, P)
+	\]
+	De plus de manière générale pour $P$ et $P'$ deux partitions de $R$ alors,
+	\[
+	\underline S(f, P) \leqslant \overline S(f, P')
+	\]
+}{}
+
+\prf{Par définition
+	\begin{align*}
+		\overline S(f,P) = \sum_{Q \in P} \inf_{\bm x \in Q} f(\bm x) \mathrm{Vol} Q &= \sum_{Q \in P} \inf_{\bm x \in Q} f(\bm x)\left( \sum_{Q' \in P',~Q' \subset Q} \mathrm{Vol} Q'\right)  \\
+		&\leqslant \sum_{Q \in P} \sum_{Q' \in P',~Q' \subset Q} \inf_{\bm x \in Q'} f(\bm x) \mathrm{Vol} Q' = \sum_{Q' \in P'} \inf_{\bm x \in Q'} f(\bm x) \mathrm{Vol} Q' = \underline S(f, P')
+	\end{align*}
+	Le reste est analogue. De plus étant donné $P$ et $P'$ par le lemme précédent il existe $P''$ qui raffine $P$ et $P'$, alors par ce qui précède
+	\[
+	\underline S(f, P) \leqslant \underline S(f, P'') \leqslant \overline S(f,P'') \leqslant \overline S(f,P')
+	\]
+}
+
+\newprf{$f$ est inégrable au sens de Riemann si et seulement si pour tout $\varepsilon > 0$ il existe une partition $P_\varepsilon$ de $R$ tel que,
+	\[
+	\overline S(f, P_\varepsilon) - \underline S(f,P_{\varepsilon})
+	\]
+}{}
+
+\prf{Soit $\varepsilon > 0$, alors 
+	\[
+	\overline{\int_R} f(\bm x)~\mathrm d \bm x \leqslant \overline S(f, P_\varepsilon) \et \underline{\int_R} f(\bm x)~\mathrm \geqslant \underline S(f, P_\varepsilon)
+	\]
+	et donc
+	\[
+	\overline{\int_R} f(\bm x) ~\mathrm d \bm x -\underline{\int_R} f(\bm x)~\mathrm d \bm x \leqslant \varepsilon
+	\]
+	et donc par arbitrarité de $\varepsilon$ on obtient bien que $f$ est intégrable au sens de Riemann.
+	
+	Réciproquement, si $f$ est intégrable au sens de Riemann, par caractérisation du sup et de l'inf, pour $\varepsilon > 0$,
+	\[
+	\exists P_\varepsilon ', \quad \overline S(f, P_\varepsilon') \leqslant \overline{\int_R} f(\bm x) ~\mathrm d \bm x + \frac{\varepsilon}{2}
+	\]
+	\[
+	\exists P_\varepsilon '', \quad \underline S(f, P_\varepsilon'') \geqslant \underline{\int_R} f(\bm x) ~\mathrm d \bm x - \frac{\varepsilon}{2}
+	\]
+	Ainsi on considère le raffinement $P_{\varepsilon}$ de  $P_\varepsilon ',  P_\varepsilon ''$ alors
+	\[
+	\overline S(f, P_\varepsilon) - \underline S(f,P_{\varepsilon}) \leqslant\overline S(f, P_\varepsilon') -\underline S(f, P_\varepsilon') \leqslant \overline{\int_R} f(\bm x) ~\mathrm d \bm x + \frac{\varepsilon}{2} - \underline{\int_R} f(\bm x) ~\mathrm d \bm x + \frac{\varepsilon}{2} \leqslant \varepsilon
+	\]
+}
+
+\newprf{Un ensemble $E \subset \rn$ est mesurable si et seulement si $\partial E$ est négligeable.}{}
+
+\prf{Soit $R$ un pavé qui contient $E$. Supposons que $E$ est mesurable, alors pour tout $\varepsilon > 0$, il existe une partition $P$ telle que
+	\[
+	\overline S(\ind_E, P) - \underline S(\ind_E, P) \leqslant \varepsilon
+	\]
+	si et seulement si
+	\[
+	\sum_{Q \cap E \neq \emptyset, ~Q \neq E^c \neq \emptyset} \mathrm{Vol}(Q) \leqslant \varepsilon
+	\]
+	Or on a 
+	\[
+	\partial E \subset \bigcup_{Q \in \Omega}Q \cup \underbrace{\bigcup_{Q \in P} \partial Q}_{négligeable}
+	\]
+	où $\Omega = \{ Q \in P ~|~ Q \cap E \neq \emptyset, ~Q \cap E^c \neq \emptyset \}$. Ainsi on pose
+	\[
+	\Omega' = \{ Q \subset E, ~\partial Q, Q \in P\}
+	\]
+	donc
+	\[
+	\sum_{\tilde Q \in \Omega'} \mathrm{Vol}(\tilde Q) \leqslant \varepsilon
+	\]
+	et comme $\partial E \subset \bigcup_{\tilde Q \in \Omega'} \tilde Q$ alors $\partial E$ est négligeable par (\ref{Caractérisation de négligeabilité}).
+	
+	Réciproquement, supposons que $\partial E$ soit négligeable, alors pour tout $\varepsilon > 0$ il existe $P$ telle que
+	\[
+	\overline S(\ind_{\partial E}, P) - \underline S(\ind_{\partial E}, P) \leqslant \varepsilon
+	\]
+	et donc 
+	\[
+	\sum_{Q \in P, ~Q \cap \partial E \neq \emptyset} \mathrm{Vol}(Q) \leqslant \varepsilon
+	\]
+	On a
+	\[
+	\overline S (\ind_E, P) - \underline S(\ind_E, P) = \sum_{Q \cap E \neq \emptyset, ~Q \cap E^c \neq \emptyset} \mathrm{Vol}(Q) \leqslant \sum_{Q \cap \partial E \neq \emptyset} \mathrm{Vol}(Q) \leqslant \varepsilon
+	\]
+	et donc $\ind_E$ est intégrable et $E$ est mesurable.
+}
+
+\newprf{Soit $R \subset \rn$ un pavé et $f : R \to \R$ bornée. Si l'ensemble des points de discontinuité de $f$ est négligeable, alors $f$ est intégrable.
+}{Caractérisation par négligeabilité des points de discontinuité}
+
+\prf{Soit $N$ l'ensemble des points de discontinuité de $f$ et $M := \sup_{\bm x \in R} |f(\bm x)|$. Puisque $N$ est négligeable, pour $\varepsilon > 0$, il existe une partition $\tilde P$ telle que
+	\[
+	\overline S(\ind_N, \tilde P) - \underbrace{\underline S(\ind_N,  \tilde P)}_{=0} \leqslant \frac{\varepsilon}{1 + 4M}
+	\]
+	où
+	\[
+	\overline S(\ind_N, \tilde P) = \sum_{Q \cap N \neq \emptyset} \mathrm{Vol}(Q) \leqslant \frac{\varepsilon}{1 + M}
+	\]
+	Ainsi soit 
+	\[
+	K = \bigcup_{Q \in P, ~Q \cap N =  \emptyset} Q
+	\]
+	$K$ est compact, donc $f$ est uniformément continue sur $K$, donc il existe $\delta >  0$ tel que
+	\[
+	\forall \bm x, \bm y \in K, \quad \norme{\bm x - \bm y} \leqslant \delta \implies |f(\bm x) - f(\bm y)| \leqslant \frac{\varepsilon}{1 + 2 \mathrm{Vol}(R)}
+	\]
+	Soit $P$ un raffinement de $\tilde P$ tel que
+	\[
+	\mathrm{diam}(Q) = \sup_{\bm x, \bm y \in Q} \norme{\bm x - \bm y} \leqslant \delta 
+	\]
+	alors
+	\begin{align*}
+		\overline S(f, P) - \underline S(f, P) &= \sum_{Q \in P}(\sup_Q f - \inf_Q f) \mathrm{Vol}(Q) \\
+		&= \sum_{Q \subset K} \underbrace{(\sup_Q f - \inf_Q f)}_{\leqslant \frac{\varepsilon}{1 + 2 \mathrm{Vol}(R)}} \mathrm{Vol}(Q) + \sum_{Q \cap N \neq \emptyset} \underbrace{(\sup_Q f - \inf_Q f)}_{\leqslant 2 M} \mathrm{Vol}(Q) \\
+		&\leqslant \frac{\varepsilon}{1 + 2 \mathrm{Vol}(R)} \mathrm{Vol}(R) + 2M \frac{\varepsilon}{1 + 4M} \leqslant \varepsilon
+	\end{align*}
+	donc $f$ est intégrable.
+}
+
+\newprf{Soit $E \subset \rn$ borné et mesurable. Si $f : E \to \R$ est bornée sur $E$ et continue sur $\mathring E$, alors $f$ est intégrable sur $E$ au sens de Riemann.}{}
+
+\prf{Soit $R$ un pavé contenant $E$ et $\tilde f$ le prolongement par zéro de $f$. Comme $E$ est mesurable, alors $\partial E $ est négligeable. Ne plus l'ensemble $\tilde N$ des points de discontinuité de $\tilde f$ est inclus dans $\partial E$, et donc $\tilde N$ est négligeable. Ainsi par le théorème (\ref{Caractérisation par négligeabilité des points de discontinuité}), $\tilde f \in \mathcal R(R)$ et donc $f$ est intégrable au sens de Riemann sur $E$.
+}
+
+\newprf{Soit $I \subset \R$ un intervalle ouvert, $E \subset \rn$ ouvert et $\bm f : I \times E \to \rn$ une fonction continue et localement lipschitzienne par rapport à la deuxième variable. 
+	
+	Alors pour tout $(t_0, \bm u_0) \in I \times E$, il existe $\delta >  0$ tel que $J_\delta := [t_0 - \delta, t_0 + \delta] \subset I$ et une fonction $\bm u : J_\delta \to E$ de classe $C^1$ solution du problème de Cauchy.
+	
+	De plus cette solution est localement unique.
+}{Cauchy-Lipschitz --- version locale}
+
+\prf{Puisque $\bm f$ est localement lipschitzienne par rapport au deuxième arguement,il existe $a,b > 0$ avec $[t_0 - a, t_0 + a]\times \overline B(\bm u_0, b) \subset I \times E$ et une constante $L > 0$ tels que
+	\[
+	\forall t \in [t_0 -a, t_0 + a], ~\forall \bm x, \bm y \in \overline B(\bm u_0, b), \quad \norme{\bm f(t, \bm x) - \bm f(t, \bm y)} \leqslant L \norme{\bm x - \bm y}
+	\]
+	On choisit
+	\[
+	M > \max_{(t, \bm x) \in [t_0 - a, t_0 + a] \times \overline B(\bm u_0, b)} \norme{\bm f(t, \bm x)}
+	\] 
+	Soit maintenant $\delta \in ]0,a], ~J_\delta := [t_0 - a,t_0 + \delta]\subset I$ et considérons la quantité
+	\[
+	K_{b, \bm u_0} (J_\delta) = \{\bm v \in C^0(J_\delta), ~ \max_{t \in J_\delta} \norme{\bm v(t) -\bm u_0} \leqslant b \}
+	\]
+	qui est alors une sous-ensemble fermé (donc complet) de $C^0(J_\delta)$. On considère l'application $\phi : K_{b, \bm u_0}(J_\delta) \to C^0(J_\delta)$ définie par 
+	\[
+	\forall t \in J_\delta, \quad \phi(\bm v)(t) = \bm u_0 + \int_{t_0}^t \bm f(s, \bm v(s))~\mathrm ds
+	\]
+	Or pour tout $\bm v \in K_{b, \bm u_0}(J_\delta)$ et $t \in J_\delta$,
+	\[
+	\norme{\phi(\bm v) - \bm u_0} = \norme{\int_{t_0}^t \bm f(s, \bm v(s)) ~\mathrm d s} \leqslant \left|\int_{t_0}^t \norme{\bm f(s, \bm v(s))} ~\mathrm ds \right| \leqslant M \delta
+	\]
+	donc si on prend $\delta \leqslant \frac{b}{M}$ on a $\norme{\phi(\bm v) -  \bm u_0}_{C^0(J_\delta)} \leqslant b$, c'est-à-dire $\phi(\bm v) \in 	K_{b, \bm u_0} (J_\delta)$ pour tout $v \in K_{b, \bm u_0} (J_\delta)$. De plus, pour tout $\bm v_1, v_2 \in K_{b, \bm u_0} (J_\delta)$ et pour tout $t \in J_\delta$,
+	\begin{align*}
+		\norme{\phi(\bm v_1) - \phi(\bm v_2)} &= \norme{\int_{t_0}^t \bm f(s, \bm v_1(s)) - \bm f(s, \bm v_2(s)) ~\mathrm d s} \leqslant \left| \int_{t_0}^t \norme{\bm f(s, \bm v_1(s)) - \bm f(s, \bm v_2(s)) } ~\mathrm ds \right| \\
+		&\leqslant \left| \int_{t_0}^t L \norme{\bm v_1(s) - \bm v_2(s)} ~\mathrm d s \right| \leqslant L \delta \max_{t \in J_\delta} \norme{\bm v_1(t) - \bm v_2(t)}
+	\end{align*}
+	ce qui implique que $\norme{\phi(\bm v_1) - \phi(\bm v_2)}_{C^0(J_\delta)} \leqslant L \delta \norme{\bm v_1 - \bm v_2}_{C^0(J_\delta)}$. Donc, pour $\delta < \min\{a, \frac{b}{M}, \frac1L\}$, l'application $\phi : K_{b, \bm u_0} (J_\delta) \to K_{b, \bm u_0} (J_\delta)$ est contractante et il existe un unique $ \bm u \in K_{b, \bm u_0} (J_\delta)$ point fixe de $\phi$. Alors $(J_\delta, \bm u)$ est l'unique solution du problème de Cauchy dans $K_{b, \bm u_0} (J_\delta)$.
+}

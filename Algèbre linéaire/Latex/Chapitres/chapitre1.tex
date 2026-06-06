@@ -1,0 +1,418 @@
+\section{Polynômes}
+
+\subsection{Notions fondamentales}
+\newthm{Soit $A$ un anneau, alors il existe un anneau $S$ tel que $A \subsetneq S$. C'est-à-dire que $A$ est un sous-anneau strict de $S$ tel qu'il existe un élément $ x \in S \backslash A$,
+	\begin{itemize}
+		\item  $\forall a \in A, \quad a x = xa$
+		\item Si $a_0 + a_1 x + \ldots + a_n x^n = 0$ et $a_i \in A$ pour tout $i$, alors $a_i = 0$ pour tout $i$
+	\end{itemize}
+$x$ est appelé \emph{variable} ou \emph{indéterminée}
+}{Existence des polynômes}
+
+\newdef{Un polynôme sur $A$ est un éléments de $S$ de la forme,
+	\[
+	p(x) = a_0 + a_1 x + \ldots + a_n x^n
+	\]
+	avec $n \in \N$ et $\forall i \in \entiers, ~ a_i \in A$. On note $A[X]$ l'ensemble des polynômes sur $A$. On définit le \emph{degré} de $p(x)$ comme
+	\[
+	\deg p = \max \{i \in \N, ~a_i \neq 0 \}
+	\]
+	si $p(x) = 0$ alors $\deg p = - \infty$. De plus le coefficient $a_{\deg p}$ est appelé \emph{coefficient dominant} de $p(x)$.
+}{}
+
+\newprop{Deux polynômes,
+	\[
+	p(x) =  a_0 + a_1 x + \ldots + a_n x^n \et q(x) = b_0 + b_1 x + \ldots b_m x^m
+	\]
+	sont égaux si et seulement $a_i = b_i$ pour tout $i \in \N$. Dans ce cas on note $p(x) = q(x)$.
+}{}
+
+\prf{Sans perte de généralité supposons que $m = n$, dans le cas contraire il suffit de considérer des coefficient nul, ainsi 
+	\[
+	p(x) - q(x) = (a_0 - b_0) + (a_1 - b_1)x + \ldots (a_n - b_n) x^n = 0
+	\]
+	ainsi en vertu du point 2.) du théorème (\ref{Existence des polynômes}) on conclut que
+	\[
+	\forall i \in \llbracket 1, n \rrbracket, \quad a_i = b_i
+	\]
+}
+
+\newthm{On a les propriétés suivantes,
+	\begin{itemize}
+		\item $A[X]$ est un anneau
+		\item $A$ commutatif $\implies A[X]$ commutatif
+		\item $A$ intégre $\implies A[X]$ intègre
+	\end{itemize}
+}{}
+
+\prf{Dans l'ordre on a,
+	\begin{itemize}
+		\item Premièrement on a $1_A \in A[X]$, de plus si $p(x), q(x), r(x) \in A[X]$ alors $p(x)q(x) - r(x) \in A[X]$. Donc par le critère de sous-anneau, $A[X]$ est un sous-anneau de $S$ et donc par extension un anneau.
+		\item Pour $p(x), q(x) \in A[X]$ on a,
+		\[
+		p(x) q(x) = \sum_{i = 0}^n \sum_{j= 0}^m a_i b_j x^{i + j} 
+		\]
+		ainsi on en déduit directement la commutativité de $A[X]$ si $A$ est commutatif.
+		\item Supposons que $A$ est intègre, ainsi pour $p(x) \neq 0$ et $q(x) \neq 0$, on a
+		\[
+		p(x) q(x) = c_0 + c_1 x + \ldots (a_n b_m) x^{n + m}
+		\]
+		mais comme $A$ est intègre, $a_n \cdot b_m$ est non-nul et donc $p(x) q(x) \neq 0$. Ainsi $A[X]$ est intègre.
+	\end{itemize}
+}
+
+\newthm{Soit $A$ un anneau, $p,q \in A[X]$ tel que le coefficient dominant de $f$ ou de $g$ n'est pas un diviseur de $0$, alors
+\[
+\deg f\cdot g = \deg f + \deg g
+\]
+}{Degrés d'un produit}
+
+\prf{On sait que le coefficient dominant de $f \cdot g$ est $a_n b_m \neq 0$. Tout les coefficients de $x^j$ où $j > n + m$ sont nuls donc on a bien,
+	\[
+	\deg f\cdot g = \deg f + \deg g
+	\]
+}
+
+
+\subsection{Interpolation}
+
+\newdef{Un polynôme $p(x)= a_0 + a_1 x + \ldots a_n x^n \in A[X]$ induit une application,
+\[
+\begin{array}{cccc}
+	f_p : & A & \to & A \\
+		& a & \mapsto & f_p(a) =  a_0 + a_1 a + \ldots a_n a^n 
+\end{array}
+\]
+On parle alors de l'évaluation de $p$ en $a$.
+}{}
+
+\newthm{Soit $A$ un anneau et $\alpha  \in Z(A)$. L'application
+	\[
+	\begin{array}{cccc}
+		\psi_\alpha : & A[X] & \to & A \\
+			& p(x) & \mapsto & p(\alpha)
+	\end{array}
+	\]
+	est un morphisme d'anneau surjectif.
+}{}
+
+\prf{Soit $p(x) = \sum_{i = 0}^n a_i x^i$ et $q(x) = \sum_{j = 0}^m b_j x^j$ alors
+	\[
+	\psi_\alpha (p(x) q(x)) = \psi_\alpha \left(\sum_{i = 0}^n \sum_{j = 0}^m a_i b_j x^{i + j}\right) = \sum_{i = 0}^n \sum_{j = 0}^m a_i b_j \alpha^{i +j}
+	\]
+	De plus
+	\[
+	\psi_\alpha (p(x)) \psi_\alpha (q(x)) = \sum_{i = 0}^n a_i \alpha^i \sum_{j = 0}^m b_i \alpha^j = \sum_{i = 0}^n \sum_{j = 0} a_i \alpha^i b_i \alpha^j =\sum_{i = 0}^n \sum_{j = 0}^m a_i b_j \alpha^{i +j} 
+	\]
+	où la dernière égalité vient de la commutativité de $\alpha$ avec les éléments de $A$. Les deux autres propriétés d'un morphisme d'anneau
+	\[
+	\psi_\alpha (p(x) + q(x)) = \psi_\alpha (p(x)) + \psi_\alpha(q(x)) \et \psi_\alpha (1) = 1
+	\]
+	sont facile à vérifier. Et finalement la surjectivité de $\psi_\alpha$ découle du qu'un élément de $A$ (polynôme constant) est envoyé sur lui même. On a donc bien un morphisme d'anneau surjectif si et seulement si $\alpha \in Z(A)$.
+}
+
+\newthm{Soient $\K$ un corps $r_0, r_1, \ldots, r_n \in \K$ des éléments \textbf{distincts} et $y_0, y_1, \ldots, y_n \in \K$. Alors il existe un unique polynôme $f(x) \in \K[X]$ tel que
+	\begin{itemize}
+		\item $\forall i \in \llbracket 0, n \rrbracket, \quad f(r_i) = y_i$
+		\item $\deg f \leqslant n$
+	\end{itemize}
+}{Polynôme sur un corps}
+
+\prf{On cherche donc,
+	\[
+	f(x) = a_0 + a_1 x + \ldots a_n x^n
+	\]
+	tel que $\forall i \in \llbracket 0,n \rrbracket, ~f(r_i) = y_i$. On a alors un système d'équation linéaire à $n$ inconnues, on peut alors l'écrire sous forme matricielle,
+	\[
+	\begin{bmatrix}
+		1 & r_0 & r_0^2 & \dots & r_0^n \\
+		1 & r_1 & r_1^2 & \dots & r_1^n \\
+		\vdots & \vdots & \vdots & \ddots & \vdots  \\
+		1 & r_n & r_n^2 & \dots & r_n^n 
+	\end{bmatrix}	
+	\cdot	
+	\begin{bmatrix}
+		a_0 \\ a_1 \\ \vdots \\ a_n	\end{bmatrix}
+	= 
+	\begin{bmatrix}
+		y_0 \\ y_1 \vdots \\ y_n
+	\end{bmatrix}
+	\]
+	Le système possède exactement une seule solution si et seulement si
+	\[
+	\det (V_{r_0, \ldots r_n}) \neq 0
+	\]
+	On calcule alors le déterminant de cette matrice en effectuant des opérations sur les colonnes, ainsi
+	\[
+	\begin{bmatrix}
+		1 & r_0 & r_0^2 & \dots & r_0^n \\
+		1 & r_1 & r_1^2 & \dots & r_1^n \\
+		\vdots & \vdots & \vdots & \ddots & \vdots  \\
+		1 & r_n & r_n^2 & \dots & r_n^n 
+	\end{bmatrix}
+	\longrightarrow
+	\begin{bmatrix}
+		1 & 0 & 0 & \dots & 0 \\
+		1 & r_1 - r_0 & r_1(r_1 - r_0) & \dots & r_1^{n-1}(r_1 - r_0) \\
+		\vdots & \vdots & \vdots & \ddots & \vdots  \\
+		1 & r_n - r_0 & r_n(r_n - r_0) & \dots & r_n^{n-1}(r_n - r_0)
+	\end{bmatrix}	
+	\]
+	Et développent par le première ligne, on obtient
+	\[
+	\det(V_{r_0, \ldots, r_n}) = \prod_{i = 1}^n (r_i - r_0) \cdot \det(V_{r_0, \ldots , r_{n-1}})
+	\] 
+	Ainsi par récurrence immédiate,
+	\[
+	\det(V_{r_0, \ldots, r_n}) = \prod_{0 \leqslant i < j \leqslant n} (r_j - r_i)
+	\]
+	On en déduit donc que $V_{r_0, \ldots, r_n}$ est inversible si et seulement si les $r_i$ sont deux à deux distincts.
+}
+
+\newcor{Soit $\K$ un corps infini et $p(x), q(x) \in \K[X$ deux polynômes. Alors
+	\[
+	p(x) = q(x) \iff f_p = f_q
+	\]
+}{}
+
+\prf{Si $p(x) = q(x)$ alors $\forall r \in \K, \quad p(r) = q(r)$ donc $f_p = f_q$. Réciproquement, comme $p(r) = q(r)$ pour tout $r \in \K$ et le corps $\K$ est infini, les polynômes prennent les mêmes valeurs sur $\max \{\deg p, \deg q \} + 1$ éléments distincts de $\K$, ainsi par le théorème (\ref{Polynôme sur un corps}) il en resulte $p(x) = q(x)$.
+}
+
+\subsection{Division avec reste}
+
+\newthm{Soient $f, g \in A[X]$ tel que $g \neq 0$ et le coefficient dominant de $g$ est un élément inversible de $R$. Alors il existe $r,q \in A[X]$ uniques tels que,
+	\[
+	f(x) = q(x) g(x) + r(x)
+	\]
+	et $\deg r < \deg g$.
+}{}
+
+\prf{Si $\deg g = 0$, alors
+	\[
+	g(x) = b_0 \in A^\times \implies q(x) = f(x) b_0^{-1} \et r(x) = 0
+	\]
+	Si $\deg f< \deg g$, alors on a le cas trivial
+	\[
+	q(x) ) 0 \et r(x) = f(x)
+	\]
+	Et finalement dans le cas où $\deg f \geqslant \deg g > 0$, on procède par récurrence sur $\N$,
+	\[
+	f(x) = a_0 + a_1 x + \ldots a_n x^n \et g(x) = b_0 + b_1 x + \ldots b_m^m
+	\]
+	alors on a clairement,
+	\[
+	\deg\left( f(x) - a_nb_m^{-1} x^{n-m} g(x) \right) < \deg f
+	\]
+	Alors par récurrence, il existe $q_0, r \in A[X]$ tel que
+	\[
+	f(x) = \underbrace{(a_n b_m^{-1}x^{n-m} + q_0(x))}_{q(x)} g(x) + r(x)
+	\]
+	et $\deg r < \deg g$.
+}
+
+\subsection{Divisibilité et racines}
+
+\newdef{Soit $A$ un anneau commutatif. Un polynôme $q(x) \in A[X]$ divise un polynôme $f(x) \in A[X]$ s'il existe un polynôme $g(x) \in A[X]$ tel que
+	\[
+	f(x) = q(x) g(x)
+	\]
+	Si c'est le cas, on dit que $q(x)$ est un diviseur de $f(x)$ et on écrit $q(x) | f(x)$.
+}{}
+
+\newdef{Soit $A$ un anneau commutatif et $p(x) \in A[X]^*$ un polynôme et $\alpha \in A$ tel que $p(\alpha) = 0$, alors on dit que $\alpha$ est une \emph{racine} de $p(x)$}
+{}
+
+\newthm{Soit $f(x) \in A[X]^*$ et $\alpha \in A$, 
+	\[
+	\alpha \text{ est une racine de } f \iff (x-\alpha) | f(x)
+	\]
+}{}
+
+\prf{Soit $\alpha$ une racine de $f$, on effectue alors la division euclidienne de $f$ par $x- \alpha$, ainsi on trouve,
+	\[
+	f(x) = q(x) (x - \alpha) + r_0
+	\]
+	par évaluation de $f$ en $\alpha$ on trouve nécessairement que $r_0 = 0$ et donc $(x - \alpha) ~|~ f(x)$. Réciproquement, si $(x - \alpha) ~|~ f(x)$, il existe $q(x) \in A[X]$ tel que
+	\[
+	f(x) = (x - \alpha) q(x)
+	\]
+	et donc par évaluation on trouve $f(\alpha) = 0$. Ainsi $\alpha$ est bien racine de $f$.
+}
+
+\newdef{Soit $A$ une anneau commutatif, la \emph{multiplicité algèbrique} d'une racine $\alpha \in A$ de $f(x) \in A[X]^*$ est le plus grand entier $i \geqslant 1$ tel que
+	\[
+	(x - \alpha)^i ~| ~ f(x)
+	\]
+}{}
+
+
+\subsection{Le plus grand diviseur commun}
+\newdef{Soient $f(x), g(x) \in \K[X]$. Un diviseur commun de $f$ et $g$ est un polynôme $q \in \K[X]$ tel que,
+	\[
+	q ~|~ f \et q ~|~g
+	\]
+}{}
+
+\newthm{Soient $f(x), g(x) \in \K[X]$ non tous deux nuls et,
+	\[
+	I = \{ u \cdot f + v \cdot g ~|~ u,v \in \K[X]\}
+	\]
+	Alors il existe un polynôme $d(x) \in \K[X]$ tel que,
+	\[
+	I = \{ h \cdot d ~|~ h \in \K[X]\}
+	\]
+}{Idéal sur l'anneau des polynômes}
+
+\prf{Soit $d \in I^*$ de degré minimal et $u', v' \in \K[X]$ tel que
+	\[
+	u' \cdot f + v' \cdot g = d
+	\]
+	Ainsi pour tout $h \in \K[X]$
+	\[
+	h \cdot d = h u' \cdot f + h v' \cdot g \in I
+	\]
+	On a donc bien la première inclusion. Réciproquement pour un certain $u \cdot f + v \cdot g \in I$, la division avec reste nous donne
+	\[
+	u \cdot f + v \cdot g = q d + r
+	\]
+	avec $\deg r < \deg d$, alors par hypothèse sur $d$
+	\[
+	r = (u-qu') \cdot f + (v - q v') \cdot g \in I
+	\]
+	et par minimalité de $d \in I^*$, $r = 0$. Ainsi il existe $h \in \K[X]$ tel que $h \cdot d = u \cdot f + v \cdot g$. On a donc la deuxième inclusion.
+}
+
+\newthm{Soient $f(x), g(x) \in \K[x]$ et $d(x)$ comme dans le théorème (\ref{Idéal sur l'anneau des polynômes}) 
+	\begin{itemize}
+		\item $d$ est un diviseur commun de $f$ et $g$,
+		\item Chaque diviseur commun de $f$ et $g$ est un diviseur de $d$,
+		\item Si $d$ est unitaire, alors $d$ est unique.
+	\end{itemize}
+}{Pus grand diviseur commun}
+\prf{Dans l'ordre on a
+	\begin{itemize}
+		\item On sait que $f \in I$ donc il existe $h \in I$ tel que $f = h \cdot d$ ainsi $d ~|~ f$. Il en va de même pour $g$.
+		\item Soit $u,v \in \K[X]$ tel que $u \cdot f + v \cdot g = d$. Soit $q \in \K[X]$ tel que
+		\[
+		q ~|~ f \et q ~|~ g \implies f = u' q \et g = v' q
+		\]
+		Ainsi il en résulte que
+		\[
+		d = (u \cdot u' + v \cdot v') \cdot q
+		\]
+		donc $q ~|~ d$.
+		\item Soit $d, d' \in \K[X]$ unitaire, alors par le point précédent,
+		\[
+		d ~|~d' \et d' ~|~ d
+		\]
+		ainsi $d = a \cdot d'$ et $d' = b \cdot d'$. Donc 
+		\[
+		d = d\cdot a \cdot b
+		\]
+		le théorème (\ref{Degrés d'un produit}) implique que $a, b \in \K$. Mais $d, d'$ sont unitaire, alors $a = b = 1$, ce qui montre bien que $d = d'$.
+\end{itemize}
+}
+
+\newdef{L'unique polynôme $d \in \K[X]$ unitaire satisfaisant (\ref{Idéal sur l'anneau des polynômes}) est appelé \emph{le plus grand diviseur commun} de $f$ et $g$. Il est noté $\mathrm{pgcd}(f,g)$.
+}{}
+
+\subsection{Algorithme d'Euclide}
+\newthm{Soient $f, g \in \K[X]$ non tout deux nuls, par la division euclidienne on a
+	\[
+	f = q \cdot g + r
+	\]
+	alors,
+	\[
+	\mathrm{pgcd} (f,g) = \mathrm{pgcd} (g, r)
+	\]
+}{Algorithme d'Euclide}
+
+\prf{On vérifie facilement les conditions du théorème (\ref{Pus grand diviseur commun})}
+
+\newcor{Puisque,
+	\[
+	\mathrm{pgcd} (f,g) = \mathrm{pgcd} (g, r)
+	\]
+	mais que $\deg r < \deg g$ on a un algorithme récursif strictement décroissant et donc convergent, ainsi par récurrence on a nécessairement
+	\[
+	\mathrm{pgcd} (f,g) = \mathrm{pgcd} (g,r) = \ldots = \mathrm{pgcd}(r_k,0) = \frac{r_k}{a_{\deg(r_k)}} 
+	\]
+}{}
+
+\exemples{On calcul le plus diviseur commun de $f = 4x^6 + x^4 + 2x^2 + 2 \in \mathbb Z_5[X]$ et $g = 3x^4 + x^3 + 2x^2 + 2x + 2 \in \mathbb Z_5[X]$, on a par dévision euclidienne,
+	\[
+	f(x) = 4x^6 + x^4 + 2x^2 + 2 = (3x^2 + 4x + 2) \cdot (3x^4 + x^3 + 2x^2 + 2x + 2) + 4x^3 + 4x^2 + 3x + 3
+	\]
+donc,
+\[
+\mathrm{pgcd} (f,g) = \mathrm{pdcg}(3x^4 + x^3 + 2x^2 + 2x + 2,4x^3 + 4x^2 + 3x + 3 )
+\]
+par division euclidienne on a,
+\[
+3x^4 + x^3 + 2x^2 + 2x + 2 = ( 2x + 2 ) \cdot (4x^3 + 4x^2 + 3x + 3) + 3x^2 + 1 
+\]
+donc,
+\[
+\mathrm{pgcd} (f,g) = \mathrm{pgcd} (4x^3 + 4x^2 + 3x + 3, 3x^2 + 1 ) =  \mathrm{pgcd} (3x^2 + 1, 0)
+\]
+On en déduit donc que $\mathrm{pgcd} (f,g) = x^2 + 2$.
+}
+
+\subsection{Factorisation irréductible}
+
+\newdef{Un polynôme $p(x) \in \K[X]^*$ est \emph{irréductible}, si
+	\begin{enumerate}
+		\item $\deg p \geqslant 1$ et
+		\item si $p(x) = f(x) g(x)$ alors $\deg f = 0$ ou $\deg g = 0$
+	\end{enumerate}
+}{}
+
+\newthm{Soit $p(x) \in \K[X]$ irréductible et supposons et $p(x)$ divise un produit $f_1(x) \cdot \ldots \cdot f_k(x)$ de polynômes non-nuls. Alors $p(x)$ divise un polynôme $f_i(x)$.
+}{Division par un polynôme irréductible d'un produit}
+
+\prf{Il suffit de montrer l'assertion pour $k = 2$. Ainsi supposons que $p ~|~fg$. Si $p$ ne divise pas $f$ alors $\mathrm{pgcd}(p, f) = 1$ car les seuls diviseurs diviseurs de $p$ sont des multiples constants de $1$ et lui même. Ainsi il existe $u,v \in \K[X]$ tel que $u p + v f = 1$ alors,
+	\[
+	upg + vfg =g \implies p (ug + vk) = g
+	\]
+	car $p ~|~ fg \implies fg = kp$. Ainsi $p ~|~ g$.
+}
+
+\newthm{Tout polynôme $f(x) \in \K[X]$ se laisse factoriser de façon unique comme,
+	\[
+	f(x) = \alpha \prod_{i = 1}^k p_i(x)
+	\]
+	où $\forall k \geqslant 0$ et $p_i(x)$ irréductible.
+}{}
+
+\prf{Si $f$ est irréductible, alors on a 
+	\[
+	f(x) = a_{\deg f} \cdot \frac{ f(x) }{a_{\deg f}}
+	\]
+	Supposons dont que $f$ ne soit pas irréductible, alors il existe $g,h \in \K[X]$ tel que $f = gh$. Par récurrence forte on en déduit que,
+	\[
+	g(x) = \alpha \prod_{i = 1}^k p_i(x) \et h(x) = \beta \prod_{j = 1}^m q_j(x)
+	\]
+	ainsi
+	\[
+	f(x) = \alpha \beta \prod_{i= 1}^k p_i(x) \prod_{j = 1}^l  q_j(x)
+	\]
+	Montrons maintenant l'unicité, soient
+	\[
+	f(x) = \alpha \prod_{i = 1}^k p_i(x) = \alpha \prod_{j =1}^l q_i(x)
+	\]
+	deux factorisation de $f$. Alors par le théorème (\ref{Division par un polynôme irréductible d'un produit}) alors,
+	\[
+	\exists j \in \llbracket 1, l \rrbracket, \quad p_1(x) ~|~ q_j(x)
+	\]
+	mais comme $p_1$ et $q_j$ sont irréductible et unitaire, $p_1 = q_j$. En divisant par $p_1$, l'assertion suit par récurrence.
+}
+
+\newcor{Soient $f(x) \in \K[X]^*$ et $\alpha_1, \ldots, \alpha_r$ des racines de $f$ de multiplicité algébrique $k_1, \ldots, k_r$ respectivement. Alors il existe $g(X) \in \K[X]$ tel que,
+\[
+f(x) = g(x) \cdot \prod_{i=1}^r (x - \alpha_i)^{k_i}
+\] 
+}
+
+
+
+

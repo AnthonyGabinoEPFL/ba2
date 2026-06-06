@@ -1,0 +1,132 @@
+\documentclass[10pt]{article}
+
+%====================================
+%				package
+%====================================
+
+%gestion du français et des accents
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+
+%symbole mathématique
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+\usepackage{bm} 
+\usepackage{stmaryrd}
+\usepackage{dsfont}
+\usepackage{mathtools} % pour mathrlap
+
+
+%mise en page
+\usepackage[margin=1in]{geometry}
+\usepackage{lmodern}
+\usepackage{fancyhdr}
+\usepackage{soul}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tcolorbox} 
+\usepackage{tabularx}
+\usepackage{stmaryrd}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tikz}
+\usepackage{xcolor}
+\pagestyle{fancy}    % Utiliser un style d'en-têtes personnalisés
+\fancyhf{}           % Réinitialise les en-têtes et pieds de page
+\fancyhead[L]{Anthony Gabino}  % Nom de l'auteur à gauche
+\fancyhead[R]{Exercice à rendre semaine 11}  % Titre du sous-chapitre à droite
+\fancyfoot[C]{\thepage}  % Numéro de page centré en bas
+\begin{document}
+	
+
+\section*{Exercice à rendre}
+Soit $A$ l'ensemble définit par
+\[
+A = \left \{ (x,y) \in ]0,1] \times \mathbb R_+ ~|~ 0 \leqslant y \leqslant 2 + \sin \frac1x \right\}
+\]
+On remarque alors que $A$ décrit la portion d'aire sous le graphe de la fonction $x \mapsto 2 + \sin 1/x$ pour $x \in ]0,1]$, ainsi on voit que
+\[
+\partial A = {\color{orange} \mathcal G (2 + \sin 1/x)} \cup {\color{red}\left([0,1] \times \{0\} \right)}\cup {\color{blue}\left( \{1\}\times[0,2 +\sin1]\right)} \cup {\color{green!50!black}(\{0\}\times [0,3])}
+\]
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}
+	\begin{axis}[
+		width=8cm,
+		height=5cm,
+		xmin=0,
+		xmax=1,
+		ymin=0,
+		ymax=3.5,
+		axis lines=middle,
+		xlabel={$x$},
+		ylabel={$y$},
+		samples=1200,
+		domain=0.001:1,
+		clip=false
+		]
+		
+		% Aire correspondant à A
+		\addplot[
+		draw=none,
+		fill=blue!25,
+		]
+		{2 + sin(deg(1/x))}
+		\closedcycle;
+		
+		% Bord supérieur plus foncé
+		\addplot[
+		very thick,
+		orange,
+		]
+		{2 + sin(deg(1/x))};
+		
+		% Bord inférieur y=0
+		\addplot[
+		very thick,
+		red,
+		domain=0:1
+		]
+		{0};
+		
+		% Bord vertical en x=0
+		\draw[very thick, green!50!black]
+		(axis cs:0,0) -- (axis cs:0,3);
+		
+		% Bord vertical en x=1
+		\pgfmathsetmacro{\h}{2 + sin(deg(1))}
+		
+		\draw[
+		very thick,
+		blue!80!black
+		]
+		(axis cs:1,0) -- (axis cs:1,\h);
+		
+		
+	\end{axis}
+\end{tikzpicture}
+\caption{Graphe de la fonction $x \mapsto 2 + \sin \frac1x$.}
+\end{center}
+\end{figure}
+Or il est claire que les segments sont tous négligeable, il reste donc à montrer que le graphe ${\color{orange} \mathcal G}$ est aussi de négligeable. Premièrement, on remarque que la fonction $f : x \mapsto 2 + \sin \frac1x$ est intégrable au sens de Riemann sur $]0,1]$, puisque continue sur cette intervalle, ainsi pour tout $\varepsilon > 0$, il existe une partition $P$ de $[0,1]$ telle que, si on note $\tilde f$ le prolongement par zéro de $f$, on a
+\[
+\sum_{Q \in P} \sup_{x \in Q} \tilde f(x) \mathrm{Vol}(Q) - \sum_{Q \in P} \inf_{x \in Q} \tilde f(x) \mathrm{Vol}(Q) \leqslant \varepsilon
+\]
+D'où
+\[
+\sum_{Q \in P} \mathrm{Vol} \left(Q \times \left[\inf_{x \in Q} \tilde f(x), \sup_{x \in Q} \tilde f(x) \right]\right) \leqslant \varepsilon
+\]
+Or par définition
+\[
+\mathcal G(f) \subset \mathcal G(\tilde f) \subset \bigcup_{Q \in P} \left(Q \times \left[\inf_{x \in Q} \tilde f(x), \sup_{x \in Q} \tilde f(x) \right]\right) \leqslant \varepsilon
+\]
+Ainsi, pour tout $\varepsilon > 0$, on peut trouver une famille finie de pavés dont l'union contient $\mathcal G(f)$ et dont la somme des volumes et strictement inférieure à $\varepsilon$, ainsi $\mathcal G(f)$ est bien négligeable. 
+
+Or comme la frontière $\partial A$ est l'union finie d'ensemble négligeable, alors elle l'est aussi. Donc on conclut que $A$ est bien mesurable au sens de Jordan. 
+\end{document}

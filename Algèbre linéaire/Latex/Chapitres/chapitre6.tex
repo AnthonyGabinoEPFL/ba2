@@ -1,0 +1,99 @@
+\section{Système différentiels linéaires}
+On veux résoudre un système 
+\[
+x_1'(t) = a_{11} x_1(t) + \ldots a_{1n} x_n(t)
+\]
+\[
+x_n'(t) = a_{n1} x_1(t) + \ldots a_{nn} x_n(t)
+\]
+où les $a_{ij} \in \R$. En notation matricielle, on peut écrire
+\[
+x'(t) = A x(t)
+\]
+où $A = (a_{ij})_{ij} \in \R^{n \times n}$ et $x(t) = (x_1(t) ~\ldots ~ x_n(t))^\top$.
+
+
+\newlem{Pour $A \in \C^{n \times m}$ et $B \in \C^{m \times n}$ on a
+	\[
+	\norme{A B }_F \leqslant \norme{A}_F \norme{B}_F
+	\]
+}{}
+
+\prf{Soit $a_i^T$ la $i$-ème ligne de $A$ et $b_i$ la $i$-colonne de $B$, alors on remarque 
+	\[
+	|(AB)_{ij}|^2 = |a_i^\top b_j|^2 = (a_i^* \overline b_j) (a_i^\top b_j) \leqslant \norme{a_i}^2 \norme{b_j}^2 
+	\]
+	Donc
+	\[
+	\norme{AB}_F^2 = \sum_{i,j = 1}^n (a_i^* \overline b_j)(a_i^\top b_j) \leqslant \sum_{i,j = 1}^n \norme{a_i}^2 \norme{b_j}^2 = \norme{A}_F^2 \norme{B}_F^2
+	\]
+}
+
+\newthm{Soit $A \in \C^{n \times n}$, alors la série
+	\[
+	e^A = \sum_{k=0}^\infty \frac{A^k}{k!}
+	\]
+	converge.
+}{}
+
+
+
+
+
+\prf{On considère la suite $(b_n) \subset \C^{n \times n}$
+	\[
+	b_n = \sum_{k=0}^n \frac{A^k}{k!}
+	\]
+	Soient $m,n	 \in \N$, alors
+	\[
+	\norme{b_m - b_n}_F = \norme{\sum_{k = n+1}^m \frac{A^k}{k!} }_F \leqslant \sum_{k=n+1}^m \frac{\norme{A^k}_F}{k!} \leqslant \sum_{k = n+1}^m \frac{\norme{A}_F^k}{k!}
+	\]
+	Or puisque la suite $(a_n) \in \R$
+	\[
+	a_n = \sum_{k=0}^n \frac{\norme{A}^k_F}{k!}
+	\]
+	est de Cauchy, alors pour tout $\varepsilon > 0$, il existe $N \in \N$ tel que pour tout $m,n \geqslant N$,
+	\[
+	|a_m - a_m | \leqslant \varepsilon
+	\]
+	Alors pour tout $m,n \geqslant N$, on a
+	\[
+	\norme{b_m - b_n}_F \leqslant \varepsilon
+	\]
+	Ceci montre bien que $(b_n)$ est de Cauchy et alors $e^A$ converge.
+}
+
+\newthm{La solution du problème initiale $x'(t) = A x, ~x(0) = v$ est 
+	\[
+	x(t) = e^{At} v
+	\]
+}{}
+
+\prf{Par le théorème précédent on a montré que pour tout $t \in \R$ la série
+	\[
+	e^{At} = \sum_{k=0}^\infty \frac{t^k}{k!} A^k
+	\]
+	converge. Donc chaque composante est une série intégrale avec un rayon de convergence $\infty$. On peut alors dériver les termes de la somme pour obtenir
+	\[
+	\frac{\mathrm d}{\mathrm dt} e^{At} = A e^{At}
+	\]
+	Donc si on considère $x(t) = e^{At} v$ alors
+	\[
+	x'(t) = Ae^{At} v= A x(t) 
+	\]
+}
+
+\newlem{Soient $A, B \in \C^{n \times n}$ tels que $AB = BA$, alors
+	\[
+	e^{A+B} = e^A \cdot e^B
+	\]
+}{}
+
+\prf{On a
+\[
+e^{A + B} = \sum_{n=0}^\infty \frac{(A + B)^n}{n!} = \sum_{n=0}^\infty \frac{1}{n!} \sum_{k=0}^n \binom{n}{k} A^k B^{n-k} = \sum_{k=0}^\infty \sum_{n=k}^\infty \frac{1}{k!(n-k)!} A^k B^{n-k}
+\]
+\[
+= \sum_{k=0}^\infty \sum_{m=0}^\infty \frac{1}{k!m!} A^k B^m = \sum_{k=0}^\infty A^k \sum_{m=0}^\infty \frac{1}{m!} B^m = e^A \cdot e^B
+\]}
+

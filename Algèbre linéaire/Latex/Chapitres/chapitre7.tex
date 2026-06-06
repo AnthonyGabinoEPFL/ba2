@@ -1,0 +1,370 @@
+\section{La forme normale de Jordan}
+\newdef{Un \emph{bloc de Jordan} est définie comme
+		\[	
+		J(\lambda,n)=\begin{pmatrix}
+			\lambda & 1 &  &  &  \\
+			& \lambda & 1 &  & \\
+			&  &  \ddots &  \ddots\\
+			&  &  &  \lambda & 1 \\
+			&  &  &  & \lambda
+		\end{pmatrix} \in \C^{n \times n}
+	\]
+	où $\lambda \in \C$ et $n \in \N$. On remarque que $J(\lambda, n) = \mathrm{diag}(\lambda, \ldots, \lambda) + J(0,n)$ où $J(0,n)$ est une matrice nilpotente, puisque $J(0, n)^{n} = 0$. De plus on dit qu'une matrice $A \in \C^{n \times n}$ est une \emph{forme normale de Jordan} si
+	\[
+	A = \begin{pmatrix} J(\lambda_1, n_1) & & \\ & \ddots &  \\ &  & J(\lambda_k, n_k) \end{pmatrix}
+	\]
+	avec $\sum n_k = n$.
+}{}
+
+\newlem{Soit $A \in \C^{n \times n}$ une matrice normale de Jordan alors
+	\[
+	\chi_A(x) = (-1)^n \prod_{i=1}^k (x - \lambda_i)^{n_i}
+	\]
+}{}
+
+\prf{Comme $A - x \mathrm{Id}$ est une matrice triangulaire supérieure, alors son déterminant est donné par le produit des termes diagonaux, ainsi on a bien
+	\[
+	\chi_A(x) = \det(A - x \mathrm{Id}) = (-1)^n \prod_{i=1}^n (x - \lambda_i)^{n_i}
+	\]
+}
+
+
+
+\newlem{Soit $J \in \C^{n \times n}$ une forme normale de Jordan. Alors
+	\[
+	 J=\underbrace{ \begin{pmatrix}
+	 		\lambda_{1}I_{n_{1}} &  &  \\
+	 		& \ddots &  \\
+	 		&  & \lambda _{k}I_{n_{k}}
+	 \end{pmatrix} }_{ D }+\underbrace{ \begin{pmatrix}
+	 		J(0,n_{1}) &  &  \\
+	 		& \ddots &  \\
+	 		&  & J(0,n_{k})
+	 \end{pmatrix} }_{ N }.
+	\]
+	où $D$ et $N$ commutent, et $N$ est nilpotent.
+}{}
+
+\prf{On a
+	\[
+	N^i = \begin{pmatrix}
+		J(0,n_{1})^i &  &  \\
+		& \ddots &  \\
+		&  & J(0,n_{k})^i
+	\end{pmatrix}
+	\]
+	Soit $j = \max\{n_1, \ldots, n_k\}$, alors $N^j = 0$. On a que $D$ et $N$ commutent
+	\[
+	\lambda_i I_{n_i} J(0, n_i) = J(0, n_i) \lambda_i I_{n_i} \implies D N = ND
+	\]
+}
+\subsection{Déterminer la forme normale de Jordan}
+\newthm{Soit $A \in \C^{n \times n}$, alors il existe une matrice $P \in \C^{n \times n}$ inversible et une forme normale de Jordan $J \in \C^{n \times n}$ tel que
+	\[
+	A = P J P^{-1}
+	\]
+}{Réduction de Jordan}
+
+\newlem{Soit $J \in \C^{n \times n}$ une forme normale de Jordan et soient $\lambda_1, \ldots, \lambda_k \in \C$ des valeurs propres distincts de $A \in \C^{n \times n}$. Alors le polynôme minimal de $J$ est 
+	\[
+	\mu_j(x) = (x- \lambda_1)^{e_i} \cdot \ldots \cdot (x- \lambda_k)^{e_i}
+	\]
+	où $e_i = \max \{n_i \mid J(\lambda_i, n_i) \text{ est un bloc de Jordan}\}$.
+}{}
+
+\prf{Soit 
+	\[
+	J=\begin{pmatrix}
+		J(\lambda_{1},n_{1}) \\
+		& J(\lambda_{1},n_{2}) \\
+		&  & \ddots  \\
+		&  &  & J(\lambda_{1},n_{k}) \\
+		&  &  &  &  J(\lambda_{2},n_{k+1}) \\
+		&  &  &  &  & \\
+		&  &  &  &  & \ddots 
+	\end{pmatrix}
+	\]
+	alors en posant $e_1 = \max\{n_i \mid J(\lambda_1, n_i) \text{ est un bloc de Jordan}\} = \max \{ n_i \mid i \in \llbracket 1, k \rrbracket \}$, alors
+		\[
+		\begin{pmatrix}
+			J(0,n_{1})^{e_{1}} \\
+			&  \ddots \\
+			&  &  J(0,n_{k})^{e_{1}}
+		\end{pmatrix}=0
+		\]
+	et pareil pour les autres blocs. 
+}	
+\newlem{Soit $k \in \N$, alors
+	\[
+	\dim \ker(A- \lambda I)^k = \dim \ker (J - \lambda I)^k
+	\]
+}{}
+
+\prf{Pour $\lambda \in \C$ on voit que
+	\[
+	(A - \lambda I)^k = (P J P^{-1} - \lambda P P^{-1})^k = (P(J - \lambda I)P^{-1})^k = P(J - \lambda I)^k P^{-1}
+	\]
+	Ainsi un élément $x \in \C$ est contenu dans le noyau de $(A - \lambda)^k$, si et seulement si $P^{-1} x \in \ker (J - \lambda I)^k$, d'où la proposition.
+}
+
+
+\newthm{Soit $A \in \C^{n \times n}$ et $\lambda_1, \ldots, \lambda_k \in \C$ les valeurs propres distinctes de $A$. Soit
+	\[
+	d_i = \dim \ker(A - \lambda_1 I)^i
+	\]
+	alors
+	\[
+	n_i = d_i - d_{i-1}
+	\]
+	correspond au nombre de blocs de Jordan dont $\lambda_1$ est l'élément diagonal et de longueur aux moins $i$.
+}{}
+
+\prf{Soit $J$ une forme de Jordan de $A$, alors $J$ est de la forme
+	\[
+	J = \mathrm{diag} (J(\lambda_1, n_{1, 1}), J(\lambda_1, n_{2,1}), \ldots J(\lambda_1, n_{k,1}), J(\lambda_2, n_{2,1}), \ldots, J(\lambda_n, n_{n,m}))
+	\]
+	Ainsi par le lemme qui précede, on considère la quantité $(J - \lambda_1 I)^i$, ce qui nous donne
+	\[
+	(J - \lambda_1 I)^i = \mathrm{diag}  (J(0, n_{1, 1})^i, \ldots, J(0, n_{2,1})^i, \ldots J(0, n_{k,1})^i, J(\lambda_2 - \lambda_1, n_{2,1})^i, \ldots, J(\lambda_n - \lambda_1, n_{n,m})^i)
+	\]
+	On remarque alors que $J(0, n_{j,1})^i = 0$ si $i \geqslant n_{j,1}$ pour tout $j = 1,2, \ldots, k$. Donc on a bien
+	\[
+	d_i = d_{i-1} + \#\text{de bloc de longueurs} \geqslant i 
+	\]
+	d'où le théorème.
+}
+\newcor{Soit $A \in \C^{n \times n}$, $J \in \C^{n \times n}$ une forme normale de Jordan de $A$ et $\lambda \in \C$ une valeur propre de $A$. Soit $k \in \entiers$ et $n_k$ le nombre de bloc de Jordan avec $\lambda$ comme élément diagonal et de longueur $k$ est donné par
+	\[
+	n_k = 2 d_i - d_{i-1} - d_{i+1}
+	\]
+}{}
+
+\subsection{Décomposition selon le polynôme caractéristique}
+\newdef{Soient $W \subset \C^n$ un sous-espace vectoriel et soit $A \in \C^{n \times n}$, on dit que $W$ est \emph{invariant} sous $A$,
+	\[
+	\forall x \in W, \quad A x \in W
+	\]
+}{}
+
+\newlem{Soient $f \in \K[X]$ et $A \in \K^{n \times n}$ une matrice quelconque, alors
+	\[
+	\ker (f(A))
+	\]
+	est invariant sous $A$.
+}{}
+
+\prf{Soit $x \in \ker(f(A))$ on trouve que
+	\[
+	f(A) \cdot Av = A \cdot f(A) \cdot x = A \cdot 0 = 0
+	\]
+	Ainsi $Av \in \ker(f(A))$.
+}
+
+\newthm{Soit $A \in \K^{n \times n}$ et soit $f(x) = f_1(x) \cdot f_2(x) \in \K[X]$ tel que
+	\begin{enumerate}
+		\item $\deg f_i > 0$ pour tout $i$ 	
+		\item $\mathrm{pgcd}(f_1, f_2) = 1$
+	\end{enumerate}
+	Alors
+	\[
+	\ker(f(A)) = \ker(f_1(A)) \oplus \ker(f_2(A))
+	\]
+}{Lemme des noyaux}
+
+\prf{Comme $\mathrm{pgcd}(f_1, f_2) = 1$, par Bézout on sait qu'il existe $g_1(x), g_2(x) \in \K[X]$ tel que
+	\[
+	1 = g_1(x) f_1(x) + g_2(x) f_2(x)
+	\]
+	et alors par évaluation
+	\[
+	I_n = g_1(A) \cdot f_1(A) + g_2(A) \cdot f_2(A)
+	\]
+	Ainsi pour $v \in \ker(f(A))$, on a
+	\[
+	v = g_1(A) \cdot f_1(A)v + g_2(A) \cdot f_2(A)v
+	\]
+	On remarque que
+	\[
+	g_1(A) \cdot f_1(A) v \in \ker (f_2(A))
+	\]
+	en effet
+	\[
+	f_2(A) g_1(A) f_1(A) v = g_1(A) f_1(A) f_2(A) v = g_1(A) f(A) v = 0
+	\]
+	il en va de même que $g_2(A) \cdot f_2(A) v \in \ker(f_1(A))$. Soit $v \in \ker(f_1(A)) \cap \ker(f_2(A))$, on a 
+	\[
+		v = g_1(A) \cdot f_1(A)v + g_2(A) \cdot f_2(A)v = 0
+	\]
+	ce qui démontre bien que la somme est directe.
+}
+
+\newcor{On peut sans problème généraliser ce résultat, ainsi soit $f(x) = f_1(x) \cdot \ldots \cdot f_k(x) \in \K[X]$ tel que
+	\begin{enumerate}
+		\item $\deg f_i > 0$ pour tout $i$
+		\item $\mathrm{pgcd}(f_i, f_j) = 1$ pour tout $i \neq j$
+	\end{enumerate}
+	alors
+	\[
+	\ker(f(A)) = \ker(f_1(A)) \oplus \dots \oplus \ker(f_k(A)) = \bigoplus_{i=1}^k \ker(f_i(A))
+	\]
+}
+
+\newthm{Soit $A \in \C^{n \times n}$, alors $\C^n$ est la somme directe de sous-espace vectoriel $\C^{n} = W_1 \oplus \dots \oplus W_k$ tels que
+	\begin{enumerate}
+		\item $W_i$ est invariant par $A$ pour tout $i$
+		\item $A_{\mid W_i}$ est de la forme $\lambda_i I_{n_i} + N_i$ où $N_i$ est nilpotente
+	\end{enumerate}
+}{}
+
+\prf{Soit $\chi_A(x)$ le polynôme caractéristique de $A$, par Cayley-Hamilton, on sait que $\chi_A(A) = 0$. De plus par le théorème fondamentale de l'algèbre on sait que $\chi_A$ se laisse factoriser sur $\C$ comme
+	\[
+	\chi_A(x) = (-1)^n (x - \lambda_1)^{n_1} \cdot \ldots \cdot (x - \lambda_k)^{n_k}
+	\]
+	avec des $\lambda_i$ deux à deux distincts. Alors par le théorème qui précède on a bien,
+	\[
+	\C^n = \ker(\chi_A(A)) = \ker(A - \lambda_1 I_n)^{n_1} \oplus \ldots \oplus \ker(A - \lambda_k I_n)^{n_k}
+	\]
+	On pose alors $W_i = \ker (A - \lambda_iI_n)^{n_i}$. De plus
+	\[
+	A_{\mid W_i} = (A - \lambda_i I_n)_{\mid W_i} + \lambda_i {I_n}_{\mid W_i} := N_i + \lambda_i I_n
+	\]
+	or $N_i$ est bien nilpotent car
+	\[
+	N_i^{n_i} = (A - \lambda_i I_n)_{\mid W_i}^{n_i} = 0
+	\]
+}
+
+\subsection{Endomorphismes nilpotents}
+On a vu que si pour $A \in \C^{n \times n}$ on pose $W_i = \ker(A - \lambda_i I_n)^{n_i}$ alors
+\[
+A_{ \mid W_i} : W_i \to W_i
+\]
+est de la norme $\lambda_i I_{n_i} + N_i$ avec $N_i$ nilpotent.
+
+\newdef{Pour $x \neq 0$, on appelle
+	\[
+	m_x = \min \{i \in \N \mid N^i(x) = 0\}
+	\]
+	la \emph{durée de vie} de $x$. De plus la séquence
+	\[
+	x, N(x), \ldots, N^{m_x -1}(x)
+	\]
+	est l'\emph{orbite} de $x$.
+}{} 
+
+\newlem{Soient $x_1, \ldots x_k \neq 0$, alors si l'ensemble des orbites est linéairement dépendant alors
+	\[
+	N^{m_1 - 1} (x_1), ~\ldots~, N^{m_k -1}(x_k)
+	\] 
+	l'est aussi.
+}{orbites linéairement dépendant}
+
+\prf{Soit 
+	\[
+	\beta_0^1 x_1 + \ldots + \beta_{m_1 -1}^1 N^{m_1 -1}(x_1) + ~\ldots~+ \beta_0^k x_k + \ldots + \beta_{m_k - 1}^k N^{m_k -1}(x_k) = 0
+	\]
+	une combinaison linéaire non-trivial de zéro. On peut alors appliquer l'application $N$ $p$-fois, où $p \geqslant 0$ est le plus grand entier tels que les termes
+	\[
+	\beta_i^j N^{p+1} (x_j) = 0
+	\]
+	ne sont pas tous égaux à zéro. Ainsi, on a trouvé un sous-ensemble $J \subset \{1, \ldots, k\}$ et des $\gamma_j \neq 0$ tels que
+	\[
+	\sum_{j \in J} \gamma_j N^{m_j -1}(x_j) = 0
+	\]
+}
+
+	
+
+\newthm{Soit $V$ un espace vectoriel sur $K$ de dimension finie et $N : V \to V$ un endomorphisme nilpotent. Alors $V$ possède une base $\mathcal B$ de la forme,
+	\[
+	x_1, N(x_1), \ldots N^{m_1 -1}(x_1), x_2, N(x_2), \ldots N^{m_2 - 1}(x_2), ~\ldots ~, x_k, N(x_k), \ldots, N^{m_k -1}(x_k)
+	\]
+	telle que $N^{m_i}(x_i) = 0$ pour tout $i$.
+}{}
+
+\prf{En concaténant les orbites des éléments d'une base de $V$ on obtient un ensemble de vecteur qui engendrent $V$. 
+	
+	Supposons alors qu'au début de l'étape $q$, nous avons un ensemble $x_1, \ldots x_k$ avec $x_1, \ldots x_k \neq 0$ dont les orbites
+	\begin{equation} \label{orbites}
+	x_1, N(x_1), \ldots N^{m_1 -1}(x_1), ~\ldots ~, x_k, N(x_k), \ldots, N^{m_k -1}(x_k)
+	\end{equation}
+	engendrent $V$ (pour la première étape il suffit de prendre $k = n$ avec des $x_i$ formant une base de $V$). Si (\ref{orbites}) est linéairement dépendant, on va alors soit supprimer un $x_i$ et son orbite (car superflus), soit remplacer un $x_i$ par un vecteur $y$ tel que
+	\begin{enumerate}
+		\item Les orbites de $x_1, \ldots, x_{i-1}, y , x_{i+1}, \ldots, x_k$ engendrent aussi l'ensemble $V$.
+		\item La somme des durées de vie de $x_1, \ldots, x_{i-1}, y , x_{i+1}, \ldots, x_k$ est strictement plus petite que la somme des durées de vie de $x_1, \ldots, x_k$
+	\end{enumerate}
+	Dès que l'ensemble (\ref{orbites}) est linéairement dépendant, il existe une combinaison linéaire non trivial de (\ref{orbites}) qui est égale à $0$, 
+	\[
+	\beta_0^1 x_1 + \ldots + \beta_{m_1 -1}^1 N^{m_1 -1}(x_1) + ~\ldots~+ \beta_0^k x_k + \ldots + \beta_{m_k - 1}^k N^{m_k -1}(x_k) = 0
+	\]
+	Or le lemme (\ref{orbites linéairement dépendant}) implique qu'il existe un sous-ensemble $J \subset \llbracket 1, k \rrbracket$ et des $\gamma_j \neq 0$ tels que
+	\[
+	\sum_{j \in J} \gamma_j N^{m_j - 1}(x_j) = 0
+	\]
+	On a alors plusieurs cas, s'il existe un $j \in J$ tel que $m_j = 1$. Dans ce cas on peut supprimer $x_j$ et les orbites des autres $x_i$ pour $i \neq j$ engendrent aussi l'ensemble $V$.
+	
+	Autrement soit $m = \min\{m_j -1 \mid j \in J\}\geqslant 1$ et soit $i \in J$ un index où le minimum est atteint. Alors
+	\[
+	0 = N^m \sum_{j \in J} \gamma_j N^{m_j -1 - m}(x_j) = N^m \left( \gamma_i x_i + \sum_{j \in J, ~j \neq i} \gamma_j N^{m_j -1 - m}(x_j) \right)
+	\]
+	Maintenant en posant
+	\[
+	y = \gamma_i x_i + \sum_{j \in J, ~j \neq i} \gamma_j N^{m_j -1 - m}(x_j)
+	\]
+	Si $y \neq 0$, on remplace $x_i$ par $y$. Il est alors facile de voir que les orbites de 
+	\[
+	x_1, \ldots, x_{i-1}, y , x_{i+1}, \ldots, x_k
+	\]
+	engendrent encore $V$. Et la durée de vie de $y$ est au plus $m < m_i$. Sinon, les orbites de 
+	\[
+	x_1, \ldots, x_{i-1}, x_{i+1}, \ldots, x_k
+	\]
+	suffisent alors à engendrer $V$.
+}
+
+\newcor{Si on inverse l'ordre de chaque orbite $x_i, N(x_i), \ldots, N^{m_i -1}(x_i)$, on obtient une base $\mathcal B'$ et la matrice $A_{\mathcal B '}^N$ de l'application $N$ a la forme
+\[
+A_{\mathcal B'}^N = \begin{pmatrix} J_1 & & & \\
+										& J_2 & & \\
+										&     & \ddots & \\
+										&     &        & J_k
+				\end{pmatrix}
+\]
+en forme normale de Jordan, où $J_i = J(0, m_i)$. Par conséquent, $\lambda I_n + N$ est représenté par
+\[
+A_{\mathcal B'}^{\lambda I_n + N} = A_{\mathcal B'}^N + \lambda I_n
+\]
+}
+\newthm{Deux matrices sont semblables si et seulement si elles ont la même forme normale de Jordan, à l'ordre près des blocs}{}
+\subsection{Résolution de système différentielle}
+On a vu que si on voulant résoudre un système linéaire 
+\[
+x_1'(t) = a_{11} x_1(t) + \ldots a_{1n} x_n(t)
+\]
+\[
+x_n'(t) = a_{n1} x_1(t) + \ldots a_{nn} x_n(t)
+\]
+où les $a_{ij} \in \C$. En notation matricielle, on peut écrire
+\[
+x'(t) = A x(t)
+\]
+où $A = (a_{ij})_{ij} \in \C^{n \times n}$ et $x(t) = (x_1(t) ~\ldots ~ x_n(t))^\top$. Alors la solution était donnée par
+\[
+x(t) = e^{At} v
+\]
+Or maintenant on sait qu'il existe une matrice $P \in \C^{n \times n}$ inversible telle que $A = P (\mathrm{diag}(\lambda_1, \ldots, \lambda_n) + N ) P^{-1}$ où $N \in \C^{n \times n}$ est une matrice nilpotente. Mais comme $N$ et $\mathrm{diag}(\lambda_1, \ldots, \lambda_n)$ commutent 
+\[
+e^{t\mathrm{diag}(\lambda_1, \ldots, \lambda_n) + tN} = e^{\mathrm{diag}(\lambda_1t, \ldots, \lambda_nt)} \cdot e^{tN} = \mathrm{diag}(e^{\lambda_1t}, \ldots, e^{\lambda_nt}) \cdot e^{Nt}
+\]
+On peut donc en conclure que
+\[
+x(t) = e^{At}v = Pe^{t \mathrm{diag}(\lambda_1, \ldots, \lambda_n)} e^{tN} P^{-1} v = P \left( \mathrm{diag}(e^{\lambda_1t}, \ldots, e^{\lambda_nt}) \cdot \sum_{j=0}^{k-1} \frac{t^j}{j!} N^j \right) P^{-1} v
+\]
+où $k \in \N$ est tel que $N^k = 0$.
+
+
+
+
+
+
+

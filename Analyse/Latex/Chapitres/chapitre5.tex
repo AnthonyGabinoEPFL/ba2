@@ -1,0 +1,171 @@
+\section{Dérivation d'ordre supérieurs}
+
+\subsection{Dérivées secondes}
+\newdef{Soit $E \subset \R$ ouvert non-vide et $f : E \to \R$ telle que toutes les dérivées partielles secondes $\frac{\partial^2 f}{\partial x_i \partial x_j} : E \to \R, ~i,j \in \entiers$ existent. On appelle matrice hessienne de $f$ en $\bm x \in E$ la matrice $H_f(\bm x) \in \R^{n \times n}$ 
+	\[
+	H_f(\bm x) = \begin{bmatrix}
+		\frac{\partial^2 f}{\partial x_1^2}(\bm x) & \frac{\partial^2 f}{\partial x_1 \partial x_2} (\bm x) & \ldots & \frac{\partial^2 f}{\partial x_1 \partial x_2} (\bm x) \\
+		\vdots & & & \vdots \\
+		\frac{\partial^2 f}{\partial x_n \partial x_1} (\bm x) & \ldots & \ldots & \frac{\partial^2 f}{\partial x_n^2}(\bm x)
+	\end{bmatrix}
+	\]
+	De manière plus concise on a,
+	\[
+	\left(H_f(\bm x)\right)_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j} (\bm x)
+	\]
+	Si toutes dérivées partielles secondes $ \frac{\partial^2 f}{\partial x_i \partial x_j} (\bm x) : E \to \R$ existent et sont continues sur $E$, alors $f \in C^2$.
+}{}
+
+\newlem{Soit $f \in C^2(E)$ avec $E \subset \rn$ un ouvert non-vide et $\bm v, \bm w \in \rn$ unitaires. Alors
+	\[
+	D_{\bm w \bm v}^2 f(\bm x) = \bm w^\top H_f(\bm x) \bm v,
+	\]
+}{}
+
+\prf{Puisque $f \in C^2(E)$, alors $D_{\bm v} f \in C^1(E)$ et donc
+\[
+D_{\bm w} (D_{\bm v}f)(\bm x) ) \sumn \frac{\partial (D_{\bm v} f)}{\partial x_i}(\bm x) w_i = \sum_{i,j = 1}^n \frac{\partial^2 f}{\partial x_i \partial x_j}(\bm x) v_j w_i = \bm w^\top H_f(\bm x) \bm v
+\]
+}
+ 
+
+\newthm{Soit $f : E \to \R$ telle que $\frac{\partial f}{\partial x_i}, \frac{\partial f}{\partial x_j}, \frac{\partial^2 f}{\partial x_i \partial x_j}, \frac{\partial^2 f}{\partial x_j \partial x_i}$ existent dans $E$ et $\frac{\partial^2 f}{\partial x_i \partial x_j}, \frac{\partial^2 f}{\partial x_j \partial x_i}$ sont continues en $\bm x \in E$, alors
+	\[
+	\frac{\partial^2 f}{\partial x_i \partial x_j}(\bm x) = \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm x)
+	\]
+}{Théorème de Schwarz}
+
+\prf{On considère la quantité,
+	\[
+	\Delta(s,t) = f(\bm x + s \bm e_i + t \bm e_j) - f(\bm x + \bm e_i) - f(\bm x + t \bm e_j) + f(\bm x)
+	\]
+et les deux fonctions auxiliaires,
+\[
+g(\xi) = f(\bm x + \xi \bm e_i + t \bm e_j) - f(\bm x + \xi \bm e_i) \et h(\xi) = f(\bm x + s \bm e_i + \xi \bm e_j) - f(\bm x + \xi \bm e_j)
+\]
+La fonction $g$ est dérivable sur $]0,s[$ et donc par le théorème des accroissement finis, il existe $\tilde s \in ]0,s[$ tel que
+\[
+g(s) - g(0) = g'(\tilde s) s = \left( \frac{\partial f}{\partial x_i}(\bm x + \tilde s \bm e_i + t \bm e_j) - \frac{\partial f}{\partial x_i}(\bm x + \tilde s \bm e_i) \right) s.
+\]
+Si on pose
+\[
+\varphi(\eta) = \frac{\partial f}{\partial x_i}(\bm x + \tilde s \bm e_i + \eta \bm e_j)
+\]
+la fonction $\varphi$ est dérivable sur $]0,t[$ donc il existe $\tilde t \in ]0,t[$ tel que
+\[
+\varphi(t) - \varphi(0) = \varphi'(\tilde t)t = \frac{\partial^2 f}{\partial x_j \partial x_i} (\bm x + \tilde s \bm e_i + \tilde t \bm e_j) t
+\]
+On a finalement,
+\[
+\Delta(s,t) = g(s) - g(0) = g'(\tilde s) s = \left( \varphi(t) - \varphi(0)\right) s = \varphi(\tilde t) st = \frac{\partial^2 f}{\partial x_j \partial x_i} (\bm x + \tilde s \bm e_i + \tilde t \bm e_j) st
+\]
+De manière analogue avec la fonction $h$ on trouve
+\[
+\Delta(s,t) = \frac{\partial^2 f}{\partial x_i \partial x_j} (\bm x + \hat s \bm e_i + \hat t \bm e_j) st
+\]
+et donc 
+\[
+\Delta(s,t) = \frac{\partial^2 f}{\partial x_i \partial x_j} (\bm x + \hat s \bm e_i + \hat t \bm e_j) st = \varphi(\tilde t) st = \frac{\partial^2 f}{\partial x_j \partial x_i} (\bm x + \tilde s \bm e_i + \tilde t \bm e_j) st
+\]
+Si on prend $s = t \to 0^+$, on obtient $\hat s, \tilde s \to 0^+$ et $\hat t, \tilde t \to 0^+$. Et donc par continuité des dérivées partielles secondes en $\bm x$, on a
+\[
+\lim_{s \to 0^+} \frac{1}{s^2} \Delta(s,s) = \frac{\partial^2 f}{\partial x_i \partial x_j}(\bm x) = \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm x)
+\]
+}	
+
+\newcor{Soit $E \subset \rn$ ouvert non-vide avec $n \geqslant 2$ et $f \in C^2(E)$. Alors
+	\[
+	\frac{\partial^2 f}{\partial x_i \partial x_j}(\bm x) = \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm x), \quad \forall \bm x \in E, \quad \forall i,j \in \entiers
+	\]
+	Le résultat du théorème de Schwarz n'est pas forcément vrai sans l'hypothèse de continuité des dérivées partielles secondes.
+}{}
+
+\subsection{Dérivées partielles d'ordres supérieurs à 2}
+
+\newdef{Soit $f : E \to \R$. On généralise la notion de dérivée partielle d'ordre $p$ de $f$ par rapport aux variables $x_{i_1}, x_{i_2}, \ldots, x_{i_p}$ pour $i_k \in \entiers$,
+	\[
+	\frac{\partial^p f}{\partial x_{i_p} \ldots \partial x_{i_2} \partial x_{i_1}} (\bm x) = \frac{\partial}{\partial x_{i_p}} \left( \dots  \frac{\partial}{\partial x_{i_2}} \left( \frac{\partial f}{\partial x_{i_1}} \right) \right)
+	\]
+}{}
+
+\newrem{Grâce au théorème de Schwarz, si $f \in C^p(E)$, alors
+	\[
+	\frac{\partial^p f}{\partial x_{i_p} \dots \partial x_{i_1}} = \frac{\partial^p f}{\partial x_{i_{\sigma(1)}} \dots \partial x_{i_{\sigma(p)}}}
+	\]
+	où $\sigma $ est une permutation arbitraire. Autrement dit, l'ordre de dérivation n'est pas important si $f \in C^p$ et donc on agencer l'ordre des dérivations tel que
+	\[
+	\frac{\partial^p f}{\partial x_{i_p} \dots \partial x_{i_1}} = \frac{\partial^p f}{\partial x_1^{\alpha_1} \ldots \partial x_n^{\alpha_n}}
+	\]
+	avec $\alpha_i \in \N$ et $\sumn \alpha_i = p$.
+}
+
+\newdef{Soit $\bm \alpha =(\alpha_1, \ldots, \alpha_n) \in \N^n$ tel que $|\bm \alpha | = \sumn \alpha_i = p$ alors on utilise la \emph{notation multi-entiers},
+	\[
+	\frac{\partial^{|\bm \alpha|} f}{\partial \bm x^{\bm \alpha}} = \frac{\partial^{|\bm \alpha|}f}{\partial x_1^{\alpha_1} \ldots \partial x_n^{\alpha_n}} = \frac{\partial^p f}{\partial x_{i_p} \dots \partial x_{i_1}}
+	\]
+	où $\partial x_j^{\alpha_j}$ signifie qu'on dérive $\alpha_j$ fois par rapport à $x_j$. Cette notation n'est valable (ou du moins utile) que si $f \in C^p(E)$.
+}{}
+
+\subsection{Développement limité et Formule de Taylor}
+
+\newdef{Soit $f : E \to \R$  et $\bm x \in \mathring{E}$. S'il existe un polynôme $q \in \R[y_1, \ldots, y_n]$ tel que 
+	\[
+	q(\bm y) = \sum_{|\bm \alpha| \leqslant p} c_{\bm \alpha}(\bm y - \bm x)^{\bm \alpha}
+	\]
+de degré $p$ en $\bm y$ et une fonction $R_p : E \to \R$ tels que
+\[
+\forall \bm y \in E, \quad f(\bm y) = q(\bm y) + R_p(\bm y)
+\]
+avec $\lim_{\bm y \to \bm x} \frac{R_p(\bm y)}{\norme{\bm y - \bm x}} = 0$, alors on dit que $f$ admet un développement limité d'ordre $p$ autour de $\bm x$.
+}{}
+
+\newthm{Soit $f : E \to \R$ de classe $C^{p+1}$ et $\bm x_0 \in \mathring{E}$ alors $f$ admet le developpement limité d'ordre $p$ en $\bm x_0$ suivant, $\forall \bm x \in E, \quad [\bm x, \bm x_0] \subset E$,
+	\[
+	f(\bm x) = \sum_{|\bm \alpha| \leqslant p} \frac{1}{\bm \alpha !} \frac{\partial^{|\bm \alpha|} f}{\partial \bm x^{\bm \alpha}}(\bm x) (\bm x - \bm x_0)^{\bm \alpha} + R_p(\bm x)
+	\]
+	avec les estimations du reste suivants,
+	\begin{align*}
+	R_p(\bm x) &= \sum_{|\bm \alpha| = p + 1} \frac{1}{\bm \alpha !} \frac{\partial^{p+1}f}{\partial \bm x^{\bm \alpha}} (\bm x + \theta (\bm x - \bm x_0))(\bm x - \bm x_0)^{\bm \alpha} \quad \text{pour un } \theta \in ]0,1[ \\
+	&= \sum_{|\bm \alpha| = p + 1} \frac{(p+1)!}{\bm \alpha!} \int_0^1 (1-s)^p \frac{\partial^{p+1}f}{\partial \bm x^{\bm \alpha}} (\bm x + s (\bm x - \bm x_0))(\bm x - \bm x_0)^{\bm \alpha} ~\mathrm ds
+	\end{align*}
+	
+}{}
+
+\prf{Supposons que $[x_0, x] \subset E$, alors on pose
+	\[
+	\begin{array}{cccc}
+		g : & [0,1] & \to & \R \\
+			& t & \mapsto & f(\bm x_0 + t(\bm x- \bm x_0))
+	\end{array}
+	\]
+	comme $f$ est supposé dérivable $p$ fois, $g$ l'est aussi. On peut donc utiliser le développement de Taylor pour les fonctions à une seule variables centré en $0$,
+	\[
+\forall t \in [0,1], \quad 	g(t) = g(0) + g'(0)t + \frac{g''(0)}{2} t^2 + \ldots + \frac{g^{(p)}}{p!}t^p + R_p^g(t)
+	\]
+	Or, si on note $\bm x_t = \bm x_0 + t(\bm x - \bm x_0)$, 
+	\begin{align*}
+		g(t) &= f(\bm x_t) \\
+		g'(t) &= Df(\bm x_t) (\bm x - \bm x_0) = \sum_{i_1 = 1}^n \frac{\partial f}{\partial x_{i_1}}(\bm x_t)( x_{i_1}-x_{0_{i_1}}) = \sum_{|\bm \alpha| = 1} \frac{\partial^{|\bm \alpha|} f}{\partial \bm x^{\bm \alpha}}(\bm x) (\bm x - \bm x_0)^{\bm \alpha} \\
+		g''(t) &= \sum_{i_2 = 1}^n \frac{\partial }{\partial x_{i_2}} \left( \sum_{i_1 = 1}^n \frac{\partial f}{\partial x_{i_1}}(\bm x_t)( x_{i_1}-x_{0_{i_1}}) \right) = \sum_{|\bm \alpha| =2 } \frac{2}{\bm \alpha !} \frac{\partial^{|\bm \alpha|} f}{\partial \bm x^{\bm \alpha}}(\bm x) (\bm x - \bm x_0)^{\bm \alpha}\\
+		&\vdots \\
+		g^{(p)}(t) &= \sum_{i_1, \ldots, i_p = 1}^n \frac{\partial p}{\partial x_{i_1} \ldots \partial x_{i_p}} (\bm x_t) (x_{i_1}- x_{0_{i_1}}) \dots (x_{i_p}- x_{0_{i_p}}) = \sum_{|\bm \alpha| = p} \frac{p!}{\bm \alpha !} \frac{\partial^{|\bm \alpha|} f}{\partial \bm x^{\bm \alpha}}(\bm x) (\bm x - \bm x_0)^{\bm \alpha}
+	\end{align*}
+	Finalement, on peut écrire la formule de Taylor
+	\[
+	f(\bm x) = g(1) = \sum_{k = 0}^p \frac{1}{k!} g^{(k)}(0) + R_p^g(1) = \sum_{|\bm \alpha| \leqslant p} \frac{1}{\bm \alpha !} \frac{\partial^{|\bm \alpha|} f}{\partial \bm x^{\bm \alpha}}(\bm x) (\bm x - \bm x_0)^{\bm \alpha} + R_p(\bm x)
+	\]
+}
+
+\subsubsection{Formule de Taylor pour des fonctions vectorielles}
+Soit $E \subset \rn$ ouvert non-vide et $\bm f \in C^{p+1}(E)$ et $\bm x, \bm x_0 \in E$ tel $[\bm x_0, \bm x] \subset E$. On peut appliquer la formule de Taylor à chaque composante $f_k$ de $\bm f$, donc un trouve bien
+\[
+\bm f(\bm x) = \sum_{|\bm \alpha| \leqslant p} \frac{1}{\bm \alpha !} \frac{\partial^{|\bm \alpha|} \bm f}{\partial \bm x^{\bm \alpha}}(\bm x) (\bm x - \bm x_0)^{\bm \alpha} + R_p(\bm x)
+\]
+cependant le reste de Lagrange est généralement faux puisque ne pas trouver un seul $\theta \in ]0,1[$ tel que
+\[
+\bm R_p(\bm x) = \sum_{|\bm \alpha| = p + 1} \frac{1}{\bm \alpha !} \frac{\partial^{p+1} \bm f}{\partial \bm x^{\bm \alpha}} (\bm x + \theta (\bm x - \bm x_0))(\bm x - \bm x_0)^{\bm \alpha}
+\]
+Toutefois, le reste intégrale est quant à lui bien défini,
+\[
+\bm R_p(\bm x) = \sum_{|\bm \alpha| = p + 1} \frac{(p+1)!}{\bm \alpha!} \int_0^1 (1-s)^p \frac{\partial^{p+1} \bm f}{\partial \bm x^{\bm \alpha}} (\bm x + s (\bm x - \bm x_0))(\bm x - \bm x_0)^{\bm \alpha} ~\mathrm ds
+\]

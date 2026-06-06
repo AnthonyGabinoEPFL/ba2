@@ -1,0 +1,129 @@
+\section{Formule Normale de Frobenius}
+\subsection{Déterminer la forme normale de Frobenius}
+On a que pour une matrice $A \in \C^{n \times n}$ alors il existe une matrice $P \in \C^{n \times n}$ telle que $A = P J P^{-1}$ avec $J \in \C^{n \times n}$ une forme normale de Jordan. Or si on se place dans un coprs $\K$ quelconque, ce résultat est vrai seulement si le polynôme caractéristique $\chi_A$ est scindé, ce qui n'est pas toujours le cas, comme par exemple si $A \in \R$. 
+
+\newdef{La \emph{matrice compagnon} d'un polynôme $f(x) = a_0 + a_1 x + \ldots a_{d-1}x^{d-1} + x^d \in \K[X]$ est la matrice
+	\[
+	C_f = \begin{pmatrix}   0 &   &  &  & - a_0 \\
+							1 & 0 &  &  & -a_1 \\
+							  & \ddots & \ddots &  & \vdots \\
+							  &        &  1 & 0  & -a_{d-2} \\
+							  &			&       & 1 & -a_{d-1}
+		\end{pmatrix}
+		\in \K^{d \times d}
+	\]
+	Il est alors facile de voir que $\chi_{C_f} = f$.
+}{}
+
+\newthm{Soit $A \in \K^{n \times n}$, alors il existe une matrice inversible $T \in \K^{n \times n}$ telle que
+	\[
+	A = T \begin{pmatrix} C_{f_1} &  & \\
+							      & \ddots &  \\
+							      &        & C_{f_k}
+	\end{pmatrix} T^{-1}
+	\]
+	où chaque $C_{f_i}$ est une matrice compagnon avec $f_{i+1} \mid f_i$ pour tout $i = 1, \ldots , k-1$.
+}{}
+
+\prf{
+On commence par calculer le polynôme minimal $\mu_A (x) = a_0 + a_1 x + \ldots + a_{d-1} x^{d-1} + x^d \in \K[X]$ ainsi qu'un vecteur $v \in \K^n$ tel que $p_v(x) = \mu_A(x)$. Ainsi les vecteurs
+\[
+v, Av, \ldots, A^{d-1} v 
+\]
+sont linéairement indépendant, car sinon il existerait une combinaison linéaire non trivial nulle, ce qui contredirait la minimalité de $p_v(x)$. De plus
+\[
+A^d v = -a_0 v - a_1 Av - \ldots - a_{d-1} A^{d-1} v
+\]
+soit $J = \{j_1, \ldots, j_{n-d}\} \subset \entiers$ un ensemble d'indice tell que
+\[
+\mathcal B = \{v, Av, \ldots, A^{d-1}v, e_{j_1}, \ldots, e_{j_{n-d}}\}
+\]
+est une base de $\K^n$ et soit $T \in \K^{n \times n}$ la matrice dont les colonnes sont les éléments de $\mathcal B$ dans cet ordre. Par construction, la matrice $A$ est de la forme
+\[
+A_{\mathcal B} = \begin{pmatrix} C_{\mu_A} & A_1 \\ 0  & A_2 \end{pmatrix} \in \K^{n \times n}
+\]
+où $\binom{A_1}{A_2} \in \K^{n \times ({n-d})}$. Par la formule de changement de base, on a
+\[
+A_{\mathcal B} = T^{-1} A T
+\]
+Maintenant le but est d'utiliser successivement des opérations élémentaires sur les lignes et colonnes pour que la matrice dans le coin supérieure droit (initialement $A_1$) devienne nulle.  Plus précisément, $A_{\mathcal B}$ ressemble à
+\[
+A_{\mathcal B}=
+\begin{pmatrix}
+	0      &        &        &        & -a_0     & b_{1,1}   & \cdots & b_{1,n-d} \\
+	1      & 0      &        &        & \vdots   & b_{2,1}   & \cdots & b_{2,n-d} \\
+	& \ddots & \ddots &        & \vdots   & \vdots    &        & \vdots \\
+	&        & 1      & 0      & -a_{d-2} & \vdots    & \cdots & \vdots \\
+	&        &        & 1      & -a_{d-1} & b_{d,1}   & \cdots & b_{d,n-d} \\
+	      &  &  &       &         & b_{d+1,1} & \cdots & b_{d+1,n-d} \\
+ &        &        &  &    & \vdots    &        & \vdots \\
+	      &  &  &       &         & b_{n,1}   & \cdots & b_{n,n-d}
+\end{pmatrix}
+\in K^{n\times n}.
+\]
+On peut donc faire disparaître la $d$-ème ligne, donc on applique les opération élementaire sur les colonnes  
+\[
+C_d \leftarrow C_d - b_{d,1} C_{d-1}, \quad \ldots \quad C_n \leftarrow C_n - b_{d, n-d} C_{d-1}
+\]
+ainsi que ses inverses correspondants sur les lignes
+\[
+L_{d-1} \leftarrow L_{d-1} + b_{d,1} L_d, \quad \ldots \quad L_{d-1} \leftarrow L_{d-1} + b_{d, n-d}
+\]
+ainsi on recommence cela à chaque ligne, pour finalement arriver à 
+\[
+B' =
+\begin{pmatrix}
+	0      &        &        &        & -a_0     &    &  &  \\
+	1      & 0      &        &        & \vdots   &    &  &  \\
+	& \ddots & \ddots &        & \vdots   &     &        &  \\
+	&        & 1      & 0      & -a_{d-2} &     &  &  \\
+	&        &        & 1      & -a_{d-1} &    &  &  \\
+	&  &  &       &         & b_{d+1,1} & \cdots & b_{d+1,n-d} \\
+	&        &        &  &    & \vdots    &        & \vdots \\
+	&  &  &       &         & b_{n,1}   & \cdots & b_{n,n-d}
+\end{pmatrix}
+\in K^{n\times n}.
+\]
+Ainsi après cette procédure, on a transformer la matrice dans la forme
+\[
+\begin{pmatrix} C_{\mu_A} &  \\  & A' \end{pmatrix} \in \K^{n \times n}
+\]
+le polynôme minimale de $A'$ divise bien $\mu_A$. Par récurrence, on a bien montrer le résultat voulu.
+}
+
+\subsection{Utilisation de la forme normale de Frobenius}
+Si on considère une matrice compagnon $C_f \in \K^{d \times d}$ alors on sait que
+\[
+f(C_f) = 0
+\]
+Donc toute puissance élevée de $C_f$ peut être écrite comme combinaison linéaire de 
+\[
+I, C_f, \ldots, C_f^{d-1}
+\]
+Donc si j'ai un polynôme $p \in \K[X]$, on a
+\[
+p(x) = q(x) f(x) + r(x)
+\]
+avec $\deg r < \deg f$ et donc par évaluation en $C_f$ on a
+\[
+p(C_f) = r(C_f)
+\]
+Ainsi pour une matrice $A \in \K$ et $p \in \K[X]$ on a
+\[
+p(A) \sim \begin{pmatrix} p(C_{f_1}) &  & \\
+							& \ddots & \\
+							&  & p(C_{f_k})
+		\end{pmatrix}
+		= 
+		\begin{pmatrix} r_1(C_{f_1}) &  & \\
+			& \ddots & \\
+			&  & r_k(C_{f_k})
+		\end{pmatrix}
+\]
+Ainsi il est plus simple de calculer $p(A)$ car $r_i$ est de degré petit. Et donc calculer des grandes puissances de matrices revient à calculer des petites puissance de matrice compagnon, ce qui est bien plus simple.
+
+Et donc dans le cas où on souhaite calculer $e^A$, on a que l'exponentielle devient un simple polynôme en $A$
+\[
+e^A = \alpha_0 I + \alpha_1 A + \ldots + \alpha_{d-1} A^{d-1}
+\]
+\newthm{Deux matrices sont semblables si et seulement si elles sont les mêmes forme normale de Frobenius}{}

@@ -1,0 +1,172 @@
+\section{Intégrales	 à paramètre}
+
+\subsection{Intégrale sur un intervalle sur un intervalle fermé borné}
+\newthm{Soient $I \subset \R$ un intervalle borné et $E \subset \rn$ non-vide. Si $f : I \times E \to \R$ est uniformément continue, alors la fonction $g( \bm x) = \int_I f(t, \bm x) ~\mathrm dt$ est bien définie pour tout $\bm x \in E$ et est continue sur $E$.}{}
+
+\prf{Par uniforme continuité, on sait que
+	\[
+	\forall \varepsilon > 0, \exists \delta > 0, \forall (t, \bm y), (s, \bm y) \in I \times E, \quad \norme{(t,\bm x) - (s, \bm y)} < \delta\implies |f(t, \bm x) - f(s, \bm y)| < \varepsilon
+	\]
+	En particulier pour $t = s$, on obtient
+	\[
+	\forall \varepsilon > 0, \exists \delta > 0, \forall t \in I, \forall \bm x, \bm y \in E, \quad \norme{\bm x - \bm y} < \delta \implies |f(t, \bm x) - f(t, \bm y)| < \varepsilon
+	\]
+	Ainsi, pour tout $\bm x, \bm y \in E$ tels que $\norme{\bm x - \bm y} < \delta$,
+	\[
+	|g(\bm x) -g(\bm y) | = \left| \int_I f(t, \bm x) - f(t, \bm y) ~\mathrm dt \right|  \leqslant \int_I |f(t, \bm x) - f(t, \bm y) | ~\mathrm dt \leqslant \varepsilon I
+	\]
+	On en déduit donc que $g$ est uniformément continue et donc par extension continue.
+}
+
+\newrem{Si on considère $E \subset \rn$ un ouvert, alors
+	\[
+	\forall \bm x_0 \in E, \exists \delta > 0, \quad \overline B(\bm x_0, \delta) \subset E
+	\]
+	Donc la restriction de $f$ sur $I \times \overline B(\bm x_0, \delta)$ qui syxest un compact donc est uniformément continue. Donc $g : \overline B(\bm x_0, \delta) : \to \R$ est continue et en particulier en $x_0$. Ainsi $g$ est continue sur $E$.
+}
+
+\newthm{Soit $f : [a,b] \times E \to \R$ une fonction continue, alors la fonction
+	\[
+	g(\bm x) = \int_a^b f(t, \bm x) ~\mathrm dt
+	\]
+	est continue sur $E$.
+}{}
+
+\prf{Soient $\bm x_0 \in E$ et $\varepsilon >0$. D'après le théorème de Cantor-Heine généralisé appliqué au sous-ensenmble $K = I \times {x_0}$, il existe $\delta > 0$ tel que
+\[
+\forall t_0  \in I, \quad \forall (t, \bm x) \in I \times E, \quad |t-t_0| + \norme{\bm x - \bm x_0} \leqslant \delta \implies |f(t_0, \bm x_0) - f(t, \bm x)| \leqslant \varepsilon
+\]
+En particulier pour $t = t_0$, on a
+\[
+\forall (t, \bm x) \in I \times E, \quad \norme{\bm x - \bm x_0} \leqslant \delta \implies |f(t, \bm x ) - f(t_0, \bm x_0) | \leqslant \varepsilon
+\]
+Pour tout $\bm x \in E$, la fonction $t \mapsto f(t, \bm x)$ est continue sur l'intervalle fermé $I$, donc l'intégrale $g(\bm x) = \int_i f(t, \bm x) ~\mathrm dt$ existe. De plus pour tout $\bm x \in \overline B(\bm x_0, \delta) \cap E$, 
+\[
+|g(\bm x) - g(\bm x_0)| = \left| \int_a^b f(t, \bm x) - f(t_0, \bm x_0) ~\mathrm dt \right| \leqslant \int_a^b |f(t, \bm x) - f(t_0, \bm x_0)| ~\mathrm dt \leqslant \varepsilon (b-a)
+\]
+ce qui pourve a continuité de $g$ en $x_0 \in E$. Puisque $x_0$ est arbitraire, $g$ est contiue sur $E$.
+}
+
+\newthm{Soit $f : [a,b] \times E \to \R$ une fonction continue telle que
+	\[
+	\frac{\partial f}{\partial x_i} : [a,b] \times E \to \R
+	\]
+	existe et est continue. Ainsi $\frac{\partial g}{\partial x_i} : E \to \R$ existe et est continue sur $E$. De plus
+	\[
+	\frac{\partial g}{\partial x_i} (\bm x) = \int_a^b \frac{\partial f}{\partial x_i} (t, \bm x) ~\mathrm dt
+	\]
+	en continue sur $E$.
+}{}
+
+\prf{Soit $\bm x \in E$, comme $E$ est ouvert, il existe $\delta > 0$ tel que $\overline B(\bm x, \delta) \subset E$. On considère donc la restriction de $\frac{\partial f}{\partial x_i}$ sur le compact $I \times \overline B(\bm x, \delta)$, ainsi $\frac{\partial f}{\partial x_i}$ est uniformément continue. Donc
+\[
+\forall \varepsilon >0, \exists \gamma > 0, \forall t \in I, \forall \bm x, \bm y \in \overline B(\bm x_0, \gamma), \quad \norme{\bm x- \bm y} < \gamma \implies \left|\frac{\partial f}{\partial x_i}(t, \bm x) - \frac{\partial f}{\partial x_i}(t, \bm y) \right| < \varepsilon
+\]
+Donc pour tout $s \in \R$ tel que $|s| < \gamma$,
+\begin{align*}
+\left| \frac{ g(\bm x_0 + s \bm e_i) - g(\bm x_0)}{s} - \int_I \frac{\partial f}{\partial x_i} (t, \bm x_0) ~\mathrm dt \right| &= \left| \int_I \left(\frac{ f(t, \bm x_0 + s \bm e_i) - f(t, \bm x_0)}{s} - \frac{\partial f}{\partial x_i} (t, \bm x_0) \right) ~\mathrm dt \right|  \\&= \left| \int_I \left( \frac{\partial f}{\partial x_i} f(t, \bm x_0 + \hat s \bm e_i) - \frac{\partial f}{\partial x_i}(t, \bm x_0) \right) ~\mathrm dt \right| \\
+&\leqslant \int_I \left| \frac{\partial f}{\partial x_i} f(t, \bm x_0 + \hat s \bm e_i) - \frac{\partial f}{\partial x_i}(t, \bm x_0) \right| ~\mathrm dt \leqslant \varepsilon I
+\end{align*}
+Ainsi $\frac{\partial g}{\partial x_i}(\bm x_0)$ existe bien et est continue.
+}
+
+\subsection{Intégrale avec des bornes variables}
+
+\newdef{On considère le cas où les bornes d'intégration dépendent de $\bm x$, 
+	\[
+	g(\bm x) = \int_{a(\bm x)}^{b(\bm x)} f(t, \bm x) ~\mathrm dt
+	\]
+	avec $a, b : E \to I \subset \R$ et $f : I \times E \to \R$.
+}{}
+
+
+\newthm{Soient $a,b \in C^1(E)$ et $ f : I \times E\ \to \R$ continue telle que,
+	\[
+	\frac{\partial f}{\partial x_i} : I \times E \to \R
+	\]
+	existe et en continue. Alors $\frac{\partial g}{\partial x_i} : E \to \R$ existe et est continue sur $E$. De plus,
+	\[
+	\frac{\partial g}{\partial x_i} (\bm x) = \frac{\partial b}{\partial x_i}f(b(\bm x), \bm x) - \frac{\partial a}{\partial x_i} f(a(\bm x), \bm x) + \int_{a(\bm x)}^{b(\bm x)} \frac{\partial f}{\partial x_i} (t, \bm x) ~\mathrm dt 
+	\]
+}{}
+
+\prf{Soit $c \in I$, on pose
+	\[
+	G(s, \bm x) = \int_c^s f(t, \bm x) ~\mathrm dt
+	\]
+	Ainsi par définition de $G$, on obtient,
+	\[
+	g(\bm x) = \int_{a(\bm a)}^c f(t, \bm x) ~\mathrm dt + \int_c^{b(\bm x)} f(t, \bm x) ~\mathrm dt = G(b(\bm x), \bm x) - G(a(\bm x), \bm x)
+	\]
+	Il s'ensuit que
+	\begin{align*}
+	\frac{\partial g}{\partial x_i} (\bm x) &= \frac{\partial}{\partial x_i} \left( G(b(\bm x), \bm x) - G(a(\bm x), \bm x) \right) 
+	\\ &= \frac{\partial G}{\partial s} (b(\bm x), \bm x) \frac{\partial b}{\partial x_i}(\bm x) + \frac{\partial G}{\partial x_i} (b(\bm x), \bm x) - \frac{\partial G}{\partial s} (a(\bm x), x) \frac{\partial a}{\partial x_i}(\bm x) - \frac{\partial G}{\partial x_i} (a(\bm x), \bm x) \\
+	&= \frac{\partial b}{\partial x_i}f(b(\bm x), \bm x) - \frac{\partial a}{\partial x_i} f(a(\bm x), \bm x) + \int_{a(\bm x)}^{b(\bm x)} \frac{\partial f}{\partial x_i} (t, \bm x) ~\mathrm dt 
+	\end{align*}
+}
+
+\subsection{Intégrales généralisées dépendant de paramètres}
+
+\newdef{Soit $E \subset  \rn$ un sous-ensemble non-vide et $f : [a,b[ \times E \to \R$ une fonction continue. On dit que l'intégrale $\int_a^b f(t, \bm x) ~\mathrm dt$ converge uniformément sur $E$ si elle converge pour tout $\bm x \in E$ et si,
+	\[
+	\forall \varepsilon > 0, \quad \exists \tilde c \in [a,b[, ~\forall c \in [\tilde c, b[, \forall \bm x \in E, \quad \left| \int_c^b f(t,\bm x) ~\mathrm dt \right| \leqslant \varepsilon
+	\]
+}{}
+
+\newprop{Si $f : [a, b[ \times E \to \R$ est continue et il existe une fonction $h : [a,b[ \to \R_+$ telle que $\int_a^b h(t) ~\mathrm dt$ converge et
+\[
+\forall t \in [a,b[, \quad |f(t, \bm x)| \leqslant h(t)
+\]
+alors $\int_a^b f(t, \bm x) ~\mathrm dt$ converge uniformément.
+}{}
+
+\prf{Puisque $\int_a^b h(t)~\mathrm dt$ converge alors,
+	\[
+	\forall \varepsilon > 0, \exists \tilde c \in ]a,b[, \forall c \in [\tilde c, b[, \quad \int_a^b h(t) ~\mathrm dt \leqslant \varepsilon
+	\]
+	et donc,
+	\[
+	\left|\int_c^b f(t, \bm x) ~\mathrm dt\right| \leqslant \varepsilon
+	\]
+	donc $\int_a^b f(t, \bm x) ~\mathrm dt$ converge uniformément.
+}
+
+
+\newthm{Soient $E \subset \rn$ un ensemble non-vide et $f : [a,b[ \times E \to \R$ une fonction continue, alors si 
+	\[
+	\int_a^b f(t, \bm x) ~\mathrm dt
+	\]
+	converge uniformément sur $E$, alors la fonction $g(\bm x) = \int_a^b f(t, \bm x) ~\mathrm dt$ est continue sur $E$.
+}{}
+
+\prf{Soit $\bm x_0 \in E$ et $\varepsilon >  0$. Par hypothèse de converge uniforme, 
+	\[
+	\exists \tilde c \in [a,b[, \forall \bm x \in E, \quad \left| \int_{\tilde c}^b f(t, \bm x) ~\mathrm dt \right|
+	\]
+	De plus comme $f$ est continue, par le théorème de Cantor-Heine généralisé (\ref{Théorème de Cantor-Heine généralisé}), il existe $\delta >  0$ tel que
+	\[
+	\forall t \in [a, \tilde c], \forall \bm x \in \overline B (\bm x_0, \delta) \cap E, \quad |f(t, \bm x_0) - f(t, \bm x)| \leqslant \frac{\varepsilon}{b-a}
+	\]
+	On conclut que pour tout $\bm x \in \overline B(\bm x_0, \delta) \cap E$,
+	\[
+	|g(\bm x) - g(\bm x_0)| \leqslant \left| \int_a^{\tilde c} (f(t, \bm x) - f(t, \bm x_0)) ~\mathrm dt \right| + \left| \int_{\tilde c}^b f(t, \bm x) ~\mathrm dt \right| + \left|\int_{\tilde c}^b f(t, \bm x)~\mathrm dt \right| \leqslant 3 \varepsilon
+	\]
+	ce qui montre la continuité de $g$ en tout $\bm x_0 \in E$.
+}
+
+\newthm{Soient $E \subset \rn$ un ensemble non-vide et $f \in C^1([a,b[ \times E)$ et les intégrales $\int_a^b f(t, \bm x) ~\mathrm dt$,
+	\[
+	\int_a^b \frac{\partial f}{\partial x_i} (t, \bm x) ~\mathrm dt
+	\]
+	convergent uniformément alors la fonction $g(\bm x) = \int_a^b f(t, \bm x)~\mathrm dt$ est de classe $C^1$ et 
+	\[
+	\frac{\partial g}{\partial x_i} (\bm x) = \int_a^b \frac{\partial f}{\partial x_i} (t, \bm x) ~\mathrm dt
+	\]
+}{}
+
+
+
+
+
+

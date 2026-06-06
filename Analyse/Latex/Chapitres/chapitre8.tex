@@ -1,0 +1,224 @@
+\section{Extrema de fonctions réelles}
+
+\newdef{Soit $f : E \to \R$ et $\bm x_0 \in E$, alors on dit que
+	\begin{itemize}
+		\item $f$ admet un \emph{maximum globale} (resp. \emph{minimum globale}) en $\bm x_0$ si,
+		\[
+		\forall \bm x \in E, \quad f(\bm x) \leqslant f(\bm x_0) \quad (resp. ~f(\bm x) \geqslant f(\bm x_0))
+		\]
+		\item $f$ admet un \emph{maximum locale} (resp. \emph{minimum locale}) en $\bm x_0$ s'il existe $\delta > 0$ tel que,
+		\[
+		\forall \bm x \in B(\bm x_0, \delta) \cap E \quad f(\bm x) \leqslant f(\bm x_0) \quad (resp. ~f(\bm x) \geqslant f(\bm x_0))
+		\]		
+	\end{itemize}
+	De manière générale, on dit que $f$ admet un \emph{extremum local} si elle admet un maximum locale ou minimum local.
+}{Extremum}
+
+\subsection{Extrema libres}
+On considère le cas où $E$ est ouvert et $f : E \to \rn$ est différentiable sur $E$.
+
+\newdef{Soit $E \subset \rn$ un ouvert non-vide, $\bm x_0 \in E$ et $f : E \to \R$ différentiable en $\bm x_0$. On dit que $\bm x_0$ est un \emph{point stationnaire} de $f$ si 
+	\[
+	\nabla f(\bm x_0) = 0
+	\]
+}{Points stationnaires}
+
+\newthm{Soit $E \subset \rn$ un ouvert non-vide et $f : E \to \R$ différentiable en $\bm x_0 \in E$ et admettant un extremum locale en $\bm x_0$. Alors $\bm x_0$ est un point stationnaire.
+}{Condition nécessaire du premier ordre}
+
+\prf{Puisque $E$ est ouvert, il existe $\delta >  0, ~B(\bm x_0, \delta) \subset E$. Alors $\bm x_0 + t \bm e_j \in E$ pour $t \in ]-\delta, \delta[$ et $g_j(t) = f(\bm x_0 + t \bm e_j)$ est dérivable en $t = 0$. Puisque que $\bm x_0$ est un extremum locale de $f$, alors $0$ est un point extremum locale de $g_j$ et donc,
+	\[
+	g_j'(0) = \frac{\partial f}{\partial x_j} (\bm x_0) = 0
+	\]
+}
+
+\newthm{Soit $E \subset \rn$ un ouvert non vide et $f : E \to \R$ une fonction de classe $C^2$ sur $E$, admettant un minimum locale (resp. maximum locale) en $\bm x_0 \in E$, alors $\bm x_0$ est un point stationnaire et,
+	\[
+	\forall \bm v \in \rn, \quad D_{\bm v}^2 f(\bm x_0) = \bm v^\top H_f(\bm x_0) \bm v \geqslant 0
+	\]
+	(resp. $D_{\bm v}^2 f(\bm x_0) \leqslant 0$.)
+}{Condition nécessaire du second ordre}
+
+\prf{Comme $f$ est de classe $C^2$ alors la matrice Hessienne $H_f(\bm x_0)$ est symétrique. Soit $\bm x_0$ un minimum locale de $g_{\bm v}$ pour tout $\bm v \in \rn$ de norme 1. Il s'ensuit que,
+	\[
+	0 \leqslant g_{\bm v}''(0) = D_{\bm v}^2 f(\bm x_0) = \bm v^\top H_f(\bm x_0) \bm v 
+	\]
+et ainsi pour tout $\bm v \in \rn, \quad D_{\bm v}^2 \geqslant 0$. La démonstration pour un maximum locale est analogue.
+}
+
+\newrem{Si l'inégalité dans la condition précédente est stricte, alors la condition du second ordre devient suffisante pour que $f$ admette un minimum locale en $\bm x_0$, pourvu que $\bm x_0$ soit un point stationnaire.
+}
+
+\newdef{Soit $A \in \R^{n \times n}$ une matrice alors on définit la \emph{forme quadratique associée} à $A$ comme,
+	\[
+	\forall \bm x \in \rn, \quad Q_A(\bm x) = \bm x^\top A \bm x 
+	\]
+De plus on dit que $Q_A$ est \emph{définie positive} si et seulement si,
+\[
+\forall \bm x \in \R, \quad Q_A(\bm x) = \bm x^\top A \bm x > 0
+\]
+la définition de $Q_A$ \emph{définie négative} est analogue.
+}{}
+
+\newlem{Une matrice $A \in \R^{n \times n}$ est définie positive si et seulement si,
+	\[
+	\exists c > 0, ~\forall \bm x \in \rn, \quad \bm x^\top A \bm x \geqslant c \norme{\bm x}^2
+	\]
+}{}
+
+\prf{Soit $A$ définie positive et $Q_A$ sa forme quadratique associée. On remarque $Q_A$ est continue sur $\rn$. De plus que $\forall t \in \R, \quad Q_A(t \bm x) = t^2 Q_A(\bm x)$. Ainsi on considère l'ensemble compact $S = \{ \bm x \in \rn ~|~ \norme{\bm x} = 1\}$ alors $Q_A$ admet un minimum sur $S$. On pose donc $c = \min_{\bm x \in S} Q_A(\bm x)$, alors pour tout $\bm x \in \rn$,
+	\[
+	\bm x^\top A \bm x = Q_A(\bm x) = \norme{\bm x^2} Q_A\left(\frac{\bm x}{\norme{\bm x}}\right) \geqslant c \norme{\bm x}^2
+	\]
+La réciproque est évidente.
+}
+
+\newlem{Soit $A \in \R^{n \times n}$ une matrice symétrique, alors $A$ est définie positive si et seulement toutes ses valeurs propres sont positives. De plus 
+	\[
+	\forall \bm x \in \rn, \quad \bm x^\top A \bm x \geqslant \lambda_{\min} \norme{\bm x}_2^2
+	\]
+	où $\lambda_{\min} = \min \{\lambda_i, ~i \in \entiers\}$.
+}{}
+
+\prf{On sait par l'algèbre linéaire qu'une matrice symétrique $A \in \R^{n \times n}$ est diagonalisable avec $\lambda_1, \ldots, \lambda_n$ et dans une base $B = \{\bm u_1, \ldots , \bm u_n\}$ orthonormée composée de vecteurs propres respectivement associés aux $\lambda_i$. Ainsi on en déduit que si $A$ est définie positive,
+	\[
+	\forall i \in \entiers, \quad \bm u_i^\top A \bm u_i = \lambda_i \bm u_i^\top \bm u_i = \lambda_i > 0
+	\]
+	donc toutes les valeurs propres sont positives. Réciproquement si on suppose que toutes les valeurs propres sont positives on a,
+	\[
+	\forall \bm x \in \rn, \quad \bm x^\top A \bm x = \left( \sum_{i=1}^n x_i \bm u_i \right)^\top A \left( \sum_{j= 1}^n x_j \bm u_j \right) = \left( \sum_{i=1}^n x_i \bm u_i \right)^\top \cdot \left(\sum_{j=1}^n \lambda_j x_i \bm u_j \right) = \sum_{i=1}^n \lambda_i x_i^2
+	\]
+	Donc si on pose $\lambda_{\min} = \min \{\lambda_i, ~i \in \entiers\} > 0$ on a bien
+	\[
+	\forall \bm x \in \rn, \quad \bm x^\top A \bm x = \sum_{i=1}^n \lambda_i x_i^2 \geqslant \lambda_{\min} \sum_{i=1}^n x_i^2 = \lambda_{\min} \norme{\bm x}_2^2
+	\]
+	ainsi $A$ est bien définie positive.
+}
+
+\newthm{Soit $E \subset \rn$ un ouvert non vide, $f : E \to \R$ de classe $C^2$ sur $E$ et $\bm x_0 \in E$ un point stationnaire de $f$. Si $H_f(\bm x_0)$ est définit positive (resp. définit négative) alors $f$ admet un minimum (resp. maximum) local strict en $\bm x_0$.
+}{Condition suffisante pour extrema locaux}
+
+\prf{Puisque $f$ est de classe $C^2$ alors on peut écrire un développement limité d'ordre $2$ de $f$ au point $\bm x_0$,
+	\[
+	\forall \bm x \in E, \quad f(\bm x) = f(\bm x_0) + \nabla f(\bm x_0) \cdot (\bm x - \bm x_0) + \frac{1}{2} Q_{H_f}(\bm x - \bm x_0) + R_f(\bm x)
+	\]
+	Comme $R_f(\bm x) = o(\norme{\bm x - \bm x_0}^2)$ alors il existe $\delta > 0$ tel que pour tout $\bm x \in B(\bm x_0, \delta)\backslash \{\bm x_0\}$, on a $\bm x \in E$ et $|R_f(\bm x)| \leqslant \frac{c}{4} \norme{\bm x - \bm x_0}^2$. Mais comme $\bm x_0$ est un point stationnaire, alors $\nabla f (\bm x_0) = 0$ et puisque $H_f(\bm x_0)$ est définie positive alors $\forall \bm x \in \rn, \quad Q_{H_F}(\bm x) \geqslant c \norme{\bm x}^2$, ainsi
+	\[
+	\forall \bm x \in B(\bm x_0, \delta) \backslash \{ \bm x_0\}, \quad f(\bm x) = f(\bm x_0) + \frac{1}{2} Q_{H_f}(\bm x - \bm x_0) + R_f(\bm x) \geqslant f(\bm x_0) + \frac{c}{4} \norme{\bm x - \bm x_0}^2 > f(\bm x_0)
+	\]
+	ce qui montre que $\bm x_0$ est bien un minimum locale strict.
+}
+
+\newdef{Soit $f : E \to \rn$, où $E \subset \rn$ est un ouvert non vide et $f$ différentiable en un certain point stationnaire $\bm x_0 \in E$. On dit que $\bm x_0$ est un \emph{point de selle} de $f$ si,
+	\[
+	\forall \delta > 0, \exists \bm x, \bm y \in B(\bm x_0, \delta) \cap E, \quad f(\bm x) > f(\bm x_0) \et f(\bm y) < f(\bm x_0)
+	\]
+}{Point selle}
+
+\newcor{Avec la définition (\ref{Point selle}) et le théorème (\ref{Condition suffisante pour extrema locaux}), on a la classification suivante des points stationnaires $\{\bm x_0 \in E, ~\nabla f(\bm x_0) = 0\}$,
+	\begin{enumerate}
+		\item Si $H_f(\bm x_0)$ est \emph{définie positive} alors $\bm x_0$ est un minimum.
+		\item Si $H_f(\bm x_0)$ est \emph{définie négative} alors $\bm x_0$ est un maximum.
+		\item Si $H_f(\bm x_0)$ est \emph{indéfinie} alors $\bm x_0$ est un point de selle.
+		\item Si $H_f(\bm x_0)$ est seulement \emph{semi-positive} ou \emph{semi-négative} on ne peut pas conclure par les arguments précédent.
+	\end{enumerate}
+}{}
+
+\subsection{Extrema liés}
+
+\newdef{Soit $f : E \to \R$ une fonction sur un ouvert $E \subset \rn$, soit $g : E \to \R$, et soit $\Sigma_g = \{ \bm x \in E, \quad g(\bm x) = 0\}$. Alors on dit que $\bm x_0$ est un \emph{point de minimum local lié} (ou \emph{sous contrainte}) de $f$ sur $\Sigma_g$ si,
+	\[
+	\exists \delta > 0, ~\forall \bm x \in B(\bm x_0, \delta) \cap \Sigma_g, \quad f(\bm x) \geqslant f(\bm x_0)
+	\]
+Le minimum est strict si l'inégalité est. La définition est analogue pour un maximum local lié.
+}{}
+
+\newthm{Soit $E \subset \rn$ un ouvert non-vide, $f,g : E \to \R$ deux fonctions de classe $C^1$. Soit $\bm z_0$ un point d'extremum local lié de $f$ sur $\Sigma_g$. Si $\nabla g(\bm z_0) \neq 0$, alors il existe $\lambda \in \R$ tel que,
+	\[
+	\nabla f (\bm z_0) = \lambda \nabla g(\bm z_0)
+	\]
+}{Condition nécessaire d'optimalité}
+
+\prf{Puisque $\nabla g(\bm z_0) \neq 0$ alors il existe au moins un composante non-nulle, soit $\frac{\partial g}{\partial x_j}(\bm z_0) \neq 0$. Pour se fixer les idées, supposons que $j = n$. Notons alors $y = z_n$ et $\bm x = (z_1, \ldots, z_{n-1}) \in \R^{n-1}$, de sorte que tout point $\bm z \in E$ puisse s'écrire comme $(\bm x, y)$. En particulier $\bm z_0 = (\bm x_0, y_0)$.
+	
+Par le théorème des fonctions implicites, il existe $\delta > 0$ et une unique fonction $\phi : B(\bm x_0, \delta) \subset \R^{n-1} \to \R$ telle que $\phi(\bm x_0) = y_0, ~(\bm x, \phi(\bm x)) \in E \et g(\bm x, \phi(\bm x)) = 0$ sur $B(\bm x_0, \delta)$, et le graphe de $\phi$ coïncident avec $\Sigma_g$ dans un voisinage de $\bm z_0$. Ainsi la fonction $\tilde f(\bm x) = f(\bm x, \phi(\bm x)$ admet un maximum locale libre en $\bm x_0$ et $\nabla \tilde f(\bm x_0) = 0$. Donc
+\[
+\forall i \in \llbracket 1, n-1 \rrbracket, \quad 0 = \frac{\partial f}{\partial x_i}(\bm x_0) = \frac{\partial f}{\partial x_i}(\bm x, \phi(\bm x)) +  \frac{\partial f}{\partial y} (\bm x_0, \phi(\bm x_0)) \frac{\partial \phi}{\partial x_i} (\bm x_0)
+\]
+D'autre part,
+\[
+\frac{\partial \phi}{\partial x_i} = (\bm x_0) = - \frac{\frac{\partial g}{\partial x_i}(\bm z_0)}{\frac{\partial g}{\partial y}(\bm z_0)}
+\]
+Par conséquent, on a
+\[
+\forall i \in \llbracket 1, n-1 \rrbracket, \quad \frac{\partial f}{\partial x_i} (\bm z_0) - \frac{\partial f}{\partial y} (\bm z_0) \frac{\frac{\partial g}{\partial x_i}(\bm z_0)}{\frac{\partial g}{\partial y}(\bm z_0)} = 0
+\]
+Si on pose $\lambda = \frac{\frac{\partial f}{\partial y} (\bm z_0)}{\frac{\partial g}{\partial y} (\bm z_0)}$, alors
+\[
+\forall i \in \llbracket 1, n-1 \rrbracket, \quad \frac{\partial f}{\partial x_i}(\bm z_0) =  \lambda \frac{\partial g}{\partial x_i}(\bm z_0)
+\]
+et, par définition $\frac{\partial f}{\partial y}(\bm z_0) = \lambda \frac{\partial g}{\partial y} (\bm z_0)$. On a donc bien
+\[
+\nabla f(\bm z_0) = \lambda \nabla g (\bm z_0)
+\]
+}
+
+\newdef{On définit le \emph{Lagrangien} comme
+	\[
+	\begin{array}{cccc}
+		\mathcal L : & E \times \R &\to &\R \\
+					& (\bm z, \lambda) & \mapsto & \mathcal L (\bm z, \lambda) = f(\bm z) - \lambda g(\bm z)
+	\end{array}
+	\]
+	qui a pour gradient
+	\[
+	\nabla \mathcal L (\bm z, \lambda) = \begin{pmatrix}
+		 \frac{\partial f}{\partial x_1} - \lambda \frac{\partial g}{\partial z_1} \\ \vdots \\ \frac{\partial f}{\partial z_n} - \lambda \frac{\partial g}{\partial z_n} \\ - g(\bm z) \end{pmatrix} \in \R^{n+1}
+	\]
+	On peut donc résoudre un problème d'optimisation si et seulement s'il existe $(\bm z_0, \lambda)$ tels que $\nabla \mathcal L (\bm z_0, \lambda_0) = 0$.
+	}{}
+	
+\subsection{Extrema sous-contrainte multiples}
+Soient  $f, g_1, \ldots, g_m : E \to \R$ de classe $C^1$. On cherche $\min_{\bm z \in E} f(\bm x)$ sous la contrainte $\forall i \in \llbracket 1,m \rrbracket, ~g_i(\bm z) = 0$. On pose donc $\bm g = (g_1, \ldots, g_m)^\top$ pour définir une fonction $\bm g : E \to \rmm$ et $\Sigma_{\bm g} = \{\bm z \in E, ~\bm g(\bm z) = 0\}$.
+
+\newthm{Une condition nécessaire pour que $\bm z_0$ soit un point extremum local de $f$ sur $\Sigma_{\bm g}$ est qu'ils existent $\lambda_1, \ldots, \lambda_m \in \R$ tels que
+	\[
+	\nabla f(\bm z_0) = \sum_{i=1}^m \lambda_i \nabla g_i(\bm z_0)
+	\]
+si les gradients $\nabla g_i(\bm z_0)$ sont linéaire indépendants, c'est-à-dire $\mathrm{rg} D \bm g(\bm z_0) = m$. Ou, de façon équivalente, $(\bm z_0, \bm \lambda_0) \in E \times\rmm$ est un point stationnaire de la fonction de Lagrange $\mathcal L : (\bm z, \bm \lambda) \mapsto f(\bm z) - \bm \lambda \cdot \bm g(\bm z) = f(\bm z) - \sum_{i=1}^m \lambda_i g_i(\bm z)$, ie
+\[
+\nabla_{\bm z, \bm \lambda} \mathcal L (\bm z_0, \bm \lambda_0) = 0
+\]
+}{Condition nécessaire d'optimalité - contraintes multiples}
+
+\prf{Puisque $\mathrm{rg} D \bm g(\bm z_0) = m$, il existe $m$ colonnes linéaire indépendantes dans la matrice $D\bm g(\bm z_0)$. Soient $(i_1, \ldots, i_m)$ ces colonnes. Pour se fixez les idées, supposons que ce soit les $m$ dernières, $(i_1, \ldots, i_m) = (n-m +1, \ldots, n)$. Notons alors $\bm y = (z_{n-m+1}, \ldots, z_n)$ et $\bm x = (z_1, \ldots, z_{n-m})$, de sorte que $\bm z= (\bm x, \bm y)$ et, en particulier $\bm z_0 = (\bm x_0, \bm y_0)$. De plus, on décompose la jacobienne en $D \bm g(\bm z_0) = [D_{\bm x} \bm g(\bm z_0) \mid D_{\bm y} \bm g(\bm z_0)]$. Ainsi par construction la matrice
+	\[
+	D_{\bm y} \bm g(\bm z_0) \in \R^{m \times m}
+	\]
+est inversible, donc $\det D_{\bm y} \bm g(\bm z_0) \neq 0$. On peut donc appliquer le théorème des fonctions implicites. Il existe donc un ouvert $U \subset \R^{n-m}$, un ouvert $V \subset E$ contenant $\bm z_0$ et une fonction $\bm \phi : U \to \rmm$ de classe $C^1$.
+
+On introduit la fonction $\tilde f(\bm x) = f(\bm x, \bm \phi(\bm x))$ pour tout $\bm x \in U$. Alors $\bm x_0$ est un extremum local de $\tilde f$ sur $U$ et $D \tilde f (\bm x_0) = \bm 0$. On a donc 
+\[
+\bm 0 = D \tilde f(\bm x_0) = D_{\bm x} f(\bm z_0) + D_{\bm y} f(\bm z_0) \cdot D \bm \phi(\bm x_0) = D_{\bm x} f(\bm z_0) - D_{\bm y} f(\bm z_0) D_{\bm y} \bm g(\bm z_0)^{-1} D_{\bm x} \bm g(\bm z_0)
+\]
+Si on pose $\bm \lambda_0 = D_{\bm y} f (\bm z_0) D_{\bm y} \bm g(\bm z_0)^{-1}\in \R^{1 \times m}$, on a donc 
+\[
+\forall i \in \llbracket 1, n-m \rrbracket, \quad \frac{\partial f}{\partial x_i} (\bm z_0) - \sum_{j = 1}^m \lambda_j \frac{\partial g_j}{\partial x_i} (\bm z_0)
+\]
+ et, par définition $D_{\bm y} f(\bm z_0) = \bm \lambda_0 D_{\bm y} \bm g(\bm z_0)$ ce qui donne,
+ \[
+ \forall i \in \entiers, \quad \frac{\partial f}{\partial z_i} = \sum_{j = i}^m \lambda_j \frac{\partial g_j}{\partial z_i} (\bm z_0)
+ \]
+ qu l'on peut écrire comme 
+ \[
+ \nabla f(\bm z_0) = \sum_{j = 1}^m \lambda_j \nabla g_j (\bm z_0)
+ \]
+ ou encore
+ \[
+ \nabla_{\bm z, \bm \lambda} \mathcal L (\bm z_0, \lambda_0) = 0
+ \]
+}
+
+ \subsection{Conditions suffisantes}
+ 
+ 

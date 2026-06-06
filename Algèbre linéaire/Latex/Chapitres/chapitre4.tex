@@ -1,0 +1,301 @@
+\section{Produit scalaire et hermitien}
+
+\newdef{Soit $V$ un espace vectoriel sur $\R$ muni d'une forme bilinéaire symétrique. La forme symétrique est dite \emph{positive} si,
+	\[
+	\forall v \in V \backslash \{0\}, \quad \langle v,v \rangle > 0
+	\]
+	Dans ce cas on parle alors de \emph{produit scalaire}. On peut alors définir la \emph{norme} induite par le produit scalaire définie par,
+	\[
+	\forall v \in V, \quad \norme{v} = \sqrt{\langle v,v \rangle }
+	\]
+}{}
+	
+	
+\newprop{Pour $v \in V$ et $\alpha \in \R$, 
+	\[
+	\norme{\alpha v } = |\alpha | \norme{v}
+	\]
+}{}
+
+\prf{
+\[
+\norme{\alpha v} = \sqrt{\langle \alpha v, \alpha v \rangle} = \sqrt{\alpha^2 \langle v,v \rangle} = |\alpha| \norme v
+\]
+}
+
+\newthm{Soit $v_1, \ldots , v_k \in V$ deux à deux orthogonaux, alors
+	\[
+	\norme{v_1 + \ldots + v_k}^2 = \norme{v_1}^2 + \ldots + \norme{v_k}^2
+	\]
+}{Théorème de Pythagore}
+
+\prf{
+\[
+\norme{v_1 + \ldots + v_k}^2 = \langle v_1 + \ldots + v_k, v_1 + \ldots + v_k \rangle = \sum_{i = 1}^k \sum_{j=1}^k  \langle v_i, v_j \rangle = \sum_{i=1}^k \langle v_i, v_i \rangle = \sum_{i=1}^k \norme{v_i}^2
+\]
+}
+
+\newthm{Pour tout $v,w \in V$, on a
+	\[
+	|\langle v, w \rangle | \leqslant \norme v  \norme w
+	\]
+	et
+	\[
+	\norme{v + w} \leqslant \norme v + \norme w
+	\]
+}{Inégalité de Cauchy-Schwarz et triangulaire}
+
+\prf{Si on pose $\alpha = \frac{\langle v, w \rangle }{\langle w,w \rangle}$ alors par construction $v - \alpha w$ est orthogonale à $w$ donc aussi à $\alpha w$. Ainsi d'après le théorème de Pythagore,
+	\[
+	\norme{v}^2 = \norme{v - \alpha w}^2 + \norme{\alpha w}^2 \geqslant \alpha^2 \norme{v}^2 
+	\]
+	ainsi on conclut que
+	\[
+	|\langle v, w \rangle | \leqslant \norme v \norme w
+	\]
+	Et
+	\[
+	\norme{v + w}^2 = \langle v,v \rangle + 2 \langle v, w \rangle + \langle w,w \rangle \leqslant \norme{v}^2 + 2 \norme{v}\norme{w} + \norme{w}^2 = (\norme{v} + \norme{w})^2 
+	\]
+	Ainsi on en déduit que 
+	\[
+	\norme{v + w} \leqslant \norme v + \norme w
+	\]
+}
+
+\newthm{Soient $V$ un espace euclidien et $\{v_1, \ldots v_k\}$ un ensemble libre. Alors il existe un ensemble libre orthogonal $\{u_1, \dots, u_k \}$ de $V$ tel que,
+	\[
+	\forall i \in \llbracket 1, k \rrbracket, \quad \mathrm{span} \{v_1, \ldots , v_i\} = \mathrm{span} \{u_1, \ldots, u_i\}
+	\]
+	Explicitement on a,
+	\[
+	\forall i \in \llbracket 1, k \rrbracket, \quad u_k = v_k - \sum_{i = 0}^{k-1} \mu_i u_i \quad \text{où} \quad \mu_i = \frac{\langle v_k, u_i \rangle}{\langle u_i, u_i \rangle}
+	\]
+}{Procédé de Gram-Schmidt}
+
+\prf{On peut le montrer le procéder de deux manière, première par induction. On pose $u_1 = v_k$ et on suppose qu'on a construit $\{u_1, \ldots, u_{i-1}\}$ il est clair que $\{u_1, \ldots, v_i\}$ est libre et est une base de $\mathrm{span} \{v_1, \ldots, v_i\}$. On pose donc
+	\[
+	u_i = v_i - \alpha_{1,i} u_i + \dots + \alpha_{i-1,i} u_{i-1}
+	\]
+où $\alpha_j,i = \langle v_i, v_j \rangle/ \langle v_j, v_j \rangle$. Comme ça,
+\[
+\Span \{u_1, \ldots, u_i\} = \Span \{u_1, \ldots u_{i-1}, v_i\} = \Span \{v_1, \ldots, v_i\}
+\]
+Et surtout $\{u_1, \ldots, u_i\}$ est orthogonal. 
+\\\\
+Une autre manière de considère ce problème est de ce ramener à la diagonalisation de matrice symétrique, en effet si on pose la matrice de Gram associé,
+\[
+(G)_{ij} = \langle v_1, v_j \rangle
+\]
+cette matrice est symétrique par construction et donc par le théorème (\ref{Base orthogonale}), on peut diagonaliser la matrice $G$ tel que,
+\[
+P^\top G P = D
+\]
+Ainsi $u_i =  (v_1, \ldots, v_k)^\top P_i$ où $P_i$ correspond à la $i$-ème colonne de la matrice $P$.
+}
+
+
+\newcor{Soit $V$ un espace euclidien de dimension finie. Alors si $V \neq \{0\}$ alors $V$ possède une base orthonormale.
+}
+\prf{
+	On applique Gram-Schmidt à une base quelconque pour trouver une base orthogonal, puis il suffit de normaliser la base.
+}{}
+
+\newcor{Soit $A \in \R^{m \times n}$ un matrice de rang (colonne) plein. On peut factoriser $A$ comme
+	\[
+	A = A^* \cdot R
+	\]
+	où les colonnes de $A^* \in \R^{m \times n}$ sont deux à deux orthonormales et $R \in \R^{n \times n}$ un matrice triangulaire supérieure donc les valeurs diagonales sont positives.
+}{}
+
+\prf{Comme $\mathrm{rang} A = n$, les colonnes sont libres, dès lors on peut appliquer les procédé dee Gram-Schmidt à $\{a_1, \ldots , a_ n\}$ où $a_j$ désigne la $j$-ème colonne de $A$. On obtient alors une base orthogonale $B = \{a_1', \ldots , a_n'\}$ avec la relation,
+	\[
+	a_1 = a_1' \et a_j = \sum_{i = 1}^{j-1} \alpha_{ij}a_i' + a_j'
+	\]
+	pour tout $j \in \llbracket 2, n \rrbracket$, et où $\alpha_ij$ sont le coefficient de Fourier de $a_j$ relativement à $a_i'$.
+	Ainsi on a bien,
+	\[
+	A = (a_1', \ldots, a_n') \cdot \begin{pmatrix} 1 & \alpha_{1,2} & \alpha_{1,3} & \dots & \alpha_{1,n} \\
+													0 & 1 & \alpha_{2,3}& \dots & \alpha_{2,n} \\
+													\vdots & \vdots & \ddots &\dots &\vdots \\
+													0 & 0 & \dots & \dots & 1 
+												\end{pmatrix}
+	\]
+	que l'on note $A = A'S$. Il reste encore à normaliser les colonnes de $A'$ ainsi on définit les deux matrices diagonales,
+	\[
+	D = \begin{pmatrix} 1/\norme{a_1'} &  & \\
+							& \ddots &  \\
+								& & 1/\norme{a_n'} 
+		\end{pmatrix}
+	\et 
+D^{-1} = \begin{pmatrix} \norme{a_1'} &  & \\
+	& \ddots &  \\
+	& & \norme{a_n'} 
+\end{pmatrix}
+	\]
+	En posant $A^* = A'D$ et $R = D^{-1} S$ on obtient bien,
+	\[
+	A = A^* \cdot R
+	\]
+	où $A^* \in \R^{m \times n}$ et $R \in \R^{n \times n}$ sont des matrices respectant les propriétés de l'énoncé.
+}
+
+\subsection{Méthode des moindres carrées}
+Soit $A \in \R^{m \times n}$ et $b \in \R^m$ et supposons que le système d'équation linéaire
+\[
+Ax = b
+\]
+ne possède pas de solution. On cherche donc à résoudre le problème d'optimisation suivant
+\begin{equation} \label{eq1}
+	\min_{x \in \R^n} \norme{Ax - b}
+\end{equation}
+On peut écrire cela de façon équivalente
+\[
+\min_{x \in \R^n} \norme{Ax - b} = \min_{h \in \Span \{a_1, \ldots, a_n\}} \norme{h - b}
+\]
+où $a_1, \ldots, a_n \in  \R^m$ sont les colonnes de $A$.
+
+On peut résoudre naïvement ce problème, en trouvant une base
+\[
+\{u_1, \ldots, u_k\}
+\]
+orthonormale du sous-espace $H = \Span \{a_1, \ldots, a_n\}$ avec le procédé de Gram-Schmidt. Puis retourner
+\[
+h= \mathrm{proj}_H(b) = \sum_{i=1}^k \langle b, u_i \rangle u_i
+\]
+Or même si c'est largement faisable, cela demande beaucoup de calcul, c'est pourquoi on a le théorème suivant
+
+\newlem{Soit $H \subset V$ un sous-espace vectoriel de $V$, $b \in V$ et $h \in H$ tel que $b-h \in H^\top$, alors
+	\[
+	\forall h'\in H \backslash \{h \}, \quad \norme{b-h'} > \norme{b-h}
+	\]
+}{}
+\prf{Soit $h' \neq h \in H$. Par Pythagore, on a
+	\[
+	\norme{b - h'}^2 = \norme{b -h}^2 + \norme{h-h'}^2 > \norme{b-h}^2	
+	\]
+}
+\newthm{Soient $A \in \R^{m\times n}$ et $b \in \R^m$. Les solutions du système
+	\[
+	A^\top A x = A^\top b
+	\]
+	sont les solutions optimales optimale du problème (\ref{eq1})
+}{La méthode des moindres carrées}
+
+\prf{Soit $H = \Span\{a_1, \ldots, a_n\}$. Soit $x^* \in \R^n$ tel que $h = Ax^*$. Le vecteur $b-h$ est orthogonal à tout les vecteurs colonnes de $A$ si et seulement si $0 = A^\top (b-h) = A^\top b - A^\top Ax^*$.
+}
+
+\subsection{Forme hermitienne}
+
+On se place dans le cas où $\K = \C$.
+
+\newdef{Une forme bilinéaire $\langle \cdot , \cdot \rangle : V \times V \to \C$ est dit \emph{hermitienne} si
+	\begin{itemize}
+		\item $\forall u,v \in V, \quad \langle u,v \rangle = \overline{\langle v, u \rangle }$
+		\item $\forall u,v,w \in V, \quad \langle u + v, w \rangle = \langle u, w \rangle + \langle v, w \rangle \et \langle u, v + w \rangle = \langle u,v \rangle + \langle u, w \rangle$.
+		\item $\forall \lambda \in \C, ~\forall u,v \in V, \quad \langle \lambda u,v \rangle = \lambda \langle u,v \rangle \et \langle u, \lambda v \rangle = \overline \lambda \langle u,v \rangle$
+	\end{itemize}
+	Finalement si $\forall v \in V\backslash \{0\}, \quad \langle v,v \rangle > 0$ on parle alors de \emph{produit hermitien}
+}{}
+
+\newrem{Les notions de non-dégénérescence, d'orthogonalité, de base orthogonale et de supplémentaire orthogonal sont définies comme avant. Aussi les \emph{coefficient de Fourier} sont les mêmes.
+}{} 
+
+\exemples{Le produit hermitien standard de $\C^n$ est définit par
+	\[
+	\langle u,v \rangle = \sum_{i=1}^n u_i \overline{v_i}
+	\]
+	On Vérifie facilement qu'on a bien un produit hermitien.
+}{}
+
+\newdef{Une matrice $A \in \C^{n \times n}$ est appellé \emph{hermitienne} si on a,
+	\[
+	A = A^*
+	\]
+	où $\cdot^* : A \mapsto \overline{A^\top}$
+}{Matrice hermitienne}
+
+\newthm{Soit $\langle \cdot, \cdot \rangle : V \times V \to \C$ un produit hermitien et $B = \{b_1, \ldots, b_n\}$ une base de $V$, alors la matrice associée dans la base B est donnée par
+	\[
+	\left(A_B \right)_{ij} = \langle b_i, b_j \rangle
+	\]
+	et pour tout $u,v \in V$,
+	\[
+	\langle u,v \rangle = [u]_B^\top A_B \overline{[v]_B}
+	\]
+}{}
+\prf{Soit $u,v \in V$, alors
+	\[
+	\langle u,v \rangle = \left\langle \sum_{i=1}^n u_i b_i, \sum_{j=1}^n v_j b_j \right\rangle = \sum_{i=1}^n \sum_{j=1}^n u_i \overline{v_j} \langle b_i, b_j \rangle
+	\]
+	ainsi si on pose la matrice $A_B \in \C^{n \times n}$ ayant comme composante $\langle b_i, b_j \rangle$, on a bien
+	\[
+	\langle u,v \rangle = [u]_B^\top A_B \overline{[v]_B}
+	\]
+}
+
+\newcor{On en déduit qu'une matrice hermitienne induit un produit hermitien et vice-versa.}{}
+
+\newthm{Soit $V$ un espace vectoriel sur $\C$ de dimension finie, muni d'une forme hermitienne. Alors $V$ possède une base orthogonale.
+}{Base orthogonale sur un espace hermitien}
+
+
+\prf{Soit $B = \{b_1, \ldots, b_n\}$ une base de $V$. Pour $u,v \in V$ on a,
+	\[
+	\langle u,v \rangle = [u]_B^\top A_B \overline{[v]_B}
+	\]
+	par le même procédé que dans le cas des matrices symétrique (\ref{Base orthogonale}) on trouve un matrice $P \in \C^{n \times n}$ inversible telle que,
+	\[
+	P^\top A_B \overline P = \begin{pmatrix}
+	\lambda_1 & & \\
+	&  \ddots & \\
+	&  & \lambda_n
+	\end{pmatrix}
+	\]
+	La base orthogonale est $w_1, \ldots, w_n$ dont $[w_j]_B$ est la $j$-ème colonne de $P$. Alors
+	\[
+	w_j = \sum_{i=1}^n p_{ij} b_i
+	\]
+}
+
+\subsection{Produit hermitien}
+
+\newdef{Soit $\langle \cdot, \cdot \rangle$ un produit hermitien, alors on définit la \emph{norme} induite par,
+	\[
+	\forall v \in V, \quad \norme{v} = \sqrt{\langle v,v \rangle}
+	\]
+	Il est facile de voir que $\norme{\cdot}$ est effectivement une norme, donc l'inégalité de Cauchy-Schwarz, le théorème de Pythagore, l'inégalité de Bessel et la règle du parallélogramme reste valables.
+}{}
+
+\newthm{Soient $V$ un espace euclidien et $\{v_1, \ldots v_k\}$ un ensemble libre. Alors il existe un ensemble libre orthogonal $\{u_1, \dots, u_k \}$ de $V$ tel que,
+	\[
+	\forall i \in \llbracket 1, k \rrbracket, \quad \mathrm{span} \{v_1, \ldots , v_i\} = \mathrm{span} \{u_1, \ldots, u_i\}
+	\]
+	Explicitement on a,
+	\[
+	\forall i \in \llbracket 1, k \rrbracket, \quad u_k = v_k - \sum_{i = 0}^{k-1} \mu_i u_i \quad \text{où} \quad \mu_i = \frac{\langle v_k, u_i \rangle}{\langle u_i, u_i \rangle}
+	\]
+}{Procédé de Gram-Schmidt sur un espace hermitien}
+
+\prf{On peut le montrer le procéder de deux manière, première par induction. On pose $u_1 = v_k$ et on suppose qu'on a construit $\{u_1, \ldots, u_{i-1}\}$ il est clair que $\{u_1, \ldots, v_i\}$ est libre et est une base de $\mathrm{span} \{v_1, \ldots, v_i\}$. On pose donc
+	\[
+	u_i = v_i - \alpha_{1,i} u_i + \dots + \alpha_{i-1,i} u_{i-1}
+	\]
+	où $\alpha_{ij} = \langle v_i, v_j \rangle/ \langle v_j, v_j \rangle$. Comme ça,
+	\[
+	\Span \{u_1, \ldots, u_i\} = \Span \{u_1, \ldots u_{i-1}, v_i\} = \Span \{v_1, \ldots, v_i\}
+	\]
+	Et surtout $\{u_1, \ldots, u_i\}$ est orthogonal. 
+	\\\\
+	Une autre manière de considère ce problème est de ce ramener à la diagonalisation de matrice symétrique, en effet si on pose la matrice de Gram associé,
+	\[
+	(G)_{ij} = \langle v_1, v_j \rangle
+	\]
+	cette matrice est hermitienne par construction et donc par le théorème (\ref{Base orthogonale sur un espace hermitien}), on peut diagonaliser la matrice $G$ tel que,
+	\[
+	P^\top G \overline P = D
+	\]
+	Ainsi $u_i =  (v_1, \ldots, v_k)^\top P_i$ où $P_i$ correspond à la $i$-ème colonne de la matrice $P$.
+}
+
+\newcor{Soit $V$ un espace hermitien, alors $V$ possède une base orthonormale.}{}

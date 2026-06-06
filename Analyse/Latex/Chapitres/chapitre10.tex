@@ -1,0 +1,379 @@
+\section{Équations différentielles ordinaires}
+Soit $I = ]a,b[$, $E \subset \rn$ et $f(t, x)$ continue avec $t \in I$ et $x \in E$. On chercher une fonction $u : I \to E$ de classe $C^1$ telle que
+\[
+\forall t \in I, \quad u'(t) = f(t, u(t))
+\]
+
+\newdef{Soit $I = ]a,b[$ un intervalle ouvert, $E \subset \rn$ un ouvert et $\bm f : I \times E \to \rn$. On cherche $\bm u : I \to E$ telle que $\bm u'(t) = \bm f(t, \bm u(t))$ pour tout $t \in I$. On a 
+	\[
+	\bm f(t, \bm x) = \begin{pmatrix} f_1(t, \bm x) \\ \vdots \\ f_n(t, \bm x) \end{pmatrix}, \quad \bm u(t) = \begin{pmatrix} u_1(t) \\ \vdots \\ u_n(t) \end{pmatrix}
+	\]
+	On a alors un système de $n$ EDO couplées : 
+	\begin{align*}
+		u_1'(t) &=  f_1(t, u_1(t), \ldots, u_n(t)) \\  &\vdots \\ u_n'(t) &= f_n(t, u_1(t), \ldots, u_n(t))
+	\end{align*}
+}{}
+
+\newrem{Si on a une EDO d'ordre $n$, c'est-à-dire que pour un intervalle $I = ]a,b[$ ouvert, $E \subset \rn$ et $f : I \times E \to \R$. On cherche une fonction $u : I \to E$ de classe $C^n$ telle que
+	\[
+	u^{(n)}(t) = f(t, u(t), u'(t), \ldots , u^{(n-1)}(t))
+	\]
+	lors on peut toujours se ramener à un système de $n$ EDO d'ordre $1$. On pose alors
+	\[
+	u_1(t) = u(t), ~u_2(t) = u'(t), ~\ldots ~, ~u_n(t) = u^{(n-1)}(t)
+	\]
+	et
+	\[
+	\bm f : I \times E \to \R, \quad \bm f(t, u_1, \ldots, u_n) = \begin{pmatrix} u_2 \\ \vdots \\ u_n \\ f(t, u_1	, \ldots, u_n) \end{pmatrix}
+	\]
+	ce qui permet d'écrire pour tout $t \in I, \quad \bm u'(t) = \bm f(t, \bm u(t))$. Ainsi une étude complète des systèmes d'EDO du premier ordre est suffisante pour pouvoir traiter aussi des équations d'ordres supérieurs.}
+	{}
+
+\subsection{Problème de Cauchy}
+
+\newdef{Étant donné une fonction $\bm f : I \times E \to \rn$ continue, avec $I \subset \R$ nu intervalle ouvert, $E \subset \rn$ un ouvert et $(t_0, \bm u_0) \in t \times E$, on souhaite alors trouver $\bm u : I \to E$ différentiable sur $I$ tel que
+\[
+\left \{ \begin{array}{l} \bm u'(t) = \bm f(t, \bm u(t)), \quad t \in I \\
+						\bm u(t_0) = \bm u_0
+		\end{array} \right.
+\]
+}{Problème de Cauchy}
+
+
+Les équations différentielles ordinaires apparaissent souvent dans les applications pour décrire l'évolution d'un système en fonction du temps. Dans ce cas, la fonction $\bm u(t_0) = \bm u_0$ peux être interprétée comme une \emph{valeur initiale}. On parle alors de \textbf{Problème à valeur initiale} :
+
+\newrem{Étant donnc une fonction $\bm f : I_+ \times E \to \rn$ continue où $I_+ = I \cap [t_0, + \infty[$, on cherche alors une fonction $\bm u : I_+ \to E$ continue sur $I_+$ et différentiable sur $\mathring I_+$ tel que
+	\[
+	\left \{ \begin{array}{l} \bm u'(t) = \bm f(t, \bm u(t)), \quad t \in \mathring I_+ \\
+		\bm u(t_0) = \bm u_0
+	\end{array} \right.
+	\]
+}
+
+Il arrive parfois qu'on souhaite modéliser l'évolution passée qui à porté à l'état actuel $\bm u(t_0) = \bm u_0$ du système. On parle alors de \textbf{Problème à valeur finale} : 
+
+\newrem{Étant donnc une fonction $\bm f : I_- \times E \to \rn$ continue où $I_- = I \cap ]-\infty, t_0]$, on cherche alors une fonction $\bm u : I_- \to E$ continue sur $I_-$ et différentiable sur $\mathring I_-$ tel que
+	\[
+	\left \{ \begin{array}{l} \bm u'(t) = \bm f(t, \bm u(t)), \quad t \in \mathring I_- \\
+		\bm u(t_0) = \bm u_0
+	\end{array} \right.
+	\]
+}
+
+\newlem{Si $\bm u_+ : I_+ \to E$ et $\bm u_- :I_- \to E$ sont solutions et $\bm f : I \times E$ est continue alors la fonction $\bm u : I \to E$ définie par $\bm u(t) = \bm u_-(t)$ si $t \in I_-$ et $\bm u(t) = \bm u_+(t)$ si $t \in I_+$ est de classe $C^1$ et est solution du problème de Cauchy.
+}{}
+
+\newdef{On appelle \emph{solution locale} du problème de Cauchy un couple $(J, \bm u)$ où $J \subset I$ est un intervalle ouvert contenant $t_0$ et où $\bm u \in C^1(J)$ satisfait le problème de Cauchy sur $J$.
+	\begin{enumerate}
+		\item On dit que qu'une solution locale $(K, \bm w)$ prolonge strictement $(J, \bm u)$ si $J \subset K, ~J \neq K,$ et $\bm u(t) = \bm w(t)$ pour tout $t \in J$.
+		
+		\item On dit qu'une solution locale $(J, \bm u)$ est \emph{maximale} s'il n'existe pas de solution local qui le prolonge strictement
+		
+		\item On dit qu'une solution maximale $(J, \bm u)$ est une solution globale si $J = I$.
+		
+	\end{enumerate}
+}{}
+
+\subsection{Équations différentielles à variable séparées}
+
+Soit $f : I \times E \to \R$ de la forme $f(t, u(t)) = g(t) k(u(t))$ avec $g : I \to \R$ et $k : E \to \R$ continues sur les intervalles ouverts $I$ et $E$, et on considère le problème de Cauchy,
+\[
+\left \{ \begin{array}{l}  u'(t) =  f(t, u(t)) = g(t) k(u(t)), \quad t \in I \\
+	 u(t_0) = u_0
+\end{array} \right.
+\]	
+
+
+\newthm{Soient $I, \tilde E \subset \R$ deux intervalles, $g : I \to \R$ continue et $ k : \tilde E \to \R$ continue telle que $k(u) \neq 0$, pour tout $u \in E$. Pour tout $(t_0, u_0) \in I \times E$, notons 
+	\[
+	G(t) = \int_{t_0}^t g(s) ~\mathrm ds \et F(u) = \int_{u_0}^u \frac{1}{k(v)} ~\mathrm d v 
+	\]
+Alors il existe un intervalle $J \subset I$ contenant $t_0$ avec $G(J) \subset \mathrm{Im}(F)$ et une fonction $u : J \to \tilde E$ définie par
+\[
+\forall t \in J, \quad u(t) = F^{-1}(G(t))
+\]
+tels que $(J, U)$ est une solutions locale du problème de Cauchy. De plus la solution locale est unique.
+}{Séparation de variables}
+
+\prf{On remarque que la fonction $k$, étant continue, ne change pas de signe sur $\tilde E$, ce qui implique que $F : \tilde \R$ est continue et strictement monotone, ainsi $F$ est un difféomorphisme en $\tilde E$ et $\mathrm{Im} (F)$
+	
+Puisque $F(u_0) = 0$, il existe alors $\eta > 0$ tel que $]- \eta, \eta [ \subset F(\tilde E)$ et par continuité de $G$ est $t_0$ et le fait que $G(t_0) = 0$, il existe $\delta_\eta > 0$ tel que
+\[
+\forall t \in J := ]t_0 - \delta_\eta, t_0 + \delta_\eta[ \subset I, \quad G(t) \in ]- \eta, \eta[
+\]
+On a donc l'existe d'un intervalle $J \subset I$ tel que  $G(J) \subset \mathrm{Im}(F)$. Grâce au fait que $F^{-1}$ et $G$ sont de classe $C^1$, on a que $u = F^{-1} \circ G \in C^1$ et 
+\[
+u'(t) = \frac{G'(t)}{F'(F^{-1}(G(t)))} = g(t) k(u(t)), \quad \forall t \in J
+\]
+De plus, $u(t_0) = F^{-1} (0) = u_0$, donc $(J, u)$ est une solution locale du Problème de Cauchy.
+}
+
+\newrem{Le théorème précédent montre l'existence d'un intervalle ouvert $J \subset I$ contenant $t_0$ et tel que $G(J) \subset \mathrm{Im}(F)$. Si maintenant on prend le plus grand intervalle $\tilde J \subset I$ contenant $t_0$ et tel que $G(\tilde J) \subset \mathrm{Im}(F)$, on peut alors calculer l'unique solution locale sur $\tilde J$ par la formule
+	\[
+	u(t) = F^{-1}(G(t)), \quad \forall t \in \tilde J
+	\]
+Toutefois il est possible qu'il existe une solution locale sur un intervalle ouvert plus grand $\tilde J \subset \hat J$, mais le théorème (\ref{Séparation de variables}) ne garantie plus l'unicité de la solution sur $\hat J \backslash \tilde J$.
+}
+
+\subsection{EDO scalaire linéaire du premier ordre}
+On parle d'équation différentielle \emph{linéaire} du premier ordre lorsque $f(t, u)$ est une fonction affine en la variable $u$. Soit $I \subset \R$ un intervalle ouvert, $g,p : I \to E$ deux fonctions continues et $f(t, u) = g(t) - p(t) u$. Pour $t_0 \in I$, on pose la problème de Cauchy suivant,
+\[
+\left \{ \begin{array}{l}  u'(t) + p(t) u(t) = g(t), \quad t \in I \\
+	u(t_0) = u_0
+\end{array} \right.
+\]	
+
+\newthm{La solution globale de l'équation de Cauchy est donnée par
+	\[
+	\forall t \in I, \quad u(t) = e^{-P(t)} u_0 + e^{-P(t)} \int_{t_0}^t e^{P(s)} g(s) ~\mathrm d s
+	\]
+	où $P(t) = \int_{t_0}^t p(s) ~\mathrm d s$.
+}{}
+
+\prf{Il suffit de dériver, ainsi on obtient
+	\begin{align*}
+		u'(t)& = -p(t) e^{-P(t)} u_0  -p(t)e^{-P(t)} \int_{t_0}^t e^{P(s)} g(s) ~\mathrm ds + g(t) \\
+		&= -p(t) \left( e^{P(t)}u_0 + e^{-P(t)} \int_{t_0}^t e^{P(s)} g(s) ~\mathrm d s \right) + g(t)\\
+		&= -p(t) u(t) + g(t)
+	\end{align*}
+De plus on remarque que $u(t_0) = u_0$, d'où le résultat.
+}
+
+\subsection{Existence et unicité de solutions}
+On considère le problème de Cauchy,
+\[
+\left \{ \begin{array}{l} \bm u'(t) = \bm f(t, \bm u(t)), \quad t \in I \\
+	\bm u(t_0) = \bm u_0
+\end{array} \right.
+\]
+avec $I \subset \R$ un ouvert, $E \subset \rn$ un ouvert et $\bm f : I \times E \to \R$. On remarque, en particulier que $\bm u \in C^1(J, E)$ et 
+\[
+\forall t \in J, \quad \bm u(t) = \bm u_0 + \int_{t_0}^t \bm f(s, \bm u(s)) ~\mathrm ds
+\]
+Si on introduit la fonction $\phi : C^0(J, E) \to C^0(J,E)$ définie par
+\[
+\forall t \in J, \quad \phi(\bm v)(t) = \bm u_0 + \int_{t_0}^t \bm f(s, \bm v(s)) ~\mathrm ds
+\]
+alors la solution du problème de Cauchy est un \emph{point fixe} de l'application $\phi$, c'est-à-dire $\phi(\bm u) = \bm u$. Ainsi résoudre le problème de Cauchy revient à trouver des points fixes.
+
+\subsubsection{Espace de Banach et complétude de $C^0(J)$.}
+
+\newdef{Soit $V$ un espace vectoriel normé et $(\bm v^k)_{k \in \N} \subset V$ une suite d'éléments de $V$ on dit que 
+	\begin{enumerate}
+		\item $(\bm v^k)$ converge vers $\bm v \in V$ si,
+		\[
+		\forall \varepsilon >0, ~\exists N > 0, ~\forall k \geqslant N, \quad \norme{\bm v^k - \bm v} \leqslant \varepsilon
+		\]
+		il est facile de vérifier que, si elle existe, la limite $\bm v \in V$ est unique.
+		\item $(\bm v^k)$ est une suite de Cauchy si,
+		\[
+		\forall \varepsilon > 0, ~\exists N >  0, ~\forall k, l \geqslant N, \quad \norme{\bm v^k - \bm v^l} \leqslant \varepsilon
+		\]
+	\end{enumerate}
+	On dit qu'un espace vectoriel normé $V$ est \emph{complet} si toute suite de Cauchy de $V$ converge dans $V$. Un espace vectoriel normé complet est appelé \textbf{Espace de Banach}. Cette définition est extensible pour un sous-ensemble $K \subset V$.
+}{}
+
+\newlem{Soit $V$ un espace de Banach et $K \subset V$ un sous-ensemble de $V$. Alors, $K$ est complet si et seulement si $K$ est fermé.
+}{}
+
+\newthm{Soit $V$ un espace de Banach et $K \subset V$ un sous-ensemble fermé non-vide et $\phi : K \to K$ une application contractante, c'est-à-dire
+	\[
+	\exists \rho \in ]0,1[, ~\forall \bm u, \bm v \in K, \quad  \norme{\phi(\bm u) - \phi(\bm v)} \leqslant \rho \norme{\bm u - \bm v}
+	\]
+	Alors il existe un unique $\bm v^* \in K$ tel que $\phi(\bm v^*) = \bm v^*$.
+}{Point fixe de Banach}
+
+\prf{Similaire à (\ref{Théorème du point fixe de Banach}).}
+
+
+\newprop{Soit $\Omega \subset \rn$ un compact. L'espace vectoriel $C^0(\Omega, \rmm)$, muni de la norme
+	\[
+	\norme{\bm v}_{C^0(\Omega)} = \max_{\bm x \in \Omega} \norme{\bm v(\bm x)}
+	\]
+	est un espace de Banach.
+}{}
+
+En particulier, on travaillera plutôt sur des boules fermées de $C^0(\Omega)$ définie par
+\[
+K_{b, \bm u} (\Omega) := \overline B(\bm u, b) = \{ \bm v \in C^0(\Omega), ~ \norme{\bm v - \bm u}_{C^0(\Omega)} \leqslant b \}
+\]
+pour $b > 0$ et $\bm u \in C^0(\Omega)$.
+
+\subsubsection{Théorème d'existence et unicité locale}
+\newthm{Si $\bm f$ est continue sur $I \times E$, alors il existe au moins une solutions locale $(J, \bm u)$ où $J \subset I$ et $\bm u \in C^1(J)$.
+}{Cauchy-Peano}
+
+\newrem{Contrairement au théorème suivant (\ref{Cauchy-Lipschitz --- version locale}) l'unicité de la solution locale n'est pas garantie. C'est pour ça qu'il faut rajouter une certaine régularité sur $\bm f$ pour avoir unicité de la solution locale.
+}
+
+\newdef{Soit $I \subset \R$ un intervalle ouvert, $E \subset \rn$ et $ \bm f: I \times E \to \rn$ une fonction continune. On dit que $\bm f$ est \emph{localement lipschitzienne} par rapport au deuxième argument, si pour tout $(t_0, u_0) \in I \times E$, il existe $a,b > 0$ avec $[t_0 - a, t_0 + a]\times \overline B(\bm u_0, b) \subset I \times E$ et une constante $L > 0$ tels que
+	\[
+	\forall t \in [t_0 -a, t_0 + a], ~\forall \bm x, \bm y \in \overline B(\bm u_0, b), \quad \norme{\bm f(t, \bm x) - \bm f(t, \bm y)} \leqslant L \norme{\bm x - \bm y}
+	\]
+	où $a,b$ et $L$ dépendent éventuellement de $(t_0, \bm u_0)$.
+}{}
+
+\newrem{On remarque, en particulier, que si $\bm f : I \times E \to \rn$, est continue avec dérivée partielle $\frac{\partial f_i}{\partial x_j}$ continues pour tout $i,j = 1, \ldots, n$, alors $\bm f$ est localement lipschitzienne par rapport à la deuxième variable.
+}
+
+\newthm{Soit $I \subset \R$ un intervalle ouvert, $E \subset \rn$ ouvert et $\bm f : I \times E \to \rn$ une fonction continue et localement lipschitzienne par rapport à la deuxième variable. 
+	
+Alors pour tout $(t_0, \bm u_0) \in I \times E$, il existe $\delta >  0$ tel que $J_\delta := [t_0 - \delta, t_0 + \delta] \subset I$ et une fonction $\bm u : J_\delta \to E$ de classe $C^1$ solution du problème de Cauchy.
+
+De plus cette solution est localement unique.
+}{Cauchy-Lipschitz --- version locale}
+
+\prf{Puisque $\bm f$ est localement lipschitzienne par rapport au deuxième arguement,il existe $a,b > 0$ avec $[t_0 - a, t_0 + a]\times \overline B(\bm u_0, b) \subset I \times E$ et une constante $L > 0$ tels que
+	\[
+	\forall t \in [t_0 -a, t_0 + a], ~\forall \bm x, \bm y \in \overline B(\bm u_0, b), \quad \norme{\bm f(t, \bm x) - \bm f(t, \bm y)} \leqslant L \norme{\bm x - \bm y}
+	\]
+	On choisit
+	\[
+	M > \max_{(t, \bm x) \in [t_0 - a, t_0 + a] \times \overline B(\bm u_0, b)} \norme{\bm f(t, \bm x)}
+	\] 
+	Soit maintenant $\delta \in ]0,a], ~J_\delta := [t_0 - a,t_0 + \delta]\subset I$ et considérons la quantité
+	\[
+	K_{b, \bm u_0} (J_\delta) = \{\bm v \in C^0(J_\delta), ~ \max_{t \in J_\delta} \norme{\bm v(t) -\bm u_0} \leqslant b \}
+	\]
+	qui est alors une sous-ensemble fermé (donc complet) de $C^0(J_\delta)$. On considère l'application $\phi : K_{b, \bm u_0}(J_\delta) \to C^0(J_\delta)$ définie par 
+	\[
+	\forall t \in J_\delta, \quad \phi(\bm v)(t) = \bm u_0 + \int_{t_0}^t \bm f(s, \bm v(s))~\mathrm ds
+	\]
+	Or pour tout $\bm v \in K_{b, \bm u_0}(J_\delta)$ et $t \in J_\delta$,
+	\[
+	\norme{\phi(\bm v) - \bm u_0} = \norme{\int_{t_0}^t \bm f(s, \bm v(s)) ~\mathrm d s} \leqslant \left|\int_{t_0}^t \norme{\bm f(s, \bm v(s))} ~\mathrm ds \right| \leqslant M \delta
+	\]
+	donc si on prend $\delta \leqslant \frac{b}{M}$ on a $\norme{\phi(\bm v) -  \bm u_0}_{C^0(J_\delta)} \leqslant b$, c'est-à-dire $\phi(\bm v) \in 	K_{b, \bm u_0} (J_\delta)$ pour tout $v \in K_{b, \bm u_0} (J_\delta)$. De plus, pour tout $\bm v_1, v_2 \in K_{b, \bm u_0} (J_\delta)$ et pour tout $t \in J_\delta$,
+	\begin{align*}
+		\norme{\phi(\bm v_1) - \phi(\bm v_2)} &= \norme{\int_{t_0}^t \bm f(s, \bm v_1(s)) - \bm f(s, \bm v_2(s)) ~\mathrm d s} \leqslant \left| \int_{t_0}^t \norme{\bm f(s, \bm v_1(s)) - \bm f(s, \bm v_2(s)) } ~\mathrm ds \right| \\
+		&\leqslant \left| \int_{t_0}^t L \norme{\bm v_1(s) - \bm v_2(s)} ~\mathrm d s \right| \leqslant L \delta \max_{t \in J_\delta} \norme{\bm v_1(t) - \bm v_2(t)}
+	\end{align*}
+	ce qui implique que $\norme{\phi(\bm v_1) - \phi(\bm v_2)}_{C^0(J_\delta)} \leqslant L \delta \norme{\bm v_1 - \bm v_2}_{C^0(J_\delta)}$. Donc, pour $\delta < \min\{a, \frac{b}{M}, \frac1L\}$, l'application $\phi : K_{b, \bm u_0} (J_\delta) \to K_{b, \bm u_0} (J_\delta)$ est contractante et il existe un unique $ \bm u \in K_{b, \bm u_0} (J_\delta)$ point fixe de $\phi$. Alors $(J_\delta, \bm u)$ est l'unique solution du problème de Cauchy dans $K_{b, \bm u_0} (J_\delta)$.
+}
+
+\newdef{On dit que $\bm f : I \times \rn \to \rn$ est \emph{globalement lipschitzienne} par rapport au deuxième argument s'il existe une fonction continue $L(t) \to \R$ telle que pour tout $\bm x, \bm y \in \rn$ on a
+	\[
+	\norme{\bm f(t, \bm x) - \bm f(t, \bm y)} \leqslant L(t) \norme{\bm x - \bm y}
+	\]
+}{}
+
+\newthm{Si $\bm f$ est globalement lipschitzienne par rapport au deuxième argument, alors il existe une solution globale au problème de Cauchy pour tout $(t_0, \bm u_0) \in I \times \rn$.
+}{Cauchy-Lipschitz --- version globale}
+
+\subsection{Équation linéaire du deuxième ordre}
+Soit $I \subset \R$ un ouvert et $a,b,g \in C^0(I)$. On considère alors le problème de Cauchy 
+\[
+\begin{cases}
+	u''(t) + a(t)u'(t) + b(t) u(t) = g(t),  \quad\forall t \in I \\
+	u(t_0) = u_0, ~u'(t_0) = v_0 
+\end{cases}
+\]
+On a donc
+\[
+\bm u(t) = \begin{pmatrix} u(t) \\ u'(t) \end{pmatrix} \implies \bm u'(t) = \begin{pmatrix} u'(t) \\ g(t) - a(t)u'(t) - b(t)u(t) \end{pmatrix} = \bm f(t, \bm u(t)) 
+\]
+On peut construire une intégrale générale du problème de Cauchy de la forme : "solution générale de l'équation homogène" plus "solution particulière de l'équation non homogène".
+
+\subsubsection{Solution générale de l'équation homogène}
+
+\newdef{Soit $z_1$ et $z_2$ des solutions de l'équation homogène. On dit que $z_1$ et $z_2$ sont linéairement indépendant si pour $\alpha, \beta \in \R$ et pour tout $t \in I$ on a
+	\[
+	\alpha z_1(t) + \beta z_2(t) = 0 \implies \alpha = 0 \et \beta = 0
+	\]
+	De plus le \emph{Wronksien} de $z_1$ et $z_2$ noté $W[z_1, z_2]$ comme la fonction
+	\[
+	W[z_1, z_2](t) = \det \begin{pmatrix} z_1(t) & z_2(t) \\ z_1'(t) & z_2'(t) \end{pmatrix} 
+	\]
+}{}
+
+\newthm{Les fonctions $z_1$ et $z_2$ sont linéairement indépendantes si et seulement si 
+	\[
+	W[z_1, z_2](t) \neq 0
+	\]
+	pour tout $t \in I$.
+}{}
+
+\prf{Supposons qu'il existe $t_0 \in I$ tel que $W[z_1, z_2] = 0$, alors les vecteurs $(z_1(t_0), z_21't_0))^\top$ et $(z_2(t_0), z_2(t_0))^\top$ sont linéairement dépendents. Ils existent alors $\alpha$ et $\beta$ dans $\R^*$ tels que 
+	\[
+	\alpha \begin{pmatrix} z_1(t_0) \\ z_1'(t_0) \end{pmatrix} + \beta \begin{pmatrix} z_2(t_0) \\ z_2'(t_0) \end{pmatrix} = 0 
+	\]
+	Soit $v(t) = \alpha z_1(t) + \beta z_2(t)$ et 
+	\[
+	\begin{cases}
+		v''(t) + \alpha (t) v'(t) + b(t) v(t) = \alpha[z_1''(t) + a(t) z_1(t) + b(t) z_1(t)] + \beta[z_2''(t) + a(t) z_2'(t) + b(t) z_2(t)] = 0 \\
+		v(t_0) = 0, ~v'(t_0) = 0
+	\end{cases}
+	\]
+	Donc $v(t) = 0$ pour tout $t$ et $\alpha z_1(t)	+ \beta z_2(t) = 0$ pour tout $t$ qui est une contradiction avec l'hypothèse que $z_1$ et $z_2$ sont linéairement indépendant.
+	
+	Réciproquement, par l'absurde supposons que $z_1$ et $z_2$ sont linéairement dépendants, alors ils existent $\alpha$ et $\beta$ dans $\R$ tels que $\alpha z_1(t) + \beta z_2(t) = 0$ pour tout $t \in I$.  La dérivée est aussi nulle, alors
+	\[
+	\alpha \begin{pmatrix} z_1(t_0) \\ z_1'(t_0) \end{pmatrix} + \beta \begin{pmatrix} z_2(t_0) \\ z_2'(t_0) \end{pmatrix} = 0 
+	\]
+	Mais ceci pose une contradiction avec l'hypothèse que $W[z_1, z_2] \neq 0$.
+}
+
+Soit
+\[
+S = \{ z \in C^2(I) \mid z'' + a z' + bz = 0 \}
+\]
+l'ensemble des solutions de l'équation différentielle. On remarque alors que $S$ est un espace vectorielle de dimension  $2$ et donc toute paire $z_1, z_2 \in S$ linéairement indépendante en est une base. Et donc la \textbf{solution générale de l'équation homogène} est de la forme
+\[
+u(t) = C_1z(t) + C_2z_2(t), \quad t \in I 
+\]
+Si l'on veut résoudre le problème de Cauchy il faudra encore trouver les bonnes valeurs des constantes pour satisfaire les conditions initiale.
+
+\subsubsection*{Méthode de la variation de la constante}
+Soit $z_1$ une solution de l'équation homogène. On peut construire une deuxième solution $z_2$ de l'équation homogène linéairement indépendante à $z_1$ sous la forme
+\[
+z_2(t) = C(t) z_1(t)
+\]
+avec $C \in C^2(I)$. 
+
+\subsubsection{Équation à coefficient constants}
+Soit $a(t) = \alpha \in \R$ et $b(t) = \beta \in \R$ pour tout $t \in I$. Alors
+\[
+u''(t) + \alpha u'(t) 1+ \beta u(t) = g(t)
+\]
+Pour l'équation homogène, on cherche une solution de la forme $z_1 = e^{\lambda t}$,  ainsi
+ \[
+ 0 = z_1'' + \alpha z_1' + \beta z_1 = (\lambda^2 + \alpha \lambda + \beta) e^{\lambda t}
+ \]
+ 
+ \begin{description}
+ 	\item[Cas 1 :  Le discriminant $\Delta = \alpha^2 - 4 \beta > 0$] Soit $\lambda_1, \lambda_2$ les deux racines réels du polynôme. Alors
+ 	\[
+ 	z_1(t) = e^{\lambda_1 t}, \quad z_2(t) = e^{\lambda_2 t}
+ 	\]
+ 	Ces solutions sont linéairement indépendante car
+ 	\[
+ 	W[z_1, z_2](t) = (\lambda_2 - \lambda_1) = e^{(\lambda_1 + \lambda_2)t} \neq 0
+ 	\]
+ 	\item[Cas 2 : Le discriminant $\Delta = \alpha^2 - 4 \beta < 0$] Les deux zéros du polynôme $\lambda_1, \lambda_2$ seront des complexes conjuguées,
+ 	\[
+ 	\lambda_{1,2} = -\frac\alpha2 \pm \frac{i \sqrt{|\Delta|}}{2}
+ 	\]
+ 	Alors
+ 	\[
+ 	\tilde z_1(t) = \exp\left( - \frac\alpha2 t - i  \frac{\sqrt \Delta}{2} t \right) = e^{-\alpha t/2} e^{-i \omega t}, \quad \tilde z_2(t) = e^{-\alpha t/2} e^{i \omega t}
+ 	\]
+ 	On trouve donc les solutions réelles 
+ 	\[
+ 	z_1(t) = e^{-\alpha t/2} \cos(\omega t) \et z_2(t) = e^{-\alpha t/2}\sin(\omega t)
+ 	\]
+ 	\item[Cas 3 : Le discriminant $\Delta = 0$] On a donc $\lambda_1 = \lambda_2 = - \frac\alpha2$
+ 	\[
+ 	z_1(t) = e^{-\alpha t/2}
+ 	\]
+ 	Et par la variation de la constant on trouve
+ 	\[
+ 	z_2(t)	 = te^{-\alpha t/2}
+ 	\]
+ \end{description}
+
+
+
+	
+
+
+

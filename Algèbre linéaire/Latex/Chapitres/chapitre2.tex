@@ -1,0 +1,212 @@
+\section{Valeurs propre}
+\subsection{Valeurs propres et vecteurs propres}
+
+\newdef{Soit $V$ un $\K$-espace vectoriel et $f : V \to V$ un endomorphisme. Un \emph{vecteur propre} associé à la \emph{valeur propre} $\lambda \in \K$ est un vecteur $v \in V^*$ tel que
+	\[
+	f(v) = \lambda v
+	\]
+}{}
+
+\newlem{Soit $B = \{v_1, \ldots, v_n\}$ une base de $V$ et $A \in M_n(\K)$ la matrice de l'endomorphisme $f : V \to V$ relatif à $B$. La matrice $A$ est diagonale, c'est-à-dire $A$ de la forme
+	\[
+	A = \begin{pmatrix}
+		\lambda_1 & & \\
+		          & \ddots & \\
+		          &        & \lambda_n
+	\end{pmatrix}
+	\]
+	si et seulement si $v_i$ est un vecteur propre associé à la valeur propre $\lambda_i$ pour tout $i \in \entiers$.
+}{}
+
+\prf{Supposons que $v_i$ soit un vecteur propre associé à la valeur propre $\lambda_i \in \K$, ainsi dans la base $B$ on a
+	\[
+	[f(v_i)]_B = \lambda [v_i]_B = \lambda e_i
+	\]
+	ainsi on a bien,
+	\[
+	A = \begin{pmatrix}
+		\lambda_1 & & \\
+		& \ddots & \\
+		&        & \lambda_n
+	\end{pmatrix}
+	\]
+La réciproque est analogue.
+}
+
+\newdef{Soit $\lambda \in \K$ une valeur propre de l'endomorphisme $f : V \to V$, alors
+	\[
+	E_{\lambda} = \ker(f - \lambda \mathrm{Id})
+	\]
+	est appelé l'\emph{espace propre} de $\lambda$. De plus $\dim E_\lambda$ est appelé \emph{multiplicité géométrique} de $\lambda$.
+}{}
+
+\newlem{Soit $f : V \to V$ un endomorphisme et $v_1, \ldots, v_k \in V$ des vecteurs propres associés aux valeurs propre $\lambda_1, \ldots, \lambda_k \in \K$ deux à deux distincts. Alors le famille $\{v_1, \ldots, v_k\}$ est libre.
+}{}
+
+\prf{Par récurrence sur $k$, pour $k = 1$ comme $v_1 \neq 0$, alors $\{v_1\}$ est libre. Pour $k > 1$, on considère une combinaison linéaire, sans perte de généralité supposons que $\lambda_k \neq 0$, 
+	\[
+	\alpha_1 v_1 + \ldots \alpha_k v_k = 0
+	\]
+Par évaluation de cette égalité par l'endomorphisme $f$ et division par $\lambda_k$ on a
+\[
+\alpha_1 \frac{\lambda_1}{\lambda_k} v_1 + \ldots + \alpha_k v_k = 0
+\]
+ainsi en soustrayant les deux équations on obtient
+\[
+\alpha_1 \left(1 - \frac{\lambda_1}{\lambda_k}\right) v_1 + \ldots + \alpha_{k-1} \left( 1 - \frac{\lambda_{k-1}}{\lambda_k}\right) v_{k-1} = 0
+\]
+ainsi par récurrence on en déduit que,
+\[
+\forall i \in \llbracket 1, k-1 \rrbracket, \quad \alpha_i \underbrace{\left(1 - \frac{\lambda_i}{\lambda_k}\right)}_{\neq 0} = 0 \implies \forall i \in \llbracket 1, k-1 \rrbracket, \quad \alpha_i = 0
+\]
+}
+
+\newlem{Soit $f : V \to V$ un endomorphisme et $\dim V = n$. Soient $\lambda_1, \ldots, \lambda_r$ les valeurs propres deux à deux distinctes. On considère
+	\[
+	B_i = \{ v_1^i, \ldots, v_{n_i}^i\}
+	\]
+	les bases respectives de $E_{\lambda_i}$. Alors
+	\[
+	B = \bigcup_{i=1}^r B_i
+	\]
+	est un ensemble libre. De plus,
+	\[
+	f \text{ diagonalisable} \iff n_1 + n_2 + \ldots + n_r = n
+	\]
+}{Base des espaces propres}
+
+\prf{
+En premier temps, on considère une combinaison linéaire tel que,
+\[
+\sum_{i = 1}^r \underbrace{\sum_{j = 1}^{n_i} \alpha_{ij} v_j^i}_{\in E_{\lambda_i}} = 0
+\]
+mais tenant compte du lemme précédent, on en déduit que
+\[
+\sum_{j = 1}^{n_i} \alpha_{ij} v_j^i = 0
+\]
+mais comme $B_i$ est une base, en particulier c'est une famille libre, ainsi,
+\[
+\forall i,j \quad \alpha_{ij} = 0
+\]
+Donc $B$ est bien un famille libre. De plus si on suppose que $\sum n_i = n$, alors $B$ est un base, mais comme $B$ est une base de vecteur propre, alors par définition  $f$ est diagonalisable. Réciproquement si $f$ est supposé diagonalisable, et si $m_i$ dénote le nombre de vecteur propre en $E_{\lambda_i}$ dans la base relatif consistant de vecteur propre, alors $m_i \leqslant n_i$, et donc
+\[
+n = m_1 + \ldots + m_r \leqslant n_1 + \ldots + n_r \leqslant n
+\]
+et donc $n_1 + \ldots + n_r = n$.
+}
+
+
+\subsection{Polynôme caractéristique}
+
+\newdef{Soit $A$ la matrice associé à l'endomorphisme de $f$, le \emph{polynôme caractéristique} de $f$ est donnée par,
+	\[
+	\chi_A(x) = \det (A - x I_n) = \sum_{\sigma \in S_n} \mathrm{sign}(\sigma) \prod_{i = 1}^n (A- x I_n)_{i \sigma(i)} = \alpha_0 + \alpha_1 x + \ldots + \alpha_n x^n
+	\]
+	où $\alpha_i \in \K$. Pour $\lambda$ une valeur propre de l'endomorphisme $f$, la \emph{multiplicité algébrique} de $\lambda$ est la multiplicité de $\lambda$ comme racine de $\det(A - x I_n)$.
+}{Polynôme caractéristique}
+
+\newprop{Soit $f : V \to V$ un endomorphisme et soit $\lambda \in \K$ une valeur propre $f$. Alors la multiplicité géométrique est au plus la multiplicité algébrique.
+}{Majoration de la multiplicité géométrique}
+
+\prf{Soit $\lambda \in \K$ une valeur propre de $f$ et $B_\lambda = \{ v_1, \ldots, v_k\}$ une base de 
+	\[
+	E_\lambda = \ker(f - \lambda \mathrm{Id})
+	\]
+	On complète alors $B_\lambda$ est une base $B'$ de $V$,
+	\[
+	B' = \{v_1, \ldots, v_k, u_1, \ldots, u_{n-k}\}
+	\]
+	Ainsi la matrice associé à notre endomorphisme dans la base $B'$ est,
+	\[
+	A = \begin{pmatrix}
+		\lambda I_k & D \\
+				0 & C
+	\end{pmatrix}
+	\]
+	ainsi le polynôme caractéristique associé est,
+	\[
+	\chi_A (x) = (\lambda - x)^k \det(C - x \lambda I_{n-k})
+	\]
+	et donc 
+	\[
+	(\lambda- x)^k ~|~\chi_A(x)
+	\]
+	donc la multiplicité de $\lambda$ est d'au moins $k$.
+} 
+
+\newthm{Soit $V$ un espace vectoriel de dimension $n$, $f : V \to V$ un endomorphisme et $\lambda_1, \ldots, \lambda_k \in \K$ les valeurs propres distincts de $f$. Alors $f$ est diagonalisable si et seulement si
+	\begin{enumerate}
+		\item Le polynôme caractéristique $\chi_f$ de $f$ est scindé,
+		\[
+		\chi_f(x) = (-1)^n \prod_{i =1}^k (x - \lambda_i)^{\alpha_i}
+		\]
+		où $\alpha_i$ est la multiplicité algébrique de $\lambda \in K$.
+		\item Les multiplicités algébriques et géométrique sont les mêmes.
+	\end{enumerate}
+}{}
+
+\prf{Supposons $f$ diagonalisable. D'après le lemme (\ref{Base des espaces propres}) alors,
+	\[
+	\dim E_{\lambda_1} + \ldots + \dim E _{\lambda_k} = n
+	\]
+	mais d'après la proposition (\ref{Majoration de la multiplicité géométrique})
+	\[
+	\alpha_1 + \ldots + \alpha_k \leqslant n
+	\]
+	ainsi on en déduit que,
+	\[
+	\forall i, \quad \dim E_{\lambda_i} = \alpha_i
+	\]
+	Donc la multiplicité géométrique et algébrique coïncident bien pour toutes les valeurs propres. Réciproquement, d'après le polynôme caractéristique on en déduit que,
+	\[
+	\alpha_1 + \ldots + \alpha_k = n
+	\]
+	mais d'après la deuxième hypothèse on a
+	\[
+	\forall i, \quad \dim E_{\lambda_i} = \alpha_i
+	\]
+	on en conclut par le lemme (\ref{Base des espaces propres}) que $f$ est diagonalisable.
+}
+
+\subsection{Théorème de Cayley-Hamilton}
+
+\newthm{Soit $A \in M_n(\K)$ et $\chi_A$ le polynôme caractéristique de $A$, alors
+	\[
+	\chi_A(A) = 0
+	\]
+}{Théorème de Cayley-Hamilton}
+\prf{Soit $V$ un $\K$-espace vectoriel de dimension $n$ et $A \in M_n(\K)$. On se fixe un $v$ dans $\K^n$, et on veut montrer que $x_A(A)v = 0$. Pour $v = 0$ c'est évident par linéarité. Pour $v \neq 0$, on considère
+	\[
+	\nu = \min \{k \geqslant 2 \mid v, Av, A^2v, \ldots , A^kv \text{ est liée}\}
+	\]
+	De sorte que $A^\nu v$ est lié avec $v, Av, \ldots A^{\nu -1} v$ qui est libre, donc se décompose en
+	\[
+	A^\nu v = a_0 v + a_1 Av + \ldots a_{\nu - 1} A^{\nu -1} v
+	\]
+	On complète ensuite la famille libre $v, Av, \ldots A^{\nu-1}$ est une base $\mathcal B$ de $\K^n$, dans laquelle $A$ s'écrit comme
+	\[
+	A_{\mathcal B} = \begin{pmatrix} 0 &  &  & -a_0 & * \\
+									1 & \ddots &  & \vdots & * \\
+									  & \ddots & 0 & a_{\nu-2} & * \\
+									  &    & 1 & a_{\nu -1} & *\\
+									 0 & \dots & \dots &  0 & M 
+					\end{pmatrix}
+					= 
+					\begin{pmatrix}
+						C_p & * \\
+						0 & M
+					\end{pmatrix}
+	\]
+	où l'on a noté $p(x) = x^{\nu} - a_{\nu -1} x^{\nu-1} - \ldots - a_0$. On observe que $P(A)v = 0$. En utilisant le lemme de la matrice compagnon on a
+	\[
+	\chi_A = \chi_{\begin{pmatrix}
+			C_p & * \\
+			0 & M
+		\end{pmatrix}} = \chi_{C_p} \times \chi_M = p \times \chi_M
+	\]
+	d'où en appliquant en $v$
+	\[
+	\chi_A(A)v = \chi_M(A) \cdot p(A)v = 0
+	\]
+	Et donc par arbitrarité de $v$ on conclut bien que $\chi_A(A) = 0$.
+}

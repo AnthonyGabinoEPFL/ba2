@@ -1,0 +1,404 @@
+\section{Espace $\rn$}
+\subsection{Espace vectoriel réel}
+On désigne par $\rn$ l'ensemble constitué de tous les $n$-tuples ordonnées $(x_1, \ldots, x_n)$ de nombres réels. Par la suite, les éléments de $\rn$ seront notés indifféremment $\bm x$ ou $(x_1, \ldots, x_n)$. On munit alors $\rn$ de deux opérations,
+\[
+ \forall \bm x, \bm y \in \rn, \quad  \bm x + \bm y = (x_1 + y_1, \ldots, x_n + x_n)
+\]
+et 
+\[
+\forall \lambda \in \R, \forall \bm x \in \rn, \quad \lambda \bm x = (\lambda x_1, \ldots, \lambda x_n)
+\]
+Avec ces deux opérations on vérifie immédiatement de $\rn$ est un \emph{espace vectoriel} sur $\R$ de dimension $n$.
+
+\subsection{Norme et produit scalaire}
+Une des notions les plus importantes sur $\rn$ est sans aucuns doute la notion de \emph{norme}
+
+\newdef{Une \emph{norme} est une application $N : \rn \to \R_+$ telle que,
+	\begin{itemize}
+		\item $\forall \bm x \in \rn, \quad N(\bm x) \geqslant 0 \et N(\bm x) = 0 \iff \bm x = \bm 0$
+		\item $\forall \bm x \in \rn, \forall \lambda \in \R, \quad N(\lambda \bm x) = |\lambda| N(\bm x)$
+		\item $\forall \bm x, \bm y \in \rn, \quad N(\bm x + \bm y) \leqslant N(\bm x) + N(\bm y)$
+	\end{itemize}
+	Plus communément on note une norme $\| \cdot \|$.
+}{Norme}
+
+\newdef{On définit les application suivantes pour $p \in \R_+$, 
+	\[
+	\forall \bm x \in \rn, \quad \norme{\bm x}_p = \left(\sumn |x_i|^p \right)^{\frac{1}{p}}
+	\]
+	et
+	\[
+	\forall \bm x \in \rn, \quad \norme{\bm x}_\infty = \max_{i \in \llbracket 1,n \rrbracket} |x_i|
+	\]
+}{norme sur rn}
+
+\newlem{
+	\[
+	\forall a,b \in \R_+, \quad a b \leqslant \frac{1}{p} a^p + \frac{1}{q} b^q
+	\]
+	où $p \in ]1, \infty[$ et $q \in \R$ tel que $\frac{1}{p} + \frac{1}{q} = 1$.
+}{Inégalité de Young}
+
+\prf{Soit $p \in ]1, \infty[$ et $q \in R$ tel que $\frac{1}{p} + \frac{1}{q} = 1$, par concavité de la fonction $t \to \ln(t)$, on obtient
+	\[
+	\forall a,b \in \R_+, \quad \ln(ab) = \ln(a) + \ln(b) = \frac{1}{p} \ln(a^p) + \frac{1}{q} \ln(b^q) \leqslant \ln\left(\frac{1}{p} a^p + \frac{1}{q} b^q \right)
+	\]
+	ainsi par la croissance de la fonction $t \to \ln(t)$ sur $\R_+$ sur $\R_+$, on a bien,
+	\[
+	\forall a,b \in \R_+, \quad ab \leqslant \frac{1}{p}a^p + \frac{1}{q} b^q
+	\]
+}
+
+\newlem{Soient $p \in ]1, \infty[$ et $q \in \R$ tel que $\frac{1}{p} + \frac{1}{q} = 1$, alors
+	\[
+	|\langle \bm x, \bm y \rangle | \leqslant \norme{\bm x }_p \norme{\bm y}_q
+	\]
+	où $\langle \cdot, \cdot \rangle$ désigne le produit scalaire usuel.
+}{Inégalité de Hölder}
+
+\prf{Si on pose,
+	\[
+	\forall i \in \entiers, \quad a_i = \frac{|x_i|}{\norme{\bm x}_p} \et b_i = \frac{|y_i|}{\norme{\bm y}_q}
+	\]
+	alors on obtient, par le lemme précédent (\ref{Inégalité de Young}),
+	\[
+	\sumn a_i b_i \leqslant \frac{1}{p} \sumn a_i^p + \frac{1}{q} \sumn b_i^q = \frac{1}{p} + \frac{1}{q} = 1
+	\]
+	ainsi on obtient l'inégalité souhaitée,
+	\[
+	\sumn \frac{|x_i||y_i|}{\norme{\bm x}_p \norme{\bm y}_q} \leqslant 1 \implies |\langle \bm x, \bm y \rangle | \leqslant \sumn |x_i||y_i| \leqslant \norme{\bm x}_p \norme{\bm y}_q
+	\]
+}
+
+\newthm{Les applications (\ref{norme sur rn}) pour $p \in [1, \infty]$ définissent des normes sur $\rn$.}{}
+
+\prf{Il faut distinguer trois cas,
+	\begin{itemize}
+		\item Supposons $p = \infty$, on a donc,
+		\[
+		\forall \bm x, \bm y \in \rn, \quad \norme{\bm x + \bm y}_\infty = \max_{i \in \llbracket 1,n \rrbracket} |x_i + y_i| \leqslant \max_{i \in \llbracket 1,n \rrbracket} |x_i| + \max_{i \in \llbracket 1,n \rrbracket} |y_i| \leqslant \norme{\bm x}_\infty + \norme{\bm y}_\infty
+		\]
+		Et les autres propriétés (\ref{Norme}) d'une norme sont facilement vérifiées. 
+		\item Supposons $p \in [1, \infty[$, pour $\bm x, \bm y \in \rn$ on a,
+		\[
+		\norme{\bm x + \bm y}_p^p \leqslant \sumn |x_i||x_i + y_i|^{p-1} + \sumn |y_i||x_i + y_i|^{p-1}
+		\]
+		si $p=1$ on obtient directement l'inégalité triangulaire. Supposons donc $p \in ]1, \infty[$, on applique donc l'inégalité de Hölder (\ref{Inégalité de Hölder}) à l'inégalité précédente,
+		\begin{align*}
+			\norme{\bm x + \bm y}_p^p 	&\leqslant \sumn |x_i||x_i + y_i|^{p-1} + \sumn |y_i||x_i + y_i|^{p-1} \\
+										&\leqslant \left( \sumn |x_i|^p \right)^\frac{1}{p} \left(\sumn |x_i + y_i|^q \right)^\frac{1}{q} + \left( \sumn |y_i|^p \right)^\frac{1}{p} \left(\sumn |x_i + y_i|^q \right)^\frac{1}{q} \\
+										&\leqslant \norme{\bm x}_p \norme{\bm x + \bm y}_p^{p-1} + \norme{\bm y}_p \norme{\bm x + \bm y}_p^{p-1} \\
+										&\leqslant (\norme{\bm x}_p + \norme{\bm y}_p) \norme{\bm x + \bm y}_p^{p-1}
+		\end{align*}
+		Si $\norme{\bm x + \bm y}_p = 0$ on a l'inégalité triangulaire, supposons donc $\norme{\bm x + \bm y}_p \neq 0$, ainsi en divisant de part et autre par $\norme{\bm x + \bm y}_p^{p-1}$, on obtient bien l'inégalité triangulaire souhaitée,
+		\[
+		\norme{\bm x + \bm y}_p \leqslant \norme{\bm x}_p + \norme{\bm y}_p
+		\]
+		Et les autres propriétés (\ref{Norme}) d'une norme sont facilement vérifiées.
+		\item Finalement si nous supposons $p \in ]0,1[$. On pose,
+		\[
+		\bm x = (1, 0, \ldots, 0) \et \bm y = (0, \ldots, 0, 1)
+		\]
+		en supposant que l'inégalité triangulaire soit vraie, obtient
+		\[
+		2^\frac{1}{p} < 2
+		\]
+		ce qui est absurde car nous avions supposé que $p \in ]0,1[$.
+	\end{itemize}
+}
+
+\newthm{Toutes les normes $\{ \norme{\cdot}_p, ~p \in [1, \infty] \}$ sont équivalentes.}{}
+
+\prf{Soit $\bm x \in \rn$, on observe que
+	\begin{itemize}
+		\item En posant $\bm y = (1,1, \ldots, 1) \in \rn$ et en notant $|\bm x | = (|x_1, \ldots, |x_n|)$, on obtient
+		\[
+		\norme{\bm x}_1 = \sumn |x_i| = \langle |\bm x|, \bm y \rangle \leqslant \norme{\bm x}_p \norme{\bm y}_q \leqslant n^\frac{1}{q} \norme{\bm x}_p
+		\]
+		\item Pour $p \in [1, \infty[$, on a
+		\[
+		\norme{\bm x }_p = \left(\sumn |x_i|^p \right)^\frac{1}{p} \leqslant \left( n \left( \max_{i \in \llbracket 1,n \rrbracket} |x_i| \right)^p \right)^\frac{1}{p} = n^\frac{1}{p} \norme{\bm x}_\infty
+		\]
+		\item Et finalement,
+		\[
+		\norme{\bm x}_\infty = \max_{i \in \llbracket 1,n \rrbracket} |x_i| \leqslant \sumn |x_i| = \norme{\bm x}_1
+		\]
+	\end{itemize}
+	Ainsi on en déduit que n'importe quelle norme $\norme{\cdot}_\alpha$ pour être bornée par n'importe quelle autre norme $\norme{\cdot}_\beta$ multipliée par une constante $C_{\alpha, \beta} > 0$ indépendante de $\bm x$. Donc on a bien que toutes les normes $\{ \norme{\cdot}_p, ~p \in [1, \infty] \}$ sont équivalentes.
+}
+
+
+
+\newdef{Un \emph{produit scalaire} sur $\rn$ est une application $b : \rn \times \rn \to \R$ telle que 
+	\begin{enumerate} \label{def : produit scalaire}
+		\item $\forall \bm x, \bm y \in \rn, \quad b(\bm x, \bm y) = \bm (\bm y, \bm y)$
+		\item $\forall \bm x, \bm y, \bm z, ~\alpha, \beta \in \R, \quad b(\alpha \bm x + \bm y, \bm z) = \alpha b(\bm x, \bm z) + b(\bm y, \bm z)$
+		\item $\forall \bm x \in \rn, \quad b(\bm x, \bm x) \geqslant 0$ et $b(\bm x, \bm x) = 0$ ssi $\bm x = 0$.
+	\end{enumerate}
+}{}
+
+\newprop{On définit le \emph{produit scalaire usuelle} comme 
+	\[
+	\forall \bm x, \bm y \in \rn, \quad \langle \bm x, \bm y \rangle = \bm x^\top \bm y = \bm y^\top \bm x = \sum_{i=1}^n x_i y_i
+	\]
+}{}
+
+\prf{Il est facile de voir que cette application respecte bien tout les conditions d'un produit scalaire.}
+
+\newlem{Soit $b : \rn \times \rn$ un produit scalaire alors pour tout $\bm x, \bm y \in \rn$ on a
+	\[
+	|b(\bm x, \bm y)| \leqslant \sqrt{b(\bm x, \bm x)}\sqrt{b(\bm y, \bm y)} = \norme{\bm x}_E \norme{\bm y}_E
+	\]
+	où $\norme{\cdot}_E$ désigne la norme induite par le produit scalaire $b$.
+}{}
+
+\prf{Pour tout $\bm x, \bm y \in \rn$ et $\alpha \in \R$ on a
+	\[
+	0 \leqslant b(\alpha \bm x + \bm y, \alpha \bm x + \bm y) = \alpha^2 b(\bm x, \bm x) + 2\alpha b(\bm x, \bm y) + b(\bm y, \bm y) = p(\alpha)
+	\]
+	on a alors on polynôme positif ou nul en $\alpha$, on a donc un discriminant nécessairement négatif ou nul, on peut donc en conclure que
+	\[
+	4 b(\bm x, \bm y)^2 - 4 b(\bm x, \bm x) b(\bm y, \bm y) \leqslant 0
+	\]
+	D'où le lemme.
+}
+	
+
+\subsection{Suites dans $\rn$}
+
+\newdef{Soit $(\bm x^k) \subset \rn$ une suite d'éléments de $\rn$, $\bm x^k = (x_1^k, \ldots, x_n^k) \in \rn$. On dit que $(\bm x^k)$ \emph{converge} s'il existe $\bm x \in \rn$ tel que,
+\[
+\forall \varepsilon > 0, \exists N > 0, \forall k \geqslant N, \quad \norme{\bm x^k - \bm x} \leqslant  \varepsilon
+\]
+Dans ce cas on note $\lim_{k \to \infty} \bm x^k = \bm x$.
+}{Suite convergente}
+
+\newprop{Soient $(x^k) \subset \rn $ une suite et $\norme{\cdot}_1, \norme{\cdot}_2$ deux normes sur $\rn$, s'il existe $\bm x \in \rn$ tel que,
+	\[
+	\lim_{k \to \infty} \norme{\bm x^k - \bm x}_1 = 0
+	\]
+	alors,
+	\[
+	\lim_{k \to \infty} \norme{\bm x^k - \bm x}_2 = 0
+	\]
+On a donc une indépendance de norme dans la caractérisation de la convergence d'une suite.
+}{Indépendance de la norme}
+
+\prf{Puisque $\norme{\cdot}_1, \norme{\cdot}_2$ sont équivalente sur $\rn$, on a
+	\[
+	\exists C > 0, \forall \bm x \in \rn, \quad \norme{\bm x}_2 \leqslant C \norme{\bm x}_1
+	\]
+	Ainsi par hypothèse de convergence, pour $\varepsilon > 0$
+	\[
+	\exists N > 0, \forall k \geqslant N, \quad \norme{\bm x^k - x}_1 \leqslant \varepsilon
+	\]
+	Il suffit de poser $\epsilon =  \frac{1}{C} \varepsilon$, ainsi
+	\[
+	\forall k \geqslant N, \quad \norme{\bm x^k - \bm x}_2 \leqslant C \norme{\bm x^k- \bm x}_1 \leqslant C \varepsilon \leqslant \epsilon
+	\]
+}
+
+\newlem{Une suite $(\bm x^k) \subset \rn$ converge vers $\bm x \in \rn$ si et seulement si pour toute composante $j \in \entiers$ la suite $(x_j^k) \subset \R$ converge vers $x_j \in \R$.}{Convergence des suites composantes}
+
+\prf{Puisque la convergence ne dépend pas de la norme choisie (\ref{Indépendance de la norme}), on considère en particulier la norme $\norme{\cdot}_\infty$. Par définition de la convergence d'une suite $(\bm x^k) \subset \rn$
+\[
+\forall \varepsilon > 0, \exists N > 0, \forall k \geqslant N, \quad \norme{\bm x^k - \bm x}_\infty = \max_{i \in \llbracket 1,n \rrbracket} |x_i^k - x_i| \leqslant \varepsilon
+\]
+ce qui implique que $\lim_{k \to \infty} x_j^k \to x_j$ pour tout $j = 1, \ldots, n$.
+Réciproquement, supposons qu'il existe $\bm x = (x_1, \ldots, x_n) \in \rn$ tel que $\lim_{k \to \infty} x_j^k = x_j$ pour tout $j =1, \ldots, n$. Alors pour tout $j \in \entiers$,
+\[
+\forall \varepsilon > 0, \exists N_j, \forall k \geqslant N_j, \quad |x_j^k - x_j| \leqslant \varepsilon
+\]
+Si on pose $\tilde N = \max\{N_1, \ldots, N_n\}$, on a $\max_{i \in \llbracket 1,n \rrbracket} |x_i^k - x_i| \leqslant \varepsilon$ pour tout $k \geqslant \tilde N$, ce qui implique $\lim_{k \to \infty} \bm x^k = \bm x$.
+}
+
+
+\newdef{Une suite $(\bm x^k) \subset \rn$ est dite de \emph{Cauchy} si
+	\[
+	\forall \varepsilon > 0, ~\exists N > 0, ~\forall k, l \geqslant N, \quad \norme{\bm x^k - \bm x^l} \leqslant \varepsilon
+	\]
+	
+}{}
+
+En suivant la même démonstration que le lemme (\ref{Convergence des suites composantes}), on peut montrer qu'une suite $(\bm x^k) \subset \rn$ est de Cauchy si et seulement si chaque suite $(x_j^k) \subset \R$ pour $j = 1, \ldots, n$ est de Cauchy.
+
+
+\newprop{Une suite $(\bm x^k) \subset \rn$ est convergente si et seulement si elle est de Cauchy.}{}
+
+\prf{On sait que cela est vrai en dimension $n = 1$. Ainsi,
+	\begin{align*}
+	(\bm x^k) \text{ converge} &\iff \forall j \in \entiers, \quad (x_j^k) \text{ converge} \\ &\iff \forall j \in \entiers, \quad (x_j^k) \text{ est de Cauchy} \iff (\bm x^k) \text{ est de Cauchy}
+	\end{align*}
+}
+
+\newthm{Soit $(\bm x^k) \subset \rn$ une suite \emph{bornée}. Alors il existe une sous-suite $(\bm x^{k_i}) \subset (\bm x^k)$ qui est convergente}{Bolzano-Weierstrass}
+
+\prf{Puisque ${\bm x^k}$ est bornée, en particulier $(x_1^k)$ l'est aussi. Donc on peut extraire une sous-suite $(x_1^{k_j})$ qui converge vers $x_1 \in \R$. Désormais, comme la suite $(x_2^{k_j})$ est bornée, on peut extraire une sous-suite $(x_2^{k_{j_l}})$ qui converge vers $x_2 \in \R$. Ainsi,
+	\[
+	x_1^{k_{j_l}} \underset{l \to \infty}{\longrightarrow} x_1 \et x_2^{k_{j_l}} \underset{l \to \infty}{\longrightarrow} x_2
+	\]
+
+En itérant ce processus $n$ fois, on peut extraire une sous-suite de $(\bm x^k)$ donc chaque composante converge vers $(x_1, x_2, \ldots, x_n)$.
+}
+
+\subsection{Topologie de $\rn$}
+On s'intéresse ici à l'étude et classification de sous-ensembles de $\rn$.
+\newdef{Pour tout $\bm x \in \rn$ et $\delta > 0$, on appelle
+	\[
+	B(\bm x, \delta) = \{ \bm y \in \rn, \quad \norme{\bm x - \bm y} < \delta\}
+	\]
+	la \emph{boule ouverte} centrée en $\bm x$ et de rayon $\delta$. Ainsi que
+	\[
+	\overline B (\bm x, \delta) = \{ \bm y \in \rn, \quad \norme{ \bm x - \bm y} \leqslant \delta \}
+	\]
+	la \emph{boule fermée} centrée en $\bm x$ et de rayon $\delta$.
+}{Boules}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{"images/boules.png"}
+	\caption{Forme des boules de $\R^2$ pour des normes différentes}
+\end{figure}
+
+\newdef{Soit $E \subset \rn$. On dit que 
+	\begin{itemize}
+		\item $E$ est \emph{ouvert} si,
+		\[
+		\forall \bm x \in E, \exists \delta > 0, \quad B(\bm x, \delta) \subset E
+		\]
+		En particulier $E$ est ouvert si $E$ est vide.
+		\item $E$ est \emph{fermé} si son complémentaire $E^c = \rn\backslash E$ est ouvert.
+	\end{itemize}
+}{Ensembles ouverts/fermée}
+
+\newprop{Pour $\bm x \in \rn$ et $\delta > 0$, $B(\bm x, \delta)$ est ouvert et $\overline B(\bm x, \delta)$ est fermée.}{}
+
+\prf{En effet, pour $\bm z \in B(\bm x, \delta)$,
+	\[
+	B(\bm z, \delta - \norme{\bm z - \bm x}) \subset B(\bm x, \delta)
+	\]
+	Donc $B(\bm x, \delta)$ est ouvert. De même, pour $\bm z \in \overline B(\bm x, \delta)^c$,
+	\[
+	B(\bm z, \norme{\bm z - \bm x} - \delta) \subset \overline B(\bm x, \delta)^c
+	\]
+	donc $\overline B(\bm x, \delta)$ est fermée.
+}
+\subsubsection{Classification des points de $\rn$ par rapport à $E$.}
+\newdef{Soit $E \subset \rn$ et $\bm x \in \rn$. On dit que
+	\begin{itemize}
+		\item $\bm x$ est un \emph{point intérieur} de $E$ si
+		\[
+		\exists \delta > 0, B(\bm x, \delta ) \subset E
+		\]
+		L'ensemble des points intérieurs de $E$ est noté $\mathring E$ et appelé \emph{intérieur} de $E$.
+		\item $\bm  x$ est un \emph{point frontière} si,
+		\[
+		\forall \delta > 0, \quad B(\bm x, \delta) \cap E \neq \emptyset \et B(\bm x, \delta) \cap E^c \neq \emptyset
+		\]
+		l'ensemble des points frontière de $E$ est noté $\partial E$ et appelé la \emph{frontière} de $E$.
+		\item $\bm x$ est un \emph{point adhérent} à $E$ si,
+		\[
+		\forall \delta > 0, \quad  B(\bm x, \delta) \cap E \neq \emptyset
+		\]
+		Un point adhérent est soit un point intérieur, soit un point frontière. L'ensemble des points adhérents à $E$ est noté $\overline E$, et appelé \emph{la fermeture} de $E$.
+		\item $\bm x$ est un \emph{point isolé} de $E$ si,
+		\[
+		\exists \delta > 0, \quad B(\bm x, \delta) \neq E = \{ \bm x\}
+		\]
+		\item $\bm x$ est un \emph{point d'accumulation} si
+		\[
+		\forall \delta > 0, \quad B(\bm x, \delta) \cap (E \backslash \{\bm x\}) \neq \emptyset
+		\]
+		Il s'ensuit que les points d'accumulation de $E$ sont tous les pointsde $\overline E$ qui ne sont pas isolés.
+	\end{itemize}
+}{}
+\subsubsection{Quelques remarques sur les ensembles ouverts}
+\newprop{$\mathring E$ est ouvert. De plus $E$ est ouvert si et seulement si $E = \mathring E$.}{}
+
+\prf{Si $\bm x \in \mathring E$, il existe $\delta > 0$ tel que $B(\bm x, \delta) \subset E$. Or pour tout $\bm z \in B(\bm x, \delta)$, 
+	\[
+	B(\bm z, \delta - \norme{\bm z - \bm x}) \subset B(\bm x, \delta) \subset E
+	\]
+	et donc $\bm z \in \mathring E$ et $B(\bm x, \delta) \subset E$. \\
+	On sait que $\mathring E \subset E$, or comme $E$ est ouvert on sait que pour tout $\bm x \in E$,
+	\[
+	\exists \delta > 0, \quad B(\bm x, \delta) \subset E
+	\]
+	donc $\bm x$ est un point intérieur de $E$ et donc $\bm x \in \mathring E$, ainsi $E = \mathring E$. La réciproque est trivial car $\mathring E$ est ouvert.
+}
+
+\newprop{Toute réunion quelconque de sous-ensemble ouverts de $\rn$ est un sous-ensemble ouvert. Cependant intersection finie de sous-ensembles ouverts de $\rn$ est ouvert.
+}{}
+
+\prf{Soit $E = \bigcup_\alpha E_\alpha$ avec $E_\alpha$ ouvert. Pour tout $\bm x \in E$, il existe $\alpha$ tel que $\bm x \in E_\alpha$. Mais comme $E_\alpha$ est ouvert, alors il existe $\delta >  0$ tel que $B(\bm x, \delta) \subset E_\alpha \subset E$. Donc $E$ est ouvert. Similairement, soit $E = \bigcap_{i=1}^m E_i$ avec $E_i$ ouvert. Si $\bm x \in E$, alors pour tout $i =1,\ldots, m$ $\bm x \in E_i$, mais puisque chaque $E_i$ est ouvert, il existe $\delta_i > 0, \quad B(\bm x, \delta_i) \subset E_i$. On pose donc $\delta = \min \{\delta_i\}$ alors
+	\[
+	B(\bm x, \delta) \subset B(\bm x, \delta_i) \subset E, \quad \forall i
+	\]
+donc $B(\bm x, \delta) \subset \bigcap_{i=1}^m E_i = E$.
+}
+
+\subsubsection{Quelques remarques sur les ensembles fermés}
+
+\newprop{
+	\[
+	(\overline E)^c = \mathring{E^c} \et \overline{E^c} = (\mathring E)^c
+	\]
+}{}
+
+\prf{On a
+	\begin{align*}
+		(\overline E)^c &= \{ \bm x \in \rn ~|~ \exists \delta > 0, ~ B(\bm x, \delta) \cap E \neq \emptyset \} \\
+						&= \{ \bm x \in \rn ~|~ \exists \delta > 0, ~ B(\bm x, \delta) \subset E^c\} \\
+						&= \mathring{E^c}
+	\end{align*}
+	Similairemment,
+	\begin{align*}
+		(\mathring E)^c &= \{\bm x \in \rn ~|~ \forall \delta > 0, ~B(\bm x, \delta) \not \subset E\} \\
+						&= \{\bm x \in \rn ~|~ \forall \delta > 0, ~B(\bm x, \delta) \cap E^c \neq \emptyset \}\\
+						&= \overline{E^c}
+	\end{align*}
+}
+
+\newprop{$\overline E$ est fermé. De plus $E$ est fermé si et seulement si $E = \overline E$.}{}
+
+\prf{Par passage on complémentaire on a
+	\[
+	(\overline E)^c = \mathring{E^c}
+	\]
+	qui est ouvert, donc $\overline E$ est fermé. De même
+	\[
+	E = \overline E \iff E^c = (\overline E)^c = \mathring E^c
+	\]
+	Donc $E^c$ est ouvert, donc $E$ est fermé.
+}
+
+\newprop{Toute intersection quelconque de sous-ensembles fermé de $\rn$ est un sous-ensemble fermé. Cependant toute intersection union finie de sous-ensembles fermés est fermée.
+}{}
+
+\prf{On sait que
+	\[
+	\left(\bigcap E_i\right)^c = \bigcup E_i^c \et \left( \bigcup E_i \right)^c = \bigcup E_i^c
+	\]
+	On conclut par le proposition similaire pour les sous-ensembles ouverts puisque si $E$ est fermée, alors $E^c$ est ouvert.
+}
+
+\newlem{Un ensemble $E \subset \rn$ non vide est fermé si et seulement si toute suite convergente $(\bm x^k) \subset E$ convergente, converge vers un élément de $E$.}{}
+
+\prf{Soit $E$ fermé et $(\bm x^k) \subset E$ une suite convergente vers $\bm x \in \rn$. Alors $\bm x$ adhère $E$ et, puisque $E$ est fermé, $\bm x \in E$. Réciproquement, supposons que $E$ ne soit pas fermé, par passage au complémentaire $E^c$ n'est pas ouvert et donc il existe $\bm{\tilde x} \in E^c$ tel que $\forall \delta > 0, \quad B(\bm{\tilde x}, \delta) \not \subset E$. En posant $\delta = \frac{1}{k}$ pour tout $k \in \N^*$, on obtient alors une suite $(\bm x^k) \subset E$ convergente vers $\bm{\tilde x} \not \in E$.
+}
+
+\subsection{Ensembles compacts}
+
+\newdef{Un ensemble $E \subset \rn$ est \emph{compact} si et seulement s'il est à la fois borné et fermé}{}
+
+\newthm{Un sous ensemble non vide $E \subset \rn$ est compact si et seulement si de toute suite d'éléments de $E$ on peut extraire un sous-suite convergente qui converge vers un élément de $E$.
+}{Caractérisation d'un sous-ensemble compact}
+
+\prf{Soit $E$ un compact, alors par Bolzano-Weierstrass, de toute suite $(\bm x^k) \subset E$, on peut extraire un sous-suite $(\bm x^{k_j}) \subset E$ convergente vers $\bm x \in \rn$ mais comme $E$ est fermé, alors $\bm x \in E$. \\
+	Réciproquement, supposons que $E$ ne soit pas compact, donc si $E$ n'est pas fermé, il existe alors une suite $(\bm y^k) \subset E$ qui converge vers $\bm y \in E^c$. Or tout sous-suite extraite converge aussi vers $\bm y$. Si $E$ n'est pas borné, alors il existe un suite $(\bm x^k) \subset E$ telle que $\norme{\bm x^k} \geqslant k$ pour tout $k \in \N$. Toute sous-suite $(\bm x^{k_j})$ satisfait $\norme{\bm x^{k_j}} \geqslant k_j \geqslant j$ et donc la suite ne converge pas.
+}
+
+\subsubsection{Ensembles connexes et connexes pas arcs}
+
+\newdef{Soit $E \subset \rn$. On dit que $E$ est \emph{connexe} s'il existe pas deux ouvert $A,B \subset \rn$ disjoint tels que $A \cap E \neq \emptyset, B \cap E \neq \et E \subset A \cap B$. Un ensemble non vide $E \subset \rn$ est \emph{connexe par arcs} si pour tout $\bm x, \bm y \in E$, il existe un chemin continue $\bm \gamma : [0,1] \to E$ tel que $\bm \gamma(0) = \bm x$ et $\bm \gamma(1) = \bm y$.
+}{}

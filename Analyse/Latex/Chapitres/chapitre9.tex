@@ -1,0 +1,630 @@
+\section{Intégrale multiple au sens de Riemann}
+
+\newdef{Un pavé de $\rn$ est un ensemble $R \subset\rn$ compacte de la forme,
+	\[
+	R = [a_1, b_1] \times \ldots \times [a_n, b_n], \quad \text{où} \quad a_i \leqslant  b_i < \infty
+	\]
+	On définit le volume de $R$ comme
+	\[
+	\mathrm{Vol} (R) = \prod_{i=1}^n  (b_i - a_i)
+	\]
+	S'il existe un $i \in \entiers$ tel que $a_i = b_i$ on appelle alors $R$ un \emph{pavé dégénéré} et $\mathrm{Vol}(R) = 0$.
+}{Pavé}
+
+\newdef{Étant donné un pavé $R \subset \rn$,
+	\[
+	R = [a_1, b_1] \times \ldots \times [a_n, b_n]
+	\]
+	Pour tout $j \in \entiers$ on introduit $N_j + 1$ points $\{t_j^k\}_{k=0}^{N_j}$ ordonnés dans l'intervalle $[a_j, b_j]$ tel
+	\[
+	a_j = t_j^0 \leqslant t_j^1 \leqslant \ldots  \leqslant t_{j}^{N_j -1} \leqslant t_j^{N_j} = b_j
+	\]
+	et la \emph{grille tensorielle} est
+	\[
+	T = \{ t_1^0, \ldots t_1^{N_1}\} \times \ldots \times \{t_n^0, \ldots t_n^{N_n}\}
+	\]
+	On appelle \emph{partition tensorielle} $P_T$ induite par la grille tensorielle $T$,
+	\[
+	P_T = \left\{ [t_1^{\alpha_1}, t_1^{\alpha_1+1}] \times [t_2^{\alpha_2}, t_2^{\alpha_2 + 1}] \times \ldots \times [t_n^{\alpha_n}, t_n^{\alpha_n +1}], \quad \forall j \in \entiers, ~\alpha_j \in \llbracket 0, N_j-1 \rrbracket \right\}
+	\]
+	que l'on peut donner plus simplement
+	\[
+	P_T = (t_1^0, \ldots, t_1^{N_1}) \otimes \ldots \otimes (t_n^0, \ldots t_n^{N_n})
+	\]
+}{}
+
+\newdef{Soient $T, T'$ deux grilles tensorielles de $R$,
+	\[
+	T = \{ t_1^0, \ldots t_1^{N_1}\} \times \ldots \times \{t_n^0, \ldots t_n^{N_n}\} \et T' = \{ p_1^0, \ldots p_1^{M_1}\} \times \ldots \times \{p_n^0, \ldots p_n^{M_n}\}
+	\]
+	et $P, P'$ les partitions tensorielles induites par $T$ et $T'$. On dit que $P'$ est un raffinement de $P$ si $T \subset T'$.
+}{}
+
+\newlem{Étant donné deux partitions $P$ et $P'$ de $R$, alors il existe toujours une partition $P''$ qui raffine à la fois $P$ et $P'$.
+}{}
+
+\subsection{Sommes de Darboux}
+
+\newdef{Soit $R \subset \rn$ un pavé, $f : R \to \rn$ bornée et $P$ une partition de $R$. On définit la \emph{somme supérieur} de $f$ sur une partition $P$ comme
+	\[
+	\overline S (f, P) = \sum_{Q \in P} \sup_{\bm x \in Q} f(\bm x) \mathrm{Vol} Q
+	\]
+	et la somme inférieure scomme
+	\[
+	\underline S(f, P) = \sum_{Q\in P} \inf_{\bm x \in Q} f(\bm x) \mathrm{Vol} Q
+	\]
+}{Sommes de Darboux}
+
+\newlem{Soit $P'$ un raffinement de $P$ alors
+	\[
+	\underline S(f, P) \leqslant \underline S(f, P') \leqslant \overline S(f, P') \leqslant \overline S(f, P)
+	\]
+De plus de manière générale pour $P$ et $P'$ deux partitions de $R$ alors,
+\[
+\underline S(f, P) \leqslant \overline S(f, P')
+\]
+}{}
+
+\prf{Par définition
+	\begin{align*}
+	\overline S(f,P) = \sum_{Q \in P} \inf_{\bm x \in Q} f(\bm x) \mathrm{Vol} Q &= \sum_{Q \in P} \inf_{\bm x \in Q} f(\bm x)\left( \sum_{Q' \in P',~Q' \subset Q} \mathrm{Vol} Q'\right)  \\
+	&\leqslant \sum_{Q \in P} \sum_{Q' \in P',~Q' \subset Q} \inf_{\bm x \in Q'} f(\bm x) \mathrm{Vol} Q' = \sum_{Q' \in P'} \inf_{\bm x \in Q'} f(\bm x) \mathrm{Vol} Q' = \underline S(f, P')
+	\end{align*}
+	Le reste est analogue. De plus étant donné $P$ et $P'$ par le lemme précédent il existe $P''$ qui raffine $P$ et $P'$, alors par ce qui précède
+	\[
+	\underline S(f, P) \leqslant \underline S(f, P'') \leqslant \overline S(f,P'') \leqslant \overline S(f,P')
+	\]
+}
+
+\newdef{Soit $R$ un pavé de $\R$ et $f : R \to \R$ une fonction bornée, alors on définit l'intégrale inférieur comme
+	\[
+	\underline{\int_R} f(\bm x)~\mathrm d \bm x = \sup \{ \underline S(f, P), ~ P \text{ partition de} R\}
+	\]
+	et la somme supérieure comme
+	\[
+	\overline{\int_R} f(\bm x) ~\mathrm d \bm x = \inf \{ \underline S(f, P), ~ P \text{ partition de} R\}
+	\]
+	Et donc on dit que $f$ est \emph{intégrable au sens de Riemann} si $\underline{\int_R} f(\bm x)~\mathrm d \bm x =\overline{\int_R} f(\bm x) ~\mathrm d \bm x$. Dans ce cas on note,
+	\[
+	\int_R f(\bm x) ~\mathrm d \bm x = \underline{\int_R} f(\bm x)~\mathrm d \bm x =\overline{\int_R} f(\bm x) ~\mathrm d \bm x
+	\]
+}{}
+
+\newlem{$f$ est inégrable au sens de Riemann si et seulement si pour tout $\varepsilon > 0$ il existe une partition $P_\varepsilon$ de $R$ tel que,
+\[
+\overline S(f, P_\varepsilon) - \underline S(f,P_{\varepsilon})
+\]
+ }{}
+ 
+\prf{Soit $\varepsilon > 0$, alors 
+	\[
+	\overline{\int_R} f(\bm x)~\mathrm d \bm x \leqslant \overline S(f, P_\varepsilon) \et \underline{\int_R} f(\bm x)~\mathrm \geqslant \underline S(f, P_\varepsilon)
+	\]
+	et donc
+	\[
+	\overline{\int_R} f(\bm x) ~\mathrm d \bm x -\underline{\int_R} f(\bm x)~\mathrm d \bm x \leqslant \varepsilon
+	\]
+	et donc par arbitrarité de $\varepsilon$ on obtient bien que $f$ est intégrable au sens de Riemann.
+	
+	Réciproquement, si $f$ est intégrable au sens de Riemann, par caractérisation du sup et de l'inf, pour $\varepsilon > 0$,
+	\[
+	\exists P_\varepsilon ', \quad \overline S(f, P_\varepsilon') \leqslant \overline{\int_R} f(\bm x) ~\mathrm d \bm x + \frac{\varepsilon}{2}
+	\]
+	\[
+	\exists P_\varepsilon '', \quad \underline S(f, P_\varepsilon'') \geqslant \underline{\int_R} f(\bm x) ~\mathrm d \bm x - \frac{\varepsilon}{2}
+	\]
+	Ainsi on considère le raffinement $P_{\varepsilon}$ de  $P_\varepsilon ',  P_\varepsilon ''$ alors
+	\[
+	\overline S(f, P_\varepsilon) - \underline S(f,P_{\varepsilon}) \leqslant\overline S(f, P_\varepsilon') -\underline S(f, P_\varepsilon') \leqslant \overline{\int_R} f(\bm x) ~\mathrm d \bm x + \frac{\varepsilon}{2} - \underline{\int_R} f(\bm x) ~\mathrm d \bm x + \frac{\varepsilon}{2} \leqslant \varepsilon
+	\]
+}
+
+\newthm{Soit $f : R \to \R$ une fonction continue sur un pavé $R$ alors $f$ est intégrable au sens de Riemann.
+}{Intégrabilité des fonctions continues}
+
+\prf{Puisque $R$ est compacte $f$ est uniformément continue sur $R$,
+\[
+\forall \varepsilon >0, \exists \delta >0, \forall \bm x, \bm y \in R, \quad \norme{\bm x - \bm y} \leqslant \delta \implies |f(\bm x) - f(\bm y)| \leqslant \varepsilon
+\]
+On peut alors construire une partition $P_\varepsilon$ tel que
+\[
+\forall Q \in P_\varepsilon, \forall \bm x, \bm y \in Q, \quad \norme{\bm x - \bm y} \leqslant \delta
+\]
+et donc
+\[
+\overline S(f, P_\varepsilon) - \underline S(f, P_\varepsilon) =  \sum_{Q \in P_{\varepsilon}} \underbrace{\left(\sup_{\bm x \in Q} f(\bm x)- \inf_{\bm y \in Q} f(\bm y) \right)}_{\leqslant \varepsilon} \mathrm{Vol}Q \leqslant \varepsilon
+\]
+\[
+\amalg
+\]
+}
+
+\newdef{Soit $R \subset \rn$ un pavé. On note $\mathcal R(R)$ l'ensemble des fonctions $ f : R \to \R$ bornées intégrables au sens de Riemann sur $R$. Ainsi par le théorème (\ref{Intégrabilité des fonctions continues}) on a $C^0(R) \subset \mathcal R(R)$.
+}{}
+
+\subsection{Intégrale itérées sur un pavé et théorème de Fubini}
+
+\newthm{Soit $R \subset \R^{n + m}$	un pavé de la forme $R = R_1 \times R_2$ tels que $R_1 \subset \rn$ et $R_2 \subset \rmm$ et $f : R \to \R$ une fonction borné et intégrable au sens de Riemann. Si pour tout $\bm y \in R_2$ la fonction $f(\cdot, y) : R_1 \to \R$ est intégrable au sens de Riemann, alors la fonction $\bm y \mapsto G(\bm y) = \int_{R_1} f(\bm x, \bm y) ~\mathrm d \bm x, ~\bm y \in R_2$ est aussi intégrable au sens de Riemann et 
+	\[
+	\int_R f(\bm x, \bm y)  ~\mathrm d \bm x \mathrm d \bm y = \int_{R_2} G(\bm y)~\mathrm d\bm y = \int_{R_2} \left( \int_{R_1} f(\bm x, \bm y) ~\mathrm d \bm x \right)\mathrm d \bm y
+	\]
+Réciproquement, si pour tout $\bm x \in R_1$ la fonction $f(\bm x, \cdot) : R_2 \to \R$ est intégrable au sens de Riemann, alors la fonction $\bm x \mapsto F(\bm x) = \int_{R_2} f(\bm x, \bm y) ~\mathrm d \bm y, ~x \in R_1$ est aussi intégrable au sens de Riemann et,
+\[
+\int_R f(\bm x, \bm y) ~\mathrm d\bm x \mathrm d \bm y = \int_{R_1} F(\bm x) ~\mathrm d \bm x = \int_{R_1} \left( \int_{R_2} f(\bm x, \bm y) ~\mathrm d \bm y \right) \mathrm d \bm x
+\]
+}{Théorème de Fubini}
+
+\prf{Soit $\varepsilon > 0$, puisque $f$ est intégrable au sens de Riemann, il existe une partition $P_\varepsilon$ de $R$ telle que,
+	\[
+	\overline S(f, P_\varepsilon) - \underline S(f, P_\varepsilon) \leqslant \varepsilon
+	\]
+or $P_\varepsilon$ admet un raffinement tensorielle,
+\[
+P_\varepsilon' = (t_1^0, \ldots, t_1^{N_1}) \otimes \ldots \otimes (t_{n+m}^0, \ldots ,t_{n+m}^{N_{n+m}})
+\]
+Soit
+\[
+P_1 = (t_1^0, \ldots, t_1^{N_1}) \otimes \ldots \otimes (t_{n}^0, \ldots, t_{n}^{N_{n}}) \et P_2 =(t_{n+1}^0, \ldots, t_{n+1}^{N_{n+1}}) \otimes \ldots \otimes (t_{n+m}^0, \ldots ,t_{n+m}^{N_{n+m}})
+\]
+des partitions tensorielles de respectivement $R_1$ et $R_2$. Alors pour $\bm y \in R_2$,
+\[
+\underline S(f(\cdot, \bm y), P_1) \leqslant \int_{R_1} f(\bm x, \bm y) ~\mathrm d \bm x = G(\bm y) \leqslant \overline S(f(\cdot, \bm y), P_1)
+\]
+Donc
+\begin{align*}
+	\underline S(G, P_2) &= \sum_{Q_2 \in P_2} \inf_{\bm y \in Q_2} G(\bm y) \mathrm{Vol} Q_2 \\
+									&\geqslant \sum_{Q_2 \in P_2} \inf_{\bm y \in Q_2} \underline S(f(\cdot, \bm y ), P_1) \mathrm{Vol} Q_2 \\
+									&= \sum_{Q_2 \in P_2} \inf_{\bm y \in Q_2} \left(\sum_{Q_1 \in P_1} \inf_{Q_1 \in P_1} f(\bm x, \bm y) \mathrm{Vol} Q_1\right)\mathrm{Vol} Q_2 \\
+									&\geqslant \sum_{Q_2 \in P_2} \sum_{Q_1 \in P_1} \left(\inf_{(\bm x, \bm y) \in Q_1 \times Q_2} f(\bm x, \bm y) \right) \mathrm{Vol} Q_1 \mathrm{Vol} Q_2 \\
+									&\geqslant \underline S(f, P_\varepsilon)
+\end{align*}
+De façon similaire on montre que $\overline S(G, P_2) \leqslant \overline S(f, P_\varepsilon)$ et donc
+\[
+\overline S(G, P_2) - \underline S(G, P_2) \leqslant \overline S(f, P_\varepsilon) - \underline S(f, P_\varepsilon) \leqslant \varepsilon
+\]
+ce qui implique que $G$ est intégrable au sens de Riemann sur $R_2$. De plus
+\[
+\underline S(f, P_\varepsilon) \leqslant \underline S(G, P_2) \leqslant \int_{R_2} G(\bm y) ~\mathrm d \bm y \leqslant \overline S(G, P_2) \leqslant \overline S(f, P_\varepsilon)
+\]
+et
+\[
+\underline S (f, P_\varepsilon) \leqslant \int_R f(\bm x, \bm y) ~\mathrm d \bm x \mathrm d \bm y \leqslant \overline S(f, P_\varepsilon)
+\]
+avec $\overline S(f, P_\varepsilon) - \underline S(f, P_\varepsilon) \leqslant \varepsilon$, et donc par arbitrarité de $\varepsilon$, on conclut
+\[
+\int_R f(\bm x, \bm y)  ~\mathrm d \bm x \mathrm d \bm y = \int_{R_2} G(\bm y)~\mathrm d\bm y
+\]
+}
+
+\newcor{Soit $f \in C^0(R)$ alors
+	\begin{itemize}
+		\item $G(\bm y) = \int_{R_1} f(\bm x, \bm y) ~\mathrm d \bm x$ existe pour tout $\bm y \in R_2$
+		\item $F(\bm x) = \int_{R_2} f(\bm x, \bm y) ~\mathrm d \bm y$ existe pour tout $\bm x \in R_1$
+		\end{itemize}
+		et donc
+		\[
+		\int_R f = \int_{R_2} \left( \int_{R_1} f(\bm x, \bm y) ~\mathrm d\bm x\right) \mathrm d \bm y = \int_{R_1} \left( \int_{R_2} f(\bm x, \bm y) ~\mathrm d\bm y\right) \mathrm d \bm x
+		\]
+}{}
+
+\subsection{Intégrale sur une domaine quelconque}
+
+\newdef{Soit $E \subset \rn$ un ensemble borné, $f : E \to \rn$ une fonction bornée et $R \subset \rn$ contenant $E$. On dit que $f$ est intégrable au sens de Riemann si la fonction $\tilde f : R \to \R$ définie par	
+	\[
+	\tilde f(\bm x) = f(\bm x), ~\text{si } \bm x \in E, \quad \tilde f(\bm x) = 0, ~\text{si } \bm x \in R \backslash E
+	\]
+est intégrable au sens de Riemann. Dans ce cas, on définit l'intégrale de $f$ sur $E$ par
+\[
+\int_E f(\bm x)~\mathrm d \bm x= \int_R \tilde f(\bm x) ~\mathrm d \bm x
+\]
+On note $\mathcal R(E)$ l'ensemble de fonctions $f : E \to \R$ intégrables au sens de Riemann sur $E$.
+}{}
+
+\newlem{Cette définition ne dépend pas du choix de $R$.}{}
+
+\prf{Soit $R \supset E$ un pavé tel que que la fonction $\tilde f : R \to \R$ est intégrable au sens de Riemann, soit $R' \supset E$ un autre pavé et soit $\hat R$ un troisième pavé tel que
+\[
+\mathring{\hat R} \supset R \cup R' 
+\]
+Par un lemme précédent appliqué à $\tilde f : R \to \R$ et $\tilde f : \hat R \to \R$, on sait que $\tilde f : \hat R \to \R$ est intégrable de Riemann et $\int_{\hat R} \tilde f ~\mathrm d\bm x = \int_{R} \tilde f ~\mathrm d \bm x$. Par le même lemme appliqué à $\tilde f : R' \to \R$ et $\tilde f :  \hat R \to \R$, on sait ensuite que $\tilde f : R' \to \R$ est intégrable au sens de Riemann et 
+\[
+\int_{R'} \tilde  f \mathrm d \bm x = \int_{\hat R} \tilde f \mathrm d \bm x = \int_R \tilde f \mathrm d \bm x
+\]
+}
+
+\newthm{ On a les propriétés suivantes : 
+\begin{enumerate}
+	\item $\mathcal R(E)$ est un espace vectoriel et l'intégrale de Riemann et linéaire, c'est-à-dire, si $f,g \in \mathcal R (E)	$ et $\alpha, \beta \in \R$, alors $\alpha f + \beta g \in \mathcal R(E)$ et
+	\[
+	\int_E (\alpha f + \beta g) = \alpha \int_E f + \beta \int_E g 
+	\]
+	\item Si $f,g \in \mathcal R (E)$ et $f(\bm x) \leqslant g(\bm x)$ pour tout $\bm x \in E$, alors
+	\[
+	\int_E f (\bm x) ~\mathrm d \bm x \leqslant \int_E g(\bm x) ~\mathrm d \bm x
+	\]
+	\item Si $f \in \mathcal R (E)$, alors $|f|, f_+, f_- \in \mathcal R(E)$ et 
+	\[
+	\left|\int_E f(\bm x) ~\mathrm d \bm x\right| \leqslant \int_E |f(\bm x)| ~\mathrm d \bm x
+	\]
+	\item Si $f, g \in \mathcal R(E)$ alors $fg \in \mathcal R(E)$.
+\end{enumerate}
+}{Propriétés de l'intégrale de Riemann}
+
+\prf{Si $f \in \mathcal R(E)$, il existe $R \subset \rn$ tel que $E \subset \mathring R$ et $\tilde f \in \mathcal R(R)$. Par hypothèse, pour $\varepsilon >0$, il existe $P$ tel que
+	\[
+	\overline S(\tilde f, P) - \underline S(\tilde f, P) \leqslant \varepsilon
+	\]
+	De plus on a
+	\[
+	\overline S(\tilde f_+, P) - \underline S(\tilde f_+, P) = \sum_{Q \in P} (\sup_{\bm x \in Q} \tilde f_+(\bm x) - \inf_{\bm x \in Q} \tilde f_+(\bm x))\mathrm{Vol}(Q)
+	\]
+	Or pour tout $Q \in P$, on a
+	\[
+	\sup_{\bm x \in Q} \tilde f_+ (x) - \inf_{\bm x \in Q} \tilde f_+(\bm x) \leqslant 	 \sup_{\bm x \in Q} \tilde f(x) - \inf_{\bm x \in Q} \tilde f(\bm x) 
+	\]
+	Il s'ensuit donc que
+	\[
+	\overline S(\tilde f_+, P) - \underline S(\tilde f_+, P) \leqslant\overline S(\tilde f, P) - \underline S(\tilde f, P) \leqslant \varepsilon
+	\]
+	Ainsi $\tilde f_+ \in \mathcal R(R)$, donc $f_+ \in \mathcal R(E)$. Comme $f_ = (-f)_+$ on a aussi $f_ \in \mathcal R(E)$ et $|f| = f_+ + f_- \in \mathcal R(E)$. Enfin, puisque $-|f| \leqslant f \leqslant |f|$, on a bien
+	\[
+	\left|\int_E f(\bm x) ~\mathrm d \bm x\right| \leqslant \int_E |f(\bm x)| ~\mathrm d \bm x
+	\]
+	
+}
+
+\subsection{Ensemble mesurable au sens de Riemann}
+\newdef{
+Soit $E \subset \rn$, on dit que $E$ est \emph{mesurable au sens de Jordan} si la fonction caractéristique de $E$, notée $\ind_E$, est intégrable au sens de Riemann. Et on note
+\[
+\mathrm{Vol} (E) = \int_E \ind_E 
+\]
+Un ensemble borné $E \subset \rn$ est dit \emph{négligeable} s'il est mesurable au sens de Jordan et $\mathrm{Vol} (E) = 0$
+}{}
+
+\newlem{Soit $E \subset \rn$ un ensemble borné et $\R \subset \rn$ un pavé contenant $E$. Alors $E$ est mesurable au sens de Jordan si et seulement si, pour tout $\varepsilon > 0$, il existe une partition $P$ de $R$ telle que
+	\[
+	\sum_{\substack{Q \in P \\ Q \cap E \neq \emptyset, ~Q \cap E^c \neq 0}} \mathrm{Vol}(Q) \leqslant \varepsilon
+	\]
+}{}
+
+\prf{Par définition $E$ est mesurable au sens de Jordan si et seulement si pour tout $\varepsilon > 0$ il existe une partition $P$ de $R$ telle que 
+	\[
+	\overline S(\ind_E, P) - \underline S(\ind_E, P) \leqslant \varepsilon
+	\]
+	Or
+	\[
+	\overline S(\ind_E, P) = \sum_{\substack{Q \in P \\ Q \cap E \neq \emptyset}} \mathrm{Vol}(Q) \et \underline S(\ind_E, P) = \sum_{\substack{Q \in P \\ Q \cap E^c \neq 0}} \mathrm{Vol}(Q)
+	\]
+	D'où le résultat.
+}
+\newlem{Un ensemble $E \subset \rn$ borné est négligeable si et seulement si pour tout $\varepsilon > 0$, il existe un nombre fini de pavés $R_1, \ldots, R_k$ de $\rn$ tel que
+	\[
+	E \subset \bigcup_{i=1}^k R_i \et \sum_{i=1}^k \mathrm{vol}(R_i) \leqslant \varepsilon
+	\]
+}{Caractérisation de négligeabilité}
+
+\prf{Choisissons un pavé $R \subset \rn$ tel que $E \subset \mathring R$. Supposons que $E$ soit négligeable, alors $\ind_E$ est intégrable au sens de Riemann et $\int_E \ind_E = 0$. Soit $\varepsilon >0$, il existe une partition $P = \{ Q_i,~ 1 \leqslant i \leqslant L \}$ de $R$ telle que $\overline S(\ind_E, P) \leqslant \varepsilon$. Or
+	\[
+	\overline S(\ind_E, P) = \sum_{Q_i \cap E \neq \emptyset} \mathrm{Vol}(Q_i) \leqslant \varepsilon
+	\]
+	et $E \subset \bigcup_{Q_i \cap E \neq \emptyset} Q_i$. 
+	
+	Réciproquement, soit $\varepsilon > 0$	et $R_1, \ldots, R_k$ tels que $E \subset \bigcup_{i=1}^k R_i$ et $\sum_{i=1}^k \mathrm{Vol}(R_i) \leqslant \varepsilon$. Sans perte de généralité, on peut supposer que $R_i \subset R$ pour tout $1 \leqslant i \leqslant k$ et que
+	\[
+	\forall \bm x \in E, \exists i \in \llbracket 1, k \rrbracket, \quad \bm x \in \mathring R_i
+	\]
+	Soit $P$ la partition tensorielle de $R$ définie à partir de toutes les composantes de tous les sommets de $R_1, \ldots, R_k, R$. Alors
+	\[
+	\forall i \llbracket 1, k \rrbracket, \quad R_i = \bigcup \{Q \in P, ~Q \subset R_i\}
+	\]
+	Alors $\underline S(\ind_E, P) \geqslant 0$ et
+	\[
+	\overline S(\ind_E, P) = \sum_{\substack{Q \in P \\ Q \cap E \neq \emptyset}} \mathrm{Vol} (Q) \leqslant\sum_{i=1}^k \sum_{Q \in P, ~ Q \subset Q_i} \mathrm{Vol}(Q) = \sum_{i=1}^k \mathrm{Vol}(R_i) \leqslant \varepsilon
+	\]
+	Comme $\varepsilon > 0$ est arbitraire, alors $\ind_E$ est intégrable au sens de Riemann et $\int_E \ind_E (\bm x) ~\mathrm d \bm x = 0$.
+}
+
+
+\newthm{Un ensemble $E \subset \rn$ est mesurable si et seulement si $\partial E$ est négligeable.}{}
+
+\prf{Soit $R$ un pavé qui contient $E$. Supposons que $E$ est mesurable, alors pour tout $\varepsilon > 0$, il existe une partition $P$ telle que
+	\[
+	\overline S(\ind_E, P) - \underline S(\ind_E, P) \leqslant \varepsilon
+	\]
+	si et seulement si
+	\[
+	\sum_{Q \cap E \neq \emptyset, ~Q \neq E^c \neq \emptyset} \mathrm{Vol}(Q) \leqslant \varepsilon
+	\]
+	Or on a 
+	\[
+	\partial E \subset \bigcup_{Q \in \Omega}Q \cup \underbrace{\bigcup_{Q \in P} \partial Q}_{négligeable}
+	\]
+	où $\Omega = \{ Q \in P ~|~ Q \cap E \neq \emptyset, ~Q \cap E^c \neq \emptyset \}$. Ainsi on pose
+	\[
+	\Omega' = \{ Q \subset E, ~\partial Q, Q \in P\}
+	\]
+	donc
+	\[
+	\sum_{\tilde Q \in \Omega'} \mathrm{Vol}(\tilde Q) \leqslant \varepsilon
+	\]
+	et comme $\partial E \subset \bigcup_{\tilde Q \in \Omega'} \tilde Q$ alors $\partial E$ est négligeable par (\ref{Caractérisation de négligeabilité}).
+	
+	Réciproquement, supposons que $\partial E$ soit négligeable, alors pour tout $\varepsilon > 0$ il existe $P$ telle que
+	\[
+	\overline S(\ind_{\partial E}, P) - \underline S(\ind_{\partial E}, P) \leqslant \varepsilon
+	\]
+	et donc 
+	\[
+	\sum_{Q \in P, ~Q \cap \partial E \neq \emptyset} \mathrm{Vol}(Q) \leqslant \varepsilon
+	\]
+	On a
+	\[
+	\overline S (\ind_E, P) - \underline S(\ind_E, P) = \sum_{Q \cap E \neq \emptyset, ~Q \cap E^c \neq \emptyset} \mathrm{Vol}(Q) \leqslant \sum_{Q \cap \partial E \neq \emptyset} \mathrm{Vol}(Q) \leqslant \varepsilon
+	\]
+	et donc $\ind_E$ est intégrable et $E$ est mesurable.
+}
+
+\newcor{Soient $E, F \subset \rn$ des ensembles mesurables borné et mesurables au sens de Jordan. Alors
+	\[
+	E \cap F, ~E \cap F, ~E \backslash F, ~\mathring E, ~\overline E
+	\]
+	sont mesurable. On note $\mathcal J(\rn)$ l'ensemble des sous-ensembles compacts mesurable en sens de Jordan de $\rn$.
+}{}
+
+\prf{Soient $R \subset \rn$ un pavé contenant $E \cup F$. Par hypothèses $\ind_E, \ind_F \in \mathcal R(R)$, ainsi on a
+	\begin{enumerate}
+		\item $\ind_{E \cap F} = \ind_E \cdot \ind_F \in \mathcal R(R)$
+		\item $\ind_{E \cup F} = \ind_E + \ind_F - \ind_{E \cap F} \in \mathcal R(R)$
+		\item $\ind_{E \backslash F} = \ind_E - \ind \ind_{E \cap F} \in \mathcal R(R)$
+		\item $\ind_{\mathring E} = \ind_E - \ind_{E \cap \partial E} \in \mathcal R(R)$
+		\item $\ind_{\overline E} = \ind_{E \cup \partial E} \in \mathcal R(R)$
+	\end{enumerate}
+}
+
+\subsection{Caractérisation des fonctions intégrables}
+
+\newthm{Soit $R \subset \rn$ un pavé et $f : R \to \R$ bornée. Si l'ensemble des points de discontinuité de $f$ est négligeable, alors $f$ est intégrable.
+}{Caractérisation par négligeabilité des points de discontinuité}
+
+\prf{Soit $N$ l'ensemble des points de discontinuité de $f$ et $M := \sup_{\bm x \in R} |f(\bm x)|$. Puisque $N$ est négligeable, pour $\varepsilon > 0$, il existe une partition $\tilde P$ telle que
+	\[
+	\overline S(\ind_N, \tilde P) - \underbrace{\underline S(\ind_N,  \tilde P)}_{=0} \leqslant \frac{\varepsilon}{1 + 4M}
+	\]
+	où
+	\[
+	\overline S(\ind_N, \tilde P) = \sum_{Q \cap N \neq \emptyset} \mathrm{Vol}(Q) \leqslant \frac{\varepsilon}{1 + M}
+	\]
+	Ainsi soit 
+	\[
+	K = \bigcup_{Q \in P, ~Q \cap N =  \emptyset} Q
+	\]
+	$K$ est compact, donc $f$ est uniformément continue sur $K$, donc il existe $\delta >  0$ tel que
+	\[
+	\forall \bm x, \bm y \in K, \quad \norme{\bm x - \bm y} \leqslant \delta \implies |f(\bm x) - f(\bm y)| \leqslant \frac{\varepsilon}{1 + 2 \mathrm{Vol}(R)}
+	\]
+	Soit $P$ un raffinement de $\tilde P$ tel que
+	\[
+	\mathrm{diam}(Q) = \sup_{\bm x, \bm y \in Q} \norme{\bm x - \bm y} \leqslant \delta 
+	\]
+	alors
+	\begin{align*}
+		\overline S(f, P) - \underline S(f, P) &= \sum_{Q \in P}(\sup_Q f - \inf_Q f) \mathrm{Vol}(Q) \\
+												&= \sum_{Q \subset K} \underbrace{(\sup_Q f - \inf_Q f)}_{\leqslant \frac{\varepsilon}{1 + 2 \mathrm{Vol}(R)}} \mathrm{Vol}(Q) + \sum_{Q \cap N \neq \emptyset} \underbrace{(\sup_Q f - \inf_Q f)}_{\leqslant 2 M} \mathrm{Vol}(Q) \\
+												&\leqslant \frac{\varepsilon}{1 + 2 \mathrm{Vol}(R)} \mathrm{Vol}(R) + 2M \frac{\varepsilon}{1 + 4M} \leqslant \varepsilon
+	\end{align*}
+	donc $f$ est intégrable.
+}
+
+\newcor{Soit $E \subset \rn$ négligeable et $f : E \to \rn$ bornée. Alors $f \in \mathcal R(E)$ et $\int f = 0$.}{}
+
+\prf{Soit $R$ un pavé contenant $E$ et $\tilde f$ le prolongement par zéro. Alors l'ensemble de discontinuité de $\tilde f$ est négligeable et $\tilde f \in \mathcal R(R)$, donc $f \in \mathcal R(E)$ et $\int f  = 0$.
+}
+
+\newthm{Soit $E \subset \rn$ borné et mesurable. Si $f : E \to \R$ est bornée sur $E$ et continue sur $\mathring E$, alors $f$ est intégrable sur $E$ au sens de Riemann.}{}
+
+\prf{Soit $R$ un pavé contenant $E$ et $\tilde f$ le prolongement par zéro de $f$. Comme $E$ est mesurable, alors $\partial E $ est négligeable. Ne plus l'ensemble $\tilde N$ des points de discontinuité de $\tilde f$ est inclus dans $\partial E$, et donc $\tilde N$ est négligeable. Ainsi par le théorème (\ref{Caractérisation par négligeabilité des points de discontinuité}), $\tilde f \in \mathcal R(R)$ et donc $f$ est intégrable au sens de Riemann sur $E$.
+}
+
+\begin{thmbox}
+	\begin{theorem}[Propriétés de l'intégrale de Riemann - suite du théorème (\ref{Propriétés de l'intégrale de Riemann})]
+		On a w
+		\begin{enumerate}[start=5]
+		
+		\item Soit $E \subset \rn$ bornée et mesurable, et $f : E \to \R$ bornée, alors
+		\[
+		\inf_{\bm x \in E} f(\bm x) \mathrm{Vol}(E) \leqslant \underline{\int_R} \tilde f(\bm x) ~\mathrm d \bm x \leqslant \overline{\int_R} \tilde f(\bm x) ~\mathrm d \bm x \leqslant \sup_{\bm x \in E} f(\bm x) \mathrm{Vol}(E)
+		\]
+		pour tout pavé $R$ contenant $E$ et $\tilde f$ le prolongement par zéro de $f$ sur $R$.
+		
+		En particulier, si $f \in \mathcal R(E)$,
+		\[
+		\inf_{\bm x \in E} f(\bm x) \mathrm{Vol}(E) \leqslant \int_R \tilde f(\bm x) ~\mathrm d \bm x \leqslant \int_E f(\bm x) ~\mathrm d \bm x \leqslant \sup_{\bm x \in E} f(\bm x) \mathrm{Vol}(E)
+		\]
+		\item Soit $E \in \mathcal J(\rn)$ connexe par arcs et $f \in C^0(E)$. Si $\mathrm{Vol}(E) \neq 0$, alors
+		\[
+		\exists \bm x_0 \in E, \quad \frac{1}{\mathrm{Vol}(E)} \int_E f(\bm x)~\mathrm d \bm x = f(\bm x_0)
+		\]
+		cette dernière égalité s'appelle le \emph{théorème de la moyenne}.
+		\item Soit $E \subset \rn$ mesurable et $f \in \mathcal R(E)$. Si $E = E_1 \cap E_2$ tel que $E_1, E_2$ sont mesurables et $E_1\cap E_2$ est négligeables, alors $f_{|E_1} \in \mathcal R(E_1), ~ f_{| E_2} \in \mathcal R(E_2)$ et
+		\[
+		\int_E f(\bm x) ~\mathrm d \bm x = \int_{E_1} f(\bm x) ~\mathrm d \bm x + \int_{E_2} f(\bm x) ~\mathrm d \bm x 
+		\]
+		\end{enumerate}
+	\end{theorem}
+\end{thmbox}
+
+\subsection{Généralisation de la formule des intégrales itérées}
+
+\newdef{On dit que $E \subset \R^{n+1}$ est un \emph{domaine simple} par rapport à la variable $y$ s'il existe un compact $K \in \mathcal J(\rn)$ et deux fonctions continues $g,h : K \to \R$ tels que $g(\bm x) \leqslant h(\bm x)$ pour tout $\bm x \in K$ et 
+	\[
+	E = \{(\bm x, y) \in \R^{n+1} ~|~ \bm x \in K, g(\bm x) \leqslant y \leqslant h(\bm x)\}
+	\]
+}{}
+
+\newthm{Un domaine simple $E$ est mesurable et 
+	\[
+	\mathrm{Vol}(E) = \int_K h(\bm x) - g(\bm x) ~\mathrm d \bm x 
+	\]
+}{Mesurabilité d'un domaine simple}
+
+\prf{On considère d'abord un domaine de la forme $E = \{ (\bm x, y) \in \R^{n+1} ~|~  \bm x \in K, ~ 0 \leqslant y \leqslant h(\bm x)\}$, avec $h(\bm x) \geqslant 0$ pour tout $\bm x \in K$. Soit $R$ un pavé non dégénérée tel que $K \subset R$ et $\tilde R = R \tilde [0, M]$, un pavé qui contient $E$, où $M = \sup_{\bm x \in K} h(\bm x) +1$.
+	
+Puisque $h$ est continue et $K \in \mathcal J(\rn)$, $h$ est intégrable au sens intégrable au sens de Riemann sur $K$. Soit $\varepsilon > 0$, il existe un partition  $P = \{R_i\}_{i=1}^L$ de $R$ telle que
+\[
+\overline S(\tilde h, P) - \underline S(\tilde f, P) \leqslant \varepsilon
+\]
+où $\tilde h$ dénote le prolongement par zéro de $h$. Notons $m_i = \inf_{\bm x \in R_i} \tilde h(\bm x)$ et $M_i = \sup_{\bm x \in R_i} \tilde h(\bm x)$ pour tout $i = 1, \ldots, L$, et considérons la partition suivante de $\tilde R$
+\[
+\tilde P = \bigcup_{i=1}^L \left\{ R_i \times [0, m_i], R_i \times \left[ m_i, M_i + \frac{\varepsilon}{\mathrm{Vol}(E)}\right], \left[M_i + \frac{\varepsilon}{\mathrm{Vol}(E)}, M\right]\right\}
+\]
+Alors on a
+\begin{align*}
+	\underline S(\ind_E, \tilde P) &= \sum_{R_i \subset K} \mathrm{Vol}(R_i \times [0, m_i]) = \sum_{R_i \subset K} m_i \mathrm{Vol}(R_i) = \underline S(\tilde h, P) \\
+	\overline S(\ind_E, \tilde P) &= \sum_{R_i \cap K \neq \emptyset} \mathrm{Vol}(R_i \times [0, m_i]) + \sum_{R_i \cap K \neq \emptyset} \mathrm{Vol}\left(R_i \times \left[ m_i, M_i + \frac{\varepsilon}{\mathrm{Vol}(E)}\right]\right) \\
+	&= \sum_{R_i \cap K \neq \emptyset } \mathrm{Vol}(R_i) \left(M_i + \frac{\varepsilon}{\mathrm{Vol}(R)} \right) \leqslant \sum_{R_i \cap K \neq \emptyset} M_i\mathrm{Vol}(R_i) + \varepsilon = \overline S(\tilde h, P) + \varepsilon
+\end{align*}
+ce qui implique que $\overline S(\ind_E, \tilde P) - \underline S(\inf_E, \tilde P) \leqslant 2 \varepsilon$ et donc $\ind_E\in \mathcal R(\tilde R)$. De plus puisque $\varepsilon > 0$ peut être pris aussi petit que possible qu'on veut et
+\[
+\underline S(\tilde h, P) = \underline S(\ind_E, \tilde P) \leqslant \overline S(\ind_E, \tilde P) \leqslant \overline S(\tilde h, P) + \varepsilon
+\]
+on conclut que
+\[
+\mathrm{Vol}(E) = \int_{\tilde R} \ind_E (\bm x, y) ~\mathrm d \bm x \mathrm d y = \int_E \tilde h(\bm x) ~\mathrm d \bm x = \int_K h(\bm x) ~\mathrm d \bm x
+\]
+Par le même argument, on montre facilement qu'un domaine de la forme $E = \{(\bm x, y) \in \R^{n+1} ~|~ \bm x \in K, ~ c \leqslant y \leqslant h(\bm x)\}$, avec $c \leqslant \min_{\bm x \in K} h(\bm x)$, est aussi mesurable.
+
+On considère alors le cas générale $E = \{(\bm x, y) \in \R^{n+1} ~|~ \bm x \in K, g(\bm x) \leqslant y \leqslant h(\bm x)\}$, soit $c = \min_{\bm x \in K} g(\bm x)$ et 
+\[
+E_h = \{(\bm x, y) \in \R^{n+1} ~|~ \bm x \in K, c \leqslant y \leqslant h(\bm x)\}
+\]
+\[
+E_g = \{(\bm x, y) \in \R^{n+1} ~|~ \bm x \in K, c \leqslant y \leqslant g(\bm x)\}
+\]
+Ainsi $E_h, E_g$ sont mesurable, par les arguments ci-dessus, et
+\[
+\mathrm{Vol}(E_h) = \int_K h(\bm x) - c \mathrm d \bm x \et \mathrm{Vol}(E_g) = \int_K g(\bm x) - c \mathrm d \bm x
+\]
+D'autre part, $E_h = E_g \cup E$ et $E_g\cap E = \mathcal G(g)$. Or $\mathrm G(g) \subset \partial E_g$ et $\partial E_g$ est négligeable car $E_g$ est mesurable. Donc $\mathcal G(g)$ est aussi négligeable. Ainsi $E = (E_n \backslash E_g)\cup \mathcal G(g)$ est mesurable, ainsi on conclut que
+\[
+\mathrm{Vol} (E) = \mathrm{Vol}(E_h) - \mathrm{Vol}(E_g) = \int_K h(\bm x) - g(\bm x) ~\mathrm d \bm x
+\]
+}
+\newthm{Soit $E = \{(\bm x, y) \in \R^{n+1} ~|~ \bm x \in K, g(\bm x) \leqslant y \leqslant h(\bm x)\}$ un domaine simple et $f : E \to \R$ continue. Alors $f \in \mathcal R(E)$ et 
+	\[
+	\int_E f(\bm x, y) \mathrm d \bm x \mathrm d y = \int_K \left(\int_{g(\bm x)}^{h(\bm x)} f(\bm x, y ) \mathrm dy \right) \mathrm d \bm x
+	\]
+}{}
+
+\prf{Soit $R$ contenant $K$, $m \leqslant \min_K g$, $M \geqslant \max_K h$ et $\tilde R = R \times [m,M] \supset E$. Par le théorème (\ref{Mesurabilité d'un domaine simple}), $E$ est mesurable, or $f$ est continue sur $E$ donc $f$ est intégrable au sens de Riemann sur $E$, c'est-à-dire que $\tilde f$ est intégrable sur $\tilde R$.
+	
+De plus pour tout $\bm x \in R$, la fonction $f(\bm x, \cdot)$ est intégrable sur $[m,M]$, car elle est continue par morceaux. Donc $\tilde F(\bm x) = \int_m^M f(\bm x, y) \mathrm d y$ existe pour tout $\bm x \in R$ et, par le théorème de Fubini, $\tilde F \in \mathcal R(R)$ et $\int_{\tilde R} \tilde f(\bm x,y) \mathrm d \bm x  \mathrm dy= \int_R \tilde F(\bm x) ~\mathrm d \bm x$. Comme $\tilde F : R \to \R$ est le prolongement par zéro de la fonction $\bm x \in K \mapsto F(\bm x) = \int_{g(\bm x)}^{h(\bm x)} f(\bm x, y) ~\mathrm d y$, cette dernière fonction est intégrable sur $K$ et
+\begin{align*}
+\int_E f(\bm x, y) ~\mathrm d \bm x \mathrm d y &= \int_{\tilde R} \tilde f(\bm x, \bm y) ~\mathrm d \bm x \mathrm d y  \\
+&= \int_R  \tilde F(\bm x) ~\mathrm d \bm x = \int_K F(\bm x) \mathrm d \bm x =\int_K \left(\int_{g(\bm x)}^{h(\bm x)} f(\bm x, y ) \mathrm dy \right) \mathrm d \bm x
+\end{align*}
+}
+
+\subsection{Changement de variables dans les intégrales de Riemann}
+Dans le cas où $n = 1$, soit $\int_\alpha^\beta f(x) ~\mathrm d x$, $F = [\alpha, \beta]$ et$E=[a,b]$. On peut alors effectuer un changement de variable $x = \psi(u)$, où $\psi : [a, b] \to [\alpha, \beta]$ est une fonction de classe $C^1$, donc
+\[
+\int_{\alpha = \psi(a)}^{\beta = \psi(b)} f(x) ~\mathrm dx = \int_a^b f(\psi(u)) \psi'(u) ~\mathrm du
+\]
+Ainsi si $\psi' > 0$, on a
+\[
+\int_F f(x) ~\mathrm dx = \int_\alpha^\beta f(x) ~\mathrm dx = \int_a^b f(\psi(u)) \psi'(u) ~\mathrm du = \int_a^b f(\psi(u)) |\psi'(u)| ~\mathrm du
+\]
+De même si $\psi'< 0$, on a
+\[
+\int_F f(x) ~\mathrm dx = \int_\alpha^\beta f(x) ~\mathrm dx = -\int_a^b f(\psi(u)) \psi'(u) ~\mathrm du = \int_a^b f(\psi(u)) |\psi'(u)| ~\mathrm du
+\]
+Ainsi dans les deux cas,
+\[
+\int_F f(x) ~\mathrm dx = \int_E f(\psi(u)) |\psi'(u)| ~\mathrm du
+\]
+Maintenant dans le cas où $n > 1$ on va se restreindre à des difféomorphismes $\bm \psi$. 
+
+\newthm{Soient $U,V \subset \rn$ deux ouverts et $\bm \psi : U \to V$ un difféomorphisme. Pour tout $r > 0$, on définit $U_r = U \cap B(\bm 0, r)$ et $V_r = V \cap B(\bm 0, r)$. On suppose que pour tout $r > 0$ :
+	\begin{enumerate}
+		\item Les composantes de $\bm \psi$ et $D\bm \psi$ sont bornés sur $U_r$
+		\item $U_r, V_r$ sont mesurables.
+	\end{enumerate}
+	Soit $E \subset U$ et $F = \psi(E) \subset V$. Alors
+	\begin{enumerate}
+		\item $E$ est mesurable si et seulement si $F$ est mesurable
+		\item Si $F$ est mesurable et $f : F \to \rn$ est continue et borné
+	\end{enumerate}
+	Alors $\bm u \mapsto f(\bm \psi(u)) |\det D \bm \psi(\bm u)| \in \mathcal R(E)$ et
+	\[
+	\int_F f(\bm x) ~\mathrm d \bm x = \int_E f(\bm \psi(\bm u)) | \det D \psi(\bm u)| ~\mathrm d \bm u
+	\]
+}{Changement de variable}
+
+\subsubsection{Changement de variable polaire, cylindrique et sphérique}
+On pose
+\[
+\begin{pmatrix} x \\ y \end{pmatrix} = \bm \psi(\rho, \theta) = \begin{pmatrix} \rho \cos \theta \\ \rho \sin \theta \end{pmatrix}
+\]
+Ainsi $\bm \psi$ est un difféomorphisme global sur les ouverts $U = ]0, \infty[ \times ]- \pi, \pi[$ et $V = \R^2 \backslash \{ (x,y) \in \R^2 ~|~ x \leqslant 0, ~ y =0\}$. On a
+\[
+\det \bm \psi (\rho, \theta) = \det \begin{pmatrix} \cos\theta & - \rho \sin \theta \\ \sin \theta & \rho \cos \theta \end{pmatrix} = \rho > 0
+\]
+
+
+\subsection{Intégrale de Riemann généralisée}
+
+\newdef{Soit $E \subset \rn$ un ouvert non-vide et $f : E \to \R$. Soit $\{K_j\}_{j \in \N}$ une suite de sous-ensembles tels que
+	\begin{enumerate}
+		\item $K \subset E$ est mesurable et compact
+		\item $K_j \subset \mathring K_{j+1}$
+		\item $E = \bigcup_{j \in \N} K_j$
+	\end{enumerate}
+	Supposons que $f$ est bornée et intégrable sur chaque $K_j$. On dit que $f$ est absolument intégrable sur $E$ si
+	\[
+	\lim_{j \to \infty} \int_{K_j} f|(\bm x)| ~\mathrm d \bm x
+	\]
+	existe. Dans ce cas on note
+	\[
+	\int_E f(\bm x) ~\mathrm d \bm x = \lim_{j \to \infty} \int_{K_j} f(\bm x) ~\mathrm d \bm x
+	\]
+}{}
+
+\newthm{Soit $f : E \to \R$ intégrable absolument par rapport à une suite $\{ K_j\}_{j \in \N}$ qui satisfait les propriétés ci-dessus. Soit $\{K_j'\}_{j \in \N}$ une autre suite qui satisfait ces propriétés. Alors $f$ est intégrable sur chaque $K_j'$ et 
+	\[
+	\lim_{j \to \infty} \int_{K_j} f(\bm x) ~\mathrm d \bm x = \lim_{j \to \infty} \int_{K_j'} f(\bm x) ~\mathrm d \bm x
+	\]
+}{}
+
+\prf{On fixe $j \in \N$ et $K_j'$ tel que
+	\[
+	K_j' \subset E = \bigcup_{m \in \N} K_m \subset \bigcup_{m \in \N} \mathring K_{m+1}
+	\]
+	Or $K_j'$ est un compact et $\{\mathring K_m\}_{m \in \N}$ est un recouvrement d'ouvert, alors il existe des indices $m_1, \ldots m_{N_j}$ tels que
+	\[
+	K_j' \subset \bigcup_{i=1}^{N_j} \mathring K_{m_i} = \mathring K_{m_{N_j}}
+	\]
+	On sait que $f$ est intégrable sur $K_{m_{N_j}}$ et $K_j' \subset \mathring K_{m_{N_j}}$ est un sous-ensemble mesurable et compact de $K_{m_{N_J}}$. Donc $f$ est intégrable sur $K_j'$, il en va de même pour $|f|, f_+$ et $f_-$. On en déduit alors que
+	\[
+	\int_{K_j'} f_+(\bm x) ~\mathrm d \bm x \leqslant \int_{K_{m_{N_j}}} f_+(\bm x) ~\mathrm d \bm x \leqslant \lim_{m \to \infty} \int_{K_m} f_+(\bm x) ~\mathrm d \bm x
+	\]
+	et 
+	\[
+	\int_{K_j'} f_-(\bm x) ~\mathrm d \bm x \leqslant \int_{K_{m_{N_j}}} f_-(\bm x) ~\mathrm d \bm x \leqslant \lim_{m \to \infty} \int_{K_m} f_-(\bm x) ~\mathrm d \bm x
+	\]
+	Donc
+	\[
+	\lim_{j \to \infty} \int_{K_j'} f_+(\bm x) ~\mathrm d \bm x \leqslant \lim_{m \to \infty} \int_{K_m} f_+(\bm x) ~\mathrm d \bm x \et \lim_{j \to \infty} \int_{K_j'} f_-(\bm x) ~\mathrm d \bm x \leqslant \lim_{m \to \infty} \int_{K_m} f_-(\bm x) ~\mathrm d \bm x
+	\]
+	Si on renverse les rôles de $K_j$ et $K_j'$, on a
+	\[
+	\lim_{j \to \infty} \int_{K_j} f_+(\bm x) ~\mathrm d \bm x \leqslant \lim_{m \to \infty} \int_{K_m'} f_+(\bm x) ~\mathrm d \bm x \et \lim_{j \to \infty} \int_{K_j} f_-(\bm x) ~\mathrm d \bm x \leqslant \lim_{m \to \infty} \int_{K_m'} f_-(\bm x) ~\mathrm d \bm x
+	\]
+	Donc
+	\[
+	\lim_{j \to \infty} \int_{K_j'} f_+(\bm x) ~\mathrm d \bm x = \lim_{m \to \infty} \int_{K_m} f_+(\bm x) ~\mathrm d \bm x \et \lim_{j \to \infty} \int_{K_j'} f_-(\bm x) ~\mathrm d \bm x = \lim_{m \to \infty} \int_{K_m} f_-(\bm x) ~\mathrm d \bm x
+	\]
+	En combinant les parties positives et négatives on a bien
+	\[
+	\lim_{j \to \infty} \int_{K_j'} f(\bm x) ~\mathrm d \bm x = \lim_{j \to \infty} f_+(\bm x) + f_-(\bm x) ~\mathrm d \bm x = \lim_{m \to \infty} \int_{K_m} f(\bm x) ~\mathrm d \bm x
+	\]
+	}

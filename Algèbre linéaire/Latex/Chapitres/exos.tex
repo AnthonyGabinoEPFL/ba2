@@ -1,0 +1,475 @@
+\section{Exercices étoiles}
+
+\subsection{Semaine 1}
+\newexo{Soit $A$ un anneau,
+	\begin{enumerate}
+		\item Monter que l'élément $1_A$ est unique.
+		\item Montrer qu'un élément inversible $a \in A^\times$ n'est pas un diviseur de zéro.
+		\item Montrer que deux polynômes,
+		\[
+		p(x) = a_0 + a_1 x + \ldots + a_n x^n \et q(x) = b_0 + b_1 x + \ldots b_m x^m 
+		\]
+		sont égaux si et seulement si $a_i = b_i$ pour tout $i$.
+		\item Soit $A^{n \times n}$ l'anneau des matrices $n \times n$ sur $A$. Montre que le centre de $A^{n \times n}$ est
+		\[
+		Z(A^{n \times n}) = \left\{ a I_n, ~a \in Z(A)\right\}
+		\]
+	\end{enumerate}
+}{Dans l'ordre on a 
+	\begin{enumerate}
+		\item Soit $1_A, 1_A' \in A$ deux éléments distincts neutre pour la multiplication, alors 
+		\[
+		1_A = 1_A \cdot 1_A' = 1_A'
+		\]
+		\item Soit $a \in A^\times$, supposons que $a$ soit un diviseur de zéro, alors il existe $b \in A^*$ tel que $a \cdot b = 0$, ainsi
+		\[
+		a \cdot b = 0 \implies a^{-1} \cdot a \cdot b = 0 \implies b = 0
+		\]
+		ce qui est absurde car on avait supposé $b$ non-nul.
+		
+		\item On peut supposer dans perte de généralité que $m = n$, ainsi
+		\[
+		p(x) - q(x) = \sum_{i=1}^n (a_i - b_i) x^i = 0
+		\]
+		ainsi $p(x) - q(x)$ est le polynôme nulle donc tous ses coefficients sont nuls, ainsi on a bien $a_i = b_i$ pour tout $i$. La réciproque est trivial.
+		
+		\item On procède par double inclusion. Soit $N \in A^{n \times n}$ alors pour tout $a \in Z(A)$,
+		\[
+		N \cdot (aI_n) = N \cdot I_n = a  N \cdot I_n = a I_n \cdot N = (aI_n) \cdot N
+		\]
+		ainsi on a bien $\{a I_n, ~a \in Z(A)\} \subset Z(A^{n \times n})$.
+		
+		Réciproquement, soient $M \in Z(A^{n \times n})$, particulier
+		\[
+		\forall k \in \entiers, \quad m_{i,k} \delta_{kj} = (M \cdot E_{k,k})_{ij} = (E_{k,k} \cdot M )_{ij} = m_{j,k} \delta_{ki}
+		\]
+		Ainsi $M$ est une matrice diagonale. Similairement, en particulier 
+		\[
+		m_{j,j} = (M \cdot E_{ij})_{ij} = (E_{ij} \cdot M)_{ij} = m_{i,i}
+		\]
+		Donc $M$ est une matrice scalaire, donc $M = m I_n$. Finalement soit $a \in A$, alors
+		\[
+		(ma)I_n = (m I_n) \cdot (a I_n) = (a I_n) \cdot (m I_n) = (am) I_n
+		\]
+		ainsi $m \in Z(A)$.
+	\end{enumerate}
+}
+
+\subsection{Semaine 2}
+
+\newexo{Soit $\K$ un corps, et $A \in \K^{n \times n}$ une matrice inversible. On pose $\tilde A = (\mathrm com A)^\top$, la transposée de la comatrice de $A$, alors
+	\begin{enumerate}
+		\item Montrez que $\det A \neq 0$.
+		\item Montrer que $A^{-1} = \det( A )^{-1}\tilde A$
+		\item Montrer que pour tout matrice $A \in \mathbb Z^{n \times n}$, alors $A$ est inversible si et seulement si $\det A = \pm 1$.
+	\end{enumerate}
+}{Dans l'ordre on a,
+	\begin{enumerate}
+		\item Pour $A \in \K^{n \times n}$ inversible, alors
+		\[
+		\det A \cdot \det A^{-1} = \det I_n = 1
+		\]
+		ainsi $\det A \neq 0$.
+		\item On veut montrer que $A \tilde A = \det A I_n$. Par calcul sommatoire on a,
+		\[
+		(A \tilde A)_{ij} = \sum_{k=1}^n a_{ik} \tilde A_{kj} = \sum_{k=1}^n a_{ik} (\mathrm{com} A)^\top_{kj} = \sum_{k=1}^n a_{ik} (-1)^{j+k} \det A_{jk}
+		\]
+		Par multilinéarité du déterminant par rapport aux colonnes, on obtient
+		\[
+		(A\tilde A)_{ij} = \det (a_1 \ldots a_{i-1} | a_j | a_{i+1} \ldots a_n)
+		\]
+		donc si $i\neq j$ alors la matrice de droite possède deux colonnes identiques et donc $(A\tilde A)_{ij} = 0$. Et si $i = j$, alors la matrice de droite est égale à A et donc $(A\tilde A)_{ii} = \det A$. Ainsi puisque $A$ est inversible on a bien,
+		\[
+		A \tilde A = \det A I_n \implies A^{-1} = \det(A)^{-1} \tilde A
+		\]
+		\item{Suppsons que $A$ soit inversible, alors il existe $B \in \mathrm Z^{n \times n}$ tel que $A \cdot B = I_n$, ainsi
+		\[
+		1 = \det{A \cdot B} = \det A \det B
+		\]
+		Donc $\det A$ est un diviseur  de $1$, or, dans $\mathrm Z$, les seuls diviseurs de $1$ sont $\pm 1$.
+		
+		Réciproquement, si $\det A = \pm 1$, alors on pose $B = \det (A)^{-1} \tilde A$ alors par le point 2. on a bien,
+		\[
+		A B = I_n
+		\]}
+	\end{enumerate}
+}
+\subsection{Semaine 3}
+
+\newexo{Soit $\K$ un corps, et $f,g \in \K[X]$ deux polynômes par tous deux nuls. On considère l'ensemble des diviseurs communs à $f$ et $g$,
+	\[
+	D_{fg} = \{d \in \K[X],d \mid  f, d \mid  g\}
+	\]
+	\begin{enumerate}
+		\item Montrez qu'il existe un unique polynôme $d \in D_{fg}$ unitaire et de degré maximal.
+		\item Montrer que $d = \mathrm{pbcd} (f,g)$
+	\end{enumerate}
+}{
+\begin{enumerate}
+	\item Sans perte de généralité, on peut supposer que $g(x) \neq 0$ donc par division polynômiale
+\[
+f(x) = q(x) \cdot g(x) + r(x)
+\]
+on remarque alors que $D_{fg} = D_{gr}$. Ainsi par division euclidienne sucéssive, on arrive par décroissante stricte du degré du reste à
+\[
+D_{fg} = D_{r^*, 0} = \{ d \in \K[X], d \mid r^*\}
+\]
+on remarque alors que pour tout $d \in D_{r^*, 0}, ~\deg d \leqslant \deg r^*$. On pose donc
+\[
+d^* = \frac{1}{a_{\deg r^*}}r^*
+\]
+ainsi par construction $d^*$ est unitaire et de degré maximal. 
+
+Soit $\tilde d \in D_{fg}$ unitaire et de degré maximal, alors $\tilde d \in D_{r^*, 0} = D_{d^*, 0}$, ainsi
+\[
+\tilde d \mid d^* \implies \exists \lambda \in \K, \quad d^* = \lambda \tilde d
+\]
+mais comme $\tilde d$ et $d^*$ sont unitaire alors $\lambda_1$ et donc $\tilde d = d^*$.
+\item Il suffit de montrer que tout diviseur commun de $f$ et $g$ divise $d^*$ et que $d^*$ divise $f$ et $g$. On remarque par ce qui précède,
+\[
+D_{fg} = D_{d^*, 0}
+\]
+donc si $h \mid d^*$ alors $h \mid f $ et $h \mid g$, et par définition $d^* \in D_{d^*, 0} = D_{fg}$. Ainsi on obtient bien que
+\[
+d^* = \mathrm{pgcd}(f,g)
+\]
+\end{enumerate}
+}
+\subsection{Semaine 4}
+\newexo{Soient $\K$ un corps, et $\lambda_1, \ldots, \lambda_r \in \K$ les valeurs propres d'une matrices $A \in \K^{n \times n}$ et $m_1, \ldots, m_r$ leurs multiplicités algébriques. Soit $m_1 + \ldots + m_r = n$. Alors
+	\begin{enumerate}
+		\item Montrez que $\det A = \prod_{i=1}^r  \lambda_i^{m_i}$
+		\item Montrer que si $\chi_A(\lambda) = \alpha_n \lambda^n + \alpha_{n-1} \lambda^{n-1} + \ldots + \alpha_1 \lambda + \alpha_0$, alors $\alpha_{n-1} = (-1)^{n-1} \mathrm{tr} A$.
+		\item Montrez que $\mathrm{tr} A = \sum_{i=1}^r \lambda_i m_i$.
+	\end{enumerate}
+}{\begin{enumerate}
+	\item On peut écrire le polynôme caractéristique $\chi_A(x) = \det(A - x I_n) = (-1)^n \prod_{i=1}^r (x - \lambda_i)^{m_i}$. Ainsi par construction
+	\[
+	\det A = \chi_A (0) = \prod_{i=1}^r \lambda_i^{m_i}
+	\]
+	\item Par la formule de Leibnitz on a
+	\[
+	\det(A - x I_n) = \sum_{\sigma \in S_n} \mathrm{sgn} (\sigma)\prod_{i =1}^n (A - x I_n)_{i, \sigma(i)}= \sum_{\sigma \in S_n} \mathrm{sgn} (\sigma)\prod_{i =1}^n (A_{i, \sigma(i)} - x \delta_{i, \sigma(i)})
+	\]
+	Ainsi si $\sigma = Id$, alors le polynôme $\prod_{i=1}^n (A_{i, \sigma(i)} - x \delta_{i, \sigma(i)}) = \prod{i=1}^n (A_{i,i} - x)$ qui est un polynôme de degré $n$. Si $\sigma \neq Id$, alors il existe $i \in \entiers$ tel que $\sigma(i) = j \neq i$, mais comme $\sigma$ est une permutation $\sigma(j) \neq j$. Donc $\prod_{i=1}^n (A_{i, \sigma(i)} - x \delta_{i, \sigma(i)})$ est un polynôme de degré au plus $n-2$, donc il ne contribue pas au coefficient $\alpha_{n-1}$, ainsi
+	\[
+	\alpha_{n-1} = \mathrm{coeff}_{n-1} \left(\prod_{i=1}^n (A_{i,i} - x)\right) = (-1)^n \sum_{i=1}^n A_{i,i} = (-1)^n \mathrm{tr} A
+	\]
+	\item On peut calculer le coefficient de degré $n-1$ de $\chi_A(x)$ d'une autre manière, en considérant le polynôme caractéristique,
+	\[
+	\chi_A(x) = \prod_{i=1}^n (x - \lambda_i)^{m_i}
+	\]
+	alors on trouve,
+	\[
+	\alpha_{n-1} = (-1)^n \sum_{i=1}^r -m_i \lambda_i = (-1)^{n-1}\sum_{i=1}^r \lambda_i m_i
+	\]
+	Donc par unicité des coefficients on trouve bien $\mathrm{tr} A = \sum_{i=1}^r \lambda_i m_i$.
+\end{enumerate}
+Une preuve qui plus facile, qui est à la limite du hors programme, serait que comme le polynôme caractéristique
+\[
+\chi_A(x) = \prod_{i=1}^r (x - \lambda_i)^{m_i} = \prod_{i=1}^n (x - \lambda_i)
+\]
+est scindé, alors $A$ est trigonalisable sur $\K$, c'est-à-dire qu'il existe une matrice $P \in \K^{n \times n}$ inversible telle que
+\[
+A = P^{-1} \begin{pmatrix} \lambda_1 & * & * & *&\\
+								 & \lambda_2 & * &* \\
+								 &			& \ddots & * \\
+								 &        &         &  \lambda_n \\
+								\end{pmatrix} P
+\]
+Ainsi par invariance du déterminant et de la trace par similitude on a bien,
+\[
+\det A = \prod_{i=1}^r \lambda_i^{m_i} \et \mathrm{tr} A = \sum_{i=1}^r \lambda_i m_i
+\]
+Et comme dans le point 3. précédent on sait que le coefficient de degré n-1 d'un polynôme scindé est donnée par
+\[
+(-1)^{n-1} \sum_{i=1}^r \lambda_i m_i
+\]
+alors on conclut.
+}
+
+\subsection{Semaine 5}
+
+\newexo{Soit $\K$ un corps de caractéristique différente de $2$. et $V$ un espace vectoriel sur $\K$ de dimension finie $n$. On considère alors une forme bilinéaire $f$ antisymétrique, c'est-à-dire
+	\[
+	\forall x,y \in V, \quad f(x,y) = - f(y,x)
+	\]
+Montrez que si $f$ est non-dégénérée, alors $n$ est pair.
+
+La réciproque est-elle vraie?
+}{
+Soit $B \{ b_1, \ldots, b_n\}s$ une base de $V$ alors on considère la matrice associé à $f$ dans la base $B$ définie par,
+\[
+(A_B)_{ij} = f(b_i, b_j)
+\]
+on remarque alors facilement que $A_B = -A_B^\top$ donc $A_B$ est antisymétrique. Or comme $f$ est non-dégénérée alors $\mathrm{rg} A_B = n$ donc $\det A_B \neq 0$, ainsi
+\[
+\det A_B = \det (-A_B^\top) = (-1)^n  \det A_B^\top = (-1)^n \det A_B 
+\]
+ainsi on en conclut que $(-1)^n = 1$ donc $n$ est paire.
+
+Le réciproque est fausse puisque qu'il suffit de considérer la forme bilinéaire nulle.
+}
+
+\subsection{Semaine 6}
+
+\newexo{Soient $f, g: V \to V$ deux endomorphismes. Montrez que si $f$ et $g$ commutent, et sont diagonalisable, alors $f$ et $g$ sont simultanément diagonalisable.
+}{
+On sait que $f$ est diagonalisable ainsi
+\[
+V = \bigoplus E_{\lambda_i}
+\]
+où $\lambda_i$ sont les valeurs propres de $f$. Ainsi soit $x \in E_{\lambda_i}$ alors
+\[
+(f - \lambda_i Id) (g(x)) = f(g(x)) - \lambda_i g(x) = g((f(x)) - g(\lambda_i x) =  g((f - \lambda_iId)(x)) = g(0) = 0
+\]
+ainsi $g(E_{\lambda_i}) \subset E_{\lambda_i}$, or par un exercice de la série $7$, on sait que la restriction d'un endomorphisme diagonalisable à un sous-espace invariant reste diagonalisable. 
+
+Donc pour chaque valeur propre $\lambda_i$ de $f$ on choisit une base de vecteur propre par rapport à $\lambda_i$ pour l'espace $E_{\lambda_i}$, que l'on nome $B_{\lambda_i}$. Mais comme $f$ est diagonalisable alors $B = \bigcup B_{\lambda_i}$ forme une base de $V$ et chaque élément de cette base est à la fois vecteur propre pour $f$ et $g$.
+}
+
+
+\subsection{Semaine 7}
+
+\newexo{Le but de cette exercice est de démontrer l'inégalité de de Hadamard,
+	\[
+	|\det A | \leqslant \prod_{i=1}^n \norme{a_i}
+	\]
+	pour $A \in \R^{n \times n}$ dont les colonnes sont $a_1, \ldots, a_n$.
+	
+	Soit $A'$ la matrice de la décomposition $A = A' S$ où $S$ est triangulaire supérieur de diagonale $1$.
+	\begin{enumerate}
+		\item Montrer que $\det S = 1$ et que $\det A = \pm \prod_{i=1}^n \norme{a_i^*}$,
+		\item Montre que $\forall i \in \entiers, \quad \norme{a_i^*} \leqslant \norme{a_i}$.
+	\end{enumerate}
+	Supposons de Surcroît que tout les coefficient de $A$ soient tous bornées absolument par $M > 0, ~ \forall i,j ~ |A_{ij}| < M$. Déduire de l'inégalité de Hadamard que $|\det A | \leqslant M^2 n^{\frac{n}{2}}$.
+}{Sans perte de généralités, un peut supposer que $A$ est inversible donc les colonnes de $A$ sont libres.
+	\begin{enumerate}
+		\item Il est claire que $\det S = 1$ puisque $S$ est triangulaire supérieur de diagonale $1$. Ainsi par construction
+		\[
+		\det A = \det (A' S) = \det A' \det S = \det A'	
+		\]
+		De plus on remarque que comme $A'$ est une matrice orthogonale alors
+		\[
+		(A'^\top A')_{ij} =  {a^*_i}^\top a^*_j = \left\{ \begin{array}{cc} 0 & \text{si } i \neq j \\ \norme{a_i^*}^2 & \text{si } i = j \end{array}\right.
+		\]
+		Donc $A'^\top A'$ est une matrice diagonale, ainsi 
+		\[
+		\det(A')^2 = \det(A'^\top A') = \prod_{i=1}^n \norme{a_i^*}^2
+		\]
+		ce qui donne bien,
+		\[
+		\det A = \det A' = \pm \prod_{i=1}^n \norme{a_i^*}
+		\]
+		\item Par définition
+		\[
+		\norme{a_i}^2 = \norme{a_i - a_i^*}^2 + \norme{a_i^*}^2 \geqslant \norme{a_i^*}^2
+		\]
+		donc a bien pour tout $i \in \entiers, \quad \norme{a_i^*} \leqslant \norme{a_i}$, ainsi on trouve bien l'inégalité souhaité,
+		\[
+		|\det A | \leqslant \prod_{i=1}^n \norme{a_i}
+		\]
+		Par hypothèse sur les coefficients de la matrice on obtient, $\forall i \in \entiers \norme{a_i} \leqslant M \cdot \sqrt n$, et donc
+		\[
+		|\det A | = \prod_{i=1}^n \norme{a_i} \leqslant \prod_{i=1}^n M \sqrt n = M^2 n^{\frac{n}{2}}
+		\]
+		\end{enumerate}}
+
+
+\subsection{Semaine 8}
+\newexo{Soit $A \in \R^{n \times n}$ une matrice symétrique alors $A$ est semi-définie positive si et seulement si tous ses mineures symétrique sont positifs ou nuls.
+}{Soit $A \in \R^{n \times n}$ une matrice symétrique semi-définie positive alors toutes des valeurs propres sont positives ou nulles. Ainsi soit $I = \subset \entiers$, pour $x \in \R^{|I|}$ on définit $\tilde x \in \R^n$ de la manière suivante,
+	\[
+	\tilde x = \left\{\begin{array}{cl} x_i & \text{si } i \in I \\ 0 & \text{sinon} \end{array} \right.
+	\]
+	Ainsi pour tout $x \in \R^{|I|}$,
+	\[
+	\tilde x^\top A_I\tilde x = x^\top A x \geqslant 0
+	\]
+	Ainsi $A_I$ est semi-définie positive. 
+	
+	Réciproquement, supposons que tous ses mineurs symétriques sont positives. Par la série 7, on sait que
+	\[
+	\chi_A(x) = \sum_{i=0}^n a_ix^i \quad \text{où} \quad a_{n-k} = (-1)^{n-k} \sum_{|I| = k} \det A_I
+	\]
+	Ainsi pour tout $b > 0$
+	\[
+	\chi_A(-b) = \sum_{i=0}^n \left((-1)^{i} \sum_{|I| = n-i} \det A_I \right) (-1)^i b^i = \sum_{i=0}^n \sum_{|I| = n -i} \det A_I b^i  \geqslant 0
+	\]
+	De plus,
+	\[
+	\chi_A(-b) = \sum_{i=0}^{n-1} \sum_{|I| = n -i} \det A_I b^i + \underbrace{\det A_\emptyset}_{=1} b^n  > 0
+	\]
+	donc pour tout $t < 0, \quad \chi_A(t) > 0$. Ainsi les valeurs propres de $A$, qui sont les racines de $\chi_A$, sont positives ou nulles, ainsi $A$ est semi-définie positive.
+}
+
+\subsection{Semaine 9}
+
+\newexo{Soit $A \in \R^{n \times n}$ une matrice symétrique et soit
+	\[
+	A = U \cdot \begin{pmatrix}
+		\lambda_1 &  & \\
+		 & \ddots & \\
+		 &  & \lambda_n 
+	\end{pmatrix}
+	\cdot U^\top
+	\]
+	une factorisation de $A$ telle que $U = (u_1, \ldots, u_n) \in \R^{n\times n}$ est orthogonale et $\lambda_1 \leqslant \ldots \leqslant \lambda_n$. Pour $1 \leqslant l \leqslant n$, montrer que 
+	\[
+	\max_{x \in S^{n-1}, ~ x \perp \Span\{u_1, \ldots, u_l\}} x^\top A x = \lambda_{l+1}
+	\]
+	et $u_{l+1}$ est une solution optimale.
+}{On procède par double inégalité, prenons $x \in S^{n-1}$, alors on écrit $x = \sum_{i=1}^n \alpha_i u_i$ alors si $x \perp \Span\{u_1, \ldots, u_l\}$ , on observe que $\alpha_1, \ldots, \alpha_l = 0$. Ainsi $x = \sum_{i=l+1}^n \alpha_i u_i$. Ainsi
+\[
+x^\top A x = \left(\sum_{i=l+1}^k \alpha_i u_i\right)^\top A \left(\sum_{i=l+1}^n \alpha_i u_i\right) = \sum_{i,j = l+1}^n \alpha_i \alpha_j u_i^\top A u_j = \sum_{i=l+1}^n \alpha_i^2 \lambda_i
+\]
+mais $x \in S^{n-1}$ alors $\norme{x} = \sum_{i=l+1}^n \alpha_i^2 =1$ et donc
+\[
+x^\top A x = \sum_{i=l+1}^n \alpha_i^2 \lambda_i \leqslant \lambda_{l+1} \sum_{i=l+1}^n \alpha_i^2 = \lambda_{l+1}
+\]
+Donc $\max_{x \in S^{n-1}, ~ x \perp \Span\{u_1, \ldots, u_l\}} x^\top A x \leqslant \lambda_{l+1}$. Or si on considère $x = u_{l+1}$ alors
+\[
+x^\top A x = u_{l+1}^\top A u_{l+1} = \lambda_{l+1} u_{l+1}^\top u_{l+1} = \lambda_{l+1}
+\]
+Ce qui permet bien de conclure que
+\[
+\max_{x \in S^{n-1}, ~ x \perp \Span\{u_1, \ldots, u_l\}} x^\top A x = \lambda_{l+1}
+\]
+}
+
+
+\subsection{Semaine 10}
+ \newexo{Soient $a_1, \ldots , a_m \in \R^n$, pour $z \in \R^n$	et $v \in S^{n-1}$, on considère la droit définie par
+ 	\[
+ 	L_{z,v} = z + \Span \{v\}
+ 	\]
+ 	Soit $d(a_i, L_{z,v})$ la distance de $a_i$ à $L_{z,v}$
+ 	\begin{enumerate}
+ 		\item Supposons que $\sum_{i=1}^m a_i = 0$. Montrer que pour tout $z \in \R^n$,
+ 		\[
+ 		\sum_{i=1}^m d(a_i, L_{v,z})^2 \geqslant \sum_{i=1}^m d(a_i, L_{0, v})^2
+ 		\]
+ 		\item Conclure que, étant donnée des points $a_1, \ldots , a_m$, on peut trouver un $z \in \R^n$ et $v \in S^{n-1}$ tels que 
+ 		\[
+ 		\sum_{i=1}^m d(a_i, L_{z,v})^2 \leqslant 	\sum_{i=1}^m d(a_i, L_{z', v'})^2 
+ 		\]
+ 		pour tout $z' \in \R^n$ et $v' \in S^{n-1}$. En particulier : 
+ 		\begin{enumerate}
+ 			\item Donner une formule pour $z$
+ 			\item Décrire la $A$ telle qu'un vecteur propre normalisé de $A^\top A$ associé à la plus grand valeurs propre est une solution pour $v$.
+ 		\end{enumerate}
+ 	\end{enumerate}
+}{
+On a 
+\begin{enumerate}
+	\item
+\begin{align*}
+	\sum_{i=1}^m d(a_i, L_{v,z})^2  &= \sum_{i = 1}^m d(a_i - z, \Span\{v\})^2  \\
+									&= \sum_{i=1}^p \norme{a_i -z }^2 - \langle a_i - z, v \rangle^2 \\
+									&= \sum_{i=1}^m \langle a_i -z , a_i - z \rangle - (\langle a_i, v \rangle - \langle z, v \rangle)^2 \\
+									&= \sum_{i=1}^m \norme{a_i}^2 - 2 \langle a_i, z\rangle + \norme{z}^2 - \langle a_i, v\rangle^2 + 2\langle a_i, v \rangle \langle z,v\rangle - \langle z,v \rangle^2 \\
+									&= \sum_{i=1}^m d(a_i, \Span\{v\}) +  \left( \sum_{i=1}^m \norme{z}^2 - \langle z, v \rangle^2 \right) \\
+									&\geqslant \sum_{i=1}^m d(a_i, L_{0, v})^2 + \sum_{i=1}^m (\norme{z}^2 - \norme{z}^2 \norme{v}^2) \\
+									&= \sum_{i=0}^m d(a_i, L_{0,v})^2
+\end{align*}
+\item Sans supposition sur $\sum_{i=1}^m a_i$, on pose $z = \frac{1}{m} \sum_{i=1}^m a_i$. Avec ce $z$, les points $a_i - z$ satisfont l'hypothèse du point $1.$. Ainsi pour $v' \in S^{n-1}$ et pour tout $z' \in \R^n$, on écrit $z' = z + z''$ avec $z'' \in \R^n$. Donc on calcul
+\[
+\sum_{i=1}^m d(a_i, L_{z, v'})^2 = \sum_{i=1}^n d(a_i - z), L_{0,v'})^2 \leqslant \sum_{i=1}^m d(a_i - z, L_{z'', v'})^2 = \sum_{i=1}^m d(a_i, L_{z + z'', v'})^2 = \sum_{i=1}^m d(a_i, L_{z', v'})^2
+\]
+Ceci montre que pour un certain $v' \in S^{n-1}$ donnée, $z = \frac{1}{m} \sum_{i=1}^m a_i$ est le choix optimale. Minimiser $\sum_{i=1}^m d(a_i, L_{z,v})^2$ s'agit donc d'un problème du meilleur sous-espace approximatif de dimension $1$.
+
+Par le cours, on pose $A^\top = (a_1 - z, \ldots , a_m - z) \in \R^{n \times m}$. Avec ce setup, on sait que $v$ est donné par un vecteur propre normalisé associé à la plus grande valeurs propre de $A^\top A$.
+
+\end{enumerate}
+}
+
+
+\subsection{Semaine 11}
+
+\newexo{Soit $A \in \C^{n \times n}$ inversible. Montrer que $A$ est diagonalisable si et seulement si $A^m$ est diagonalisable pour un certain $m \in \N^*$. 
+	
+Donnez un contre-exemple lorsque $A$ n'est pas inversible.
+}{Supposons que $A$ est diagonalisable alors il suffit de prendre $m = 1$.
+
+Réciproquement, supposons que $A^m$ soit diagonalisable pour un certain $m \in \N^*$. Donc le polynôme minimal de $A^m$
+\[
+\mu_{A^m} = \prod_{i=1}^k (x - \lambda_i)
+\]
+est scindé simple. On considère le polynôme $p(x) = \mu_{A^m} (x^m)$, on remarque alors que $p(A) = 0$. Donc
+\[
+\mu_A \mid p(x)
+\]
+car $\mu_A$ divise tout polynôme annulateur de $A$. Il suffit alors de montrer que $p(x)$ est scindé simple, or
+\[
+p(x) = \prod_{i=1}^k (x^m - \lambda_i) = \prod_{i=1}^k \prod_{j=1}^m (x - \mu_{ij})
+\]
+Supposons que $\mu_{ab} = \mu_{cd}$ alors
+\[
+\mu_{ab}^m = \mu_{cd}^m \implies \lambda_a = \lambda_c \implies a = c
+\]
+Ainsi les facteurs $x^m - \lambda_i$ de partagent pas de racines entre eux. De plus
+\[
+\mathrm{pgcd} (x^m - \lambda_i, m x^{m-1}) = 1
+\]
+puisque $\lambda_i \neq 0$ car $A$ est inversible. Ainsi $p(x)$ n'admet que des racines simples. Mais comme $\mu_A$ divise $p(x)$ alors $\mu_A$ est scindé simple et donc $A$ est diagonalisable.
+}
+\subsection{Semaine 12}
+\newexo{Soit $A \in C^{n \times n}$ et soient $J$ une forme normale de Jordan de $A$ et $P$ la matrice de passage associée,
+	\begin{enumerate}
+		\item Soient $B_1, \ldots B_k$ l'ensemble des blocs de $J$ associé à une même valeurs propre $\lambda$. Montrer que 
+		\[
+		\dim \mathrm{Im}(J - \lambda I_n) = n-k
+		\]
+		\item En déduire que le nombre de blocs de $J$ associé à une valeurs propre propre $\lambda$ est égale à sa multiplicité géométrique $\dim \ker(A - \lambda I_n)$.
+		\item Montre que si $A$ diagonalisable, chaque bloc de Jordan est de taille $1$ et la décomposition $A = PJP^{-1}$ est exactement sa diagonalisation.
+	\end{enumerate}
+}{
+\begin{enumerate}
+	\item Comme $J$ est une matrice construite par bloc. On voit que
+\[
+\mathrm{rg}(J - \lambda I_n) = \sum_{B_i} \mathrm{rg}(B_i - \lambda I_{n_i})
+\]
+Si $B_i$ est un bloc de Jordan associé à $\lambda$, alors $B_i - \lambda I_{n_i} = J(0, n_i)$ et donc $\mathrm{rg}(B_i) = n_i -1$. Tandis que si $B_i$ est associé à $\mu \neq \lambda$, alors $B_i - \lambda I_{n_i} = J(\mu - \lambda, n_i)$ et donc $\mathrm{rg}(B_i - \lambda I_{n_i}) = n_i$. Alors
+\[
+\mathrm{rg}(J - \lambda I_n ) = \sum_{B_i} \mathrm{rg}(B_i - \lambda I_{n_i}) = \sum_{B_i = J(\lambda, n_i)} (n_i - 1) + \sum_{B_i = J(\mu, n_i)} n_i = n - k
+\]
+Car il y a $k$ bloc associé à $\lambda$.
+
+\item On a
+\[
+\dim \ker(A - \lambda I_n) = \dim \ker (J - \lambda I_n) = n - \mathrm{rg}(J - \lambda I_n) = k
+\]
+\item Si $A$ est diagonalisable, alors $m_{alg}(\lambda) = m_{geo}(\lambda)$ pour tout valeurs propre de $\lambda$. Alors
+\[
+\sum_{B_i = J(\lambda, n_i)} n_i = m_{alg}(\lambda) = m_{geo}(\lambda) = \sum_{B_i = J(\lambda, n_i)} 1
+\]
+Donc $n_i = 1$ pour tout bloc $B_i$ associé à $\lambda$. Comme $\lambda$ est arbitraire, tout bloc de $J$ est de taille $1$. Alors $J$ est une matrice diagonale et donc $P^{-1} A P = J$ est une diagonalisation de $A$.
+\end{enumerate}
+}
+
+\subsection{Semaine 13}
+\newexo{En utilisant la forme normale de Jordan montrer que toute matrice $A \in \C^{n \times n}$ est semblable à sa transposée $A^\top$.
+}{
+Soit $A \in \C^{n \times n}$, alors il existe une matrice $P \in \C^{n \times n}$ inversible telle que $A = P J P^{-1}$ où $J$ est une forme normale de Jordan de la matrice $A$. Alors $A^\top = P^{- \top} J P^\top$. 
+
+On commence par étudier un bloc de jordan $B_\lambda \in \C^{n_i \times n_i}$, on remarque alors que
+\[
+B_\lambda^\top = C B_\lambda C^{-1} 
+\]
+où 
+\begin{equation} \label{bloc antidiagonal}
+C = \begin{pmatrix} & & 1 \\
+					& \iddots & \\
+					1 && \\
+	\end{pmatrix}
+\end{equation}
+de plus on voit que $C^2 = I_{n_i}$. On définit alors $\tilde C \in \C^{n \times n}$ ayant des blocs de la forme (\ref{bloc antidiagonal}) sur la diagonale où la taille de ces blocs est donnée par la taille des blocs correspondants dans $J$. Ainsi on a en conclut que
+\[
+A^\top = P^{-\top} J^\top P^\top = P^{-\top} \tilde C^\top J \tilde C P^\top = P^{-\top} \tilde C P A P^{-1} \tilde C P^\top
+\]
+Donc si on pose $B = P^{-\top} \tilde C P$ on a $B^{-1} = P^{-1} \tilde C P^\top$ et donc
+\[
+A^\top = B A B^{-1}
+\]
+Ainsi $A$ est bien similaire à sa transposée $A^\top$.
+}
