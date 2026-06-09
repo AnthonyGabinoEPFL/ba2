@@ -1,0 +1,4 @@
+#### Définition
+On part avec $f_0, f_{1} \in \mathbb K[X]$ deux polynôme arbitraire tel que $f_0 \neq 0$ et $\deg f_0 \geqslant \deg f_1$, on veut alors calculer $\mathrm{pgcd}(f_0, f_1)$ on observe alors que
+1. Si $f_1 = 0$ alors $\mathrm{pgcd}(f_0, f_1) = a_{\deg f_0}^{-1} f_0$
+2. Si $f_1 \neq 0$ on effectue alors la [[division avec reste]] entre $f_0$ et $f_{1}$, ce qui nous donne $$ f_{0}(x) = f_{1}(x) q(x) + f_{2}(x)$$ avec $\deg f_2 < \deg f_1$. On remarque alors que $$\mathrm{pgcd}(f_0, f_1) = \mathrm{pgcd}(f_1, f_2)$$ On a alors un algorithme récursif strictement décroissant donc convergent. Donc il existe un indice $r \in \mathbb N$ tel que $f_r = 0$ et $\forall j \leqslant r-1, \quad f_j \neq 0$ . On alors $$\mathrm{pgcd}(f_0, f_1)= \mathrm{pgcd}(f_{r-1}, 0) = a_{\deg f_{r-1}}^{-1} f_{r-1}$$
